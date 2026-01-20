@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>トヨタ アルファード｜ASOBI 株式会社</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+  <link rel="stylesheet" href="css/vehicle_detail.css" />
+  <!-- width + right-nav sizing are unified in follow.css / vehicle_detail.css (match asobi) -->
+</head>
+<body>
+
+  <!-- optional right-side decorative car (same class name as your framework) -->
+  <!-- If you don't want this on this page, delete this img line. -->
+<img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+
+  <div class="stage">
+
+    <main class="paper" role="main">
+      <header class="topbar">
+        <div class="brand">ASOBI 株式会社</div>
+        <nav aria-label="top">
+          <a href="#">会社概要</a>
+          <a href="#">お知らせ</a>
+        </nav>
+      </header>
+
+      <!-- 01 hero (your screenshot + figma export) -->
+      <section class="hero" id="top">
+        <h1 class="h">トヨタ<br>アルファード</h1>
+        <p class="desc">海外の方にも大人気
+さまざまなシーンにご対応できます。
+快適な旅を実現します</p>
+
+        <img class="car-illu" src="images/vellfa.png" alt="トヨタ アルファード" />
+
+        <div class="badges" aria-label="scenes">
+          <div class="badge">家族旅</div>
+          <div class="badge">ビジネス</div>
+          <div class="badge">空港送迎</div>
+          <div class="badge">役員車</div>
+        </div>
+      </section>
+
+      <!-- ✅ 4张照片轮播（左右白色圆按钮） -->
+<section class="content">
+  <div class="block">
+
+    <div class="photo-carousel" aria-label="写真スライダー">
+      <button class="pc-btn pc-prev" type="button" aria-label="前へ"></button>
+
+      <div class="pc-viewport" id="pcViewport">
+        <div class="pc-track" id="pcTrack">
+          <!-- ✅ 换成你的4张照片路径 -->
+          <div class="pc-slide"><img src="images/vellfa1.png" alt="Photo 01"></div>
+          <div class="pc-slide"><img src="images/vellfa2.png" alt="Photo 02"></div>
+          <div class="pc-slide"><img src="images/VCG211219732959.jpg" alt="Photo 03"></div>
+          <div class="pc-slide"><img src="images/company-04.jpg" alt="Photo 04"></div>
+        </div>
+      </div>
+
+      <button class="pc-btn pc-next" type="button" aria-label="次へ"></button>
+    </div>
+
+  </div>
+</section>
+<!-- ✅ 规格表格 + 座位图（放在轮播下面） -->
+<section class="spec-wrap" aria-label="車両スペック">
+  <h2 class="spec-title">アルファード（TOYOTA）</h2>
+
+  <!-- 上：主要信息（三行，左右两列） -->
+  <div class="spec-grid">
+    <div class="spec-row">
+      <div class="spec-th">最大ご乗車人数<br><small>（乗務員含む）</small></div>
+      <div class="spec-td">7名</div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-th">推奨人数</div>
+      <div class="spec-td">2〜4名</div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-th">トランク積載目安</div>
+      <div class="spec-td">
+        ゴルフバッグ：2個<br>
+        スーツケース：4個
+      </div>
+    </div>
+  </div>
+
+  <!-- 中：尺寸信息（两列两行） -->
+  <div class="spec-mini">
+    <div class="spec-mini-row">
+      <div class="spec-mini-cell"><span>全長(mm)</span>：4,995</div>
+      <div class="spec-mini-cell"><span>全幅(mm)</span>：1,850</div>
+    </div>
+    <div class="spec-mini-row">
+      <div class="spec-mini-cell"><span>車高(mm)</span>：1,935</div>
+      <div class="spec-mini-cell"><span>AC電源</span>：◯</div>
+    </div>
+  </div>
+
+  <!-- 下：图片区域（座位图） -->
+  <figure class="seat-figure">
+    <!-- ✅ 换成你的座位图图片 -->
+    <img src="images/alphard_seat.png" alt="車内座席図">
+    <figcaption>車内座席図</figcaption>
+  </figure>
+</section>
+
+
+      <div class="others-title" id="vehicle-photos">
+  <span style="font-size: 14px; display: block; color: #999; font-weight: 400; margin-bottom: 5px;">Lineup</span>
+  車種紹介
+</div>
+
+<div class="photo-carousel" aria-label="写真スライダー"></div>
+<div class="other-grid">
+  <a class="other-card" href="alphard_detail.html" aria-label="トヨタ ヴェルファイヤー">
+    <img src="images/imagesb.png" alt="ヴェルファイヤー">
+    <div class="make">ヴェルファイヤー</div>
+  </a>
+
+  <a class="other-card" href="alphard_detail.html"aria-label="トヨタ アルファード">
+    <img src="images/imagesa.png" alt="アルファード">
+    <div class="make">アルファード</div>
+  </a>
+
+  <a class="other-card" href="hiace.html" aria-label="トヨタ ハイエース">
+    <img src="images/imagesh.png" alt="ハイエース">
+    <div class="make">ハイエース</div>
+  </a>
+
+  <a class="other-card" href="grandice.html"トヨタ グランエース">
+    <img src="images/imagesg.png" alt="グランエース">
+    <div class="make">グランエース</div>
+  </a>
+</div>
+
+        </section>
+      <section class="sns-guide">
+  <div class="sec-title-block" style="margin:40px 0 20px;">
+    <div class="sec-en" style="font-size:20px;">Contact Us</div>
+    <div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
+  </div>
+
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.jp">
+      <img src="images/contact-mail.svg" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+ 
+  </div>
+</section>
+
+
+
+      <!-- bottom space (avoid mobile bottom floating nav overlay) -->
+      <div style="height:120px"></div>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="service.html">サービス一覧</a></li>
+        <li><a href="vehicles.html">車両ラインナップ</a></li>
+        <li><a href="#">会社概要</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI 株式会社. All Rights Reserved.
+    </div>
+</footer>
+    </main>
+
+    <!-- right floating nav (uses your follow.css). Put your image buttons here. -->
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="LINEでお問い合わせ" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
+<img alt="メールでお問い合わせ" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+  </div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('pcTrack');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.pc-next');
+    const prevButton = document.querySelector('.pc-prev');
+    
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+
+    // 更新位置的函数
+    const updateSlide = (index) => {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
+    };
+
+    // 切换到下一张的逻辑
+    const moveToNext = () => {
+        currentIndex++;
+        if (currentIndex >= slides.length) {
+            currentIndex = 0; // 循环回到第一张
+        }
+        updateSlide(currentIndex);
+    };
+
+    // 切换到上一张的逻辑
+    const moveToPrev = () => {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = slides.length - 1; // 循环回到最后一张
+        }
+        updateSlide(currentIndex);
+    };
+
+    // --- 自动播放逻辑 ---
+    const startAutoPlay = () => {
+        stopAutoPlay(); // 先清除旧的，防止重叠
+        autoPlayTimer = setInterval(moveToNext, 3000); // 每3秒自动切下一张
+    };
+
+    const stopAutoPlay = () => {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    };
+
+    // 点击按钮切换
+    nextButton.addEventListener('click', () => {
+        moveToNext();
+        startAutoPlay(); // 用户操作后重新计时
+    });
+
+    prevButton.addEventListener('click', () => {
+        moveToPrev();
+        startAutoPlay(); // 用户操作后重新计时
+    });
+
+    // 鼠标悬停时停止自动播放，离开时恢复
+    const viewport = document.getElementById('pcViewport');
+    viewport.addEventListener('mouseenter', stopAutoPlay);
+    viewport.addEventListener('mouseleave', startAutoPlay);
+
+    // 窗口大小改变时重置
+    window.addEventListener('resize', () => updateSlide(currentIndex));
+
+    // 初始化启动
+    startAutoPlay();
+});
+</script>
+</body>
+</html>

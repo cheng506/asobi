@@ -1,0 +1,702 @@
+:root{
+  --bg-blue:#9CE0FC;
+  /* match 0-asobi */
+  --paper-w:664px;
+  --paper-pad-x:56px;
+  --text:#111;
+  --muted:#444;
+  --radius:18px;
+  --shadow: 0 10px 30px rgba(0,0,0,.10);
+  /* right floating nav size (match 0-asobi) */
+  --w-nav:228px;
+  --h-nav:64px;
+	--w-screen: 664px;
+--max: 664px;
+}
+/* sana： nav right */
+
+body{ background: var(--bg-blue); }
+
+/* layout wrapper (match your 0-asobi style: center paper with side blue) */
+.stage{
+  max-width: 1440px;
+  margin: 0 auto;
+  display:flex;
+  align-items:flex-start;
+  gap: 18px;
+  padding: 0 18px;
+}
+
+.paper{
+  width: min(var(--paper-w), 100%);
+  background:#fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 6px auto 10px;
+  overflow: hidden;
+}
+
+/* top header (simple, like your screenshot) */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 18px 26px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.topbar .brand{ font-weight:700; letter-spacing:.5px; }
+.topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
+
+/* section 01 */
+.hero{
+  padding: 70px var(--paper-pad-x) 40px;
+  text-align:center;
+}
+.hero .h{
+  margin:0;
+  font-size: 30px;
+  line-height: 1.35;
+  letter-spacing:.08em;
+}
+.hero .desc{
+  margin: 22px 0 0;
+  color: var(--muted);
+  line-height: 2.1;
+  font-size: 14px;
+  white-space: pre-line;
+}
+.hero .car-illu{
+  margin: 34px auto 0;
+  width: min(520px, 90%);
+}
+
+.badges{
+  margin: 26px auto 6px;
+  display:flex;
+  justify-content:center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.badge{
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: transparent; /* 镂空 */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* 金色金属描边（关键） */
+  border: 2.5px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(
+      135deg,
+      #e6c57a 0%,
+      #f7e7b4 25%,
+      #c9a24d 50%,
+      #f7e7b4 75%,
+      #e6c57a 100%
+    ) border-box;
+
+  /* 克制的金色发光 */
+  box-shadow:
+    0 0 14px rgba(230,197,122,0.35);
+
+  color: #9c7a2f;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+@media (hover:hover){
+  .badge{
+    transition: box-shadow .3s ease, transform .3s ease;
+  }
+
+  .badge:hover{
+    box-shadow:
+      0 0 20px rgba(230,197,122,0.55),
+      0 0 2px rgba(255,255,255,0.6);
+    transform: translateY(-2px);
+  }
+}
+
+
+/* section 02 slider placeholder */
+.section{
+  padding: 34px var(--paper-pad-x) 54px;
+}
+
+.slider-ph{
+  background:#D9D9D9;
+  border-radius: 10px;
+  height: 280px;
+  position:relative;
+}
+.slider-ph .arrow{
+  width: 66px;
+  height: 66px;
+  border-radius: 999px;
+  background:#fff;
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+}
+.slider-ph .arrow.left{ left: 22px; }
+.slider-ph .arrow.right{ right: 22px; }
+
+/* 車種紹介タイトルのデザイン修正 */
+.others-title {
+    font-size: 28px;            /* 文字を大きく */
+    font-weight: 800;           /* かなり太く */
+    text-align: center;         /* 中央寄せ */
+    margin: 60px 0 30px;        /* 上下にしっかり余白を作る */
+    letter-spacing: 0.1em;      /* 文字の間隔を広げて高級感を出す */
+    color: #333;                /* 濃いグレーで視認性アップ */
+    position: relative;
+    font-family: var(--font-accent); /* 丸みのあるフォント（Zen Maru Gothic）を適用 */
+}
+
+/* 下に短い線を入れるとおしゃれになります */
+.others-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--c-purple-start); /* 既存のテーマカラー（紫）を使用 */
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+
+.other-card .make{ font-size: 18px; line-height: 1.4; }
+.other-card .model{ font-size: 12px; margin-top: 10px; opacity:.85; }
+
+/* responsive */
+@media (max-width: 1000px){
+  .stage{ display:block; padding: 0 12px; }
+  .paper{ border-radius: 0; width:100%; max-width: 520px; }
+  .hero{ padding: 54px 20px 34px; }
+  .section{ padding: 26px 20px 46px; }
+  .other-grid{ grid-template-columns: 1fr; }
+  .badge{ width: 86px; height: 86px; }
+}
+/* 给手机端底部导航预留空间，避免压住正文 */
+@media (max-width: 1000px){
+  .paper{ padding-bottom: 110px; }
+}
+/* =========================
+   右侧三色浮动导航（完全跟随 follow）
+   ========================= */
+
+.floating-nav-wrapper {
+  position: sticky;
+  top: calc(20vh + 400px);  /* ✅ 往下 600px，同时继续跟随滚动 */
+  margin-left: 10px;
+  z-index: 120;             /* ✅ 提升层级：盖在 .bg-car (z-index:80) 上面 */
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/*
+  ✅ 重要：在某些布局组合（例如 body:flex + 复杂容器）里，Chrome 会让 sticky 偶发失效。
+  电脑端我们直接改用 fixed，保证“永远跟随视口”，同时通过 left:50% + translateX
+  把它锁在中间白色屏幕（--w-screen）的右侧。
+*/
+@media (min-width: 1001px){
+  .floating-nav-wrapper{
+    position: fixed !important;
+    top: calc(20vh + 400px) !important; /* ✅ 默认比原来更自然一点：你要更低就加大 120px */
+    left: 50% !important;
+    margin-left: 0 !important;
+    right: auto !important;
+    transform: translateX(calc((var(--w-screen) / 2) + 18px)) !important;
+  }
+}
+
+
+    
+.nav-tag {
+        width: var(--w-nav);
+        height: var(--h-nav);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        text-decoration: none;
+        color: #000;
+        position: relative;
+        transition: transform 0.2s;
+        
+        /* 关键：右侧内凹的燕尾/丝带效果 */
+        clip-path: polygon(0% 0%, 100% 0%, 92% 50%, 100% 100%, 0% 100%);
+        filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+    }
+    
+.nav-icon {
+        font-size: 24px;
+        margin-right: 12px;
+        display: flex; align-items: center; justify-content: center;
+        width: 32px;
+    }
+    
+.nav-txt {
+        display: flex; flex-direction: column;
+        line-height: 1.2;
+    }
+    
+.nav-img{
+  padding: 0;
+  background: none;
+  clip-path: none;   /* 关闭原本燕尾裁切 */
+}
+
+
+.nav-img img{
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+  
+}
+
+
+
+@media (min-width: 1001px){
+  :root{
+    --paper-shift: 140px; /* ✅ 四分之一屏宽 */
+  }
+
+  /* 白色本文整体向左 */
+  .paper{
+    transform: translateX(calc(var(--paper-shift) * -1));
+  }
+
+  /* 右侧悬浮导航：仍然“贴着白色右边” */
+  .floating-nav-wrapper{
+    transform: translateX(
+      calc((var(--w-screen) / 2) + 18px - var(--paper-shift))
+    ) !important;
+  }
+}
+
+/* =========================
+   Mobile bottom CTA — match homepage
+   ========================= */
+@media (max-width: 1000px){
+
+  /* 1) 三按钮：贴底、横排、三等分 */
+  .floating-nav-wrapper{
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: auto !important;
+
+    width: 100% !important;
+    margin: 0 !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) !important;
+
+    background: rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(8px);
+    z-index: 9999 !important;
+
+    /* ✅ 重点：清掉你 PC 端那些 translateX 贴右的逻辑 */
+    transform: none !important;
+  }
+
+  /* 2) 每个按钮固定高度（跟首页那种“大条按钮”一致） */
+  .floating-nav-wrapper .nav-tag{
+    width: 100% !important;
+    height: 64px !important;          /* ✅ 如果你首页是更矮/更高，就改这里 */
+    padding: 0 !important;
+    border-radius: 12px !important;
+    clip-path: none !important;
+    overflow: hidden;
+    background: transparent !important;
+  }
+
+
+  /* 4) 给正文留出空间（你现在 110px 不够，所以圆形按钮被压住了） */
+  .paper{
+    padding-bottom: calc(140px + env(safe-area-inset-bottom)) !important;
+  }
+}
+/* =========================
+   4-photo carousel (wide + relaxed)
+   ========================= */
+.photo-carousel{
+  position: relative;
+  max-width: 560px;          /* 跟你 .block 一致 */
+  margin: 6px auto 10px;
+}
+
+.pc-viewport{
+  width: 100%;
+  height: 280px;             /* 你截图那种大灰块高度 */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #D9D9D9;       /* 没图时也像占位 */
+  box-shadow: 0 10px 26px rgba(0,0,0,.06);
+}
+
+.pc-track{
+  display:flex;
+  height:100%;
+  transition: transform .35s ease;
+  will-change: transform;
+}
+
+.pc-slide{
+  flex: 0 0 100%;
+  height: 100%;
+  display:flex;
+}
+
+.pc-slide img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+/* 左右白色圆按钮（你截图那种） */
+.pc-btn{
+  position:absolute;
+  top:50%;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 12px 22px rgba(0,0,0,.12);
+  transform: translateY(-50%);
+  cursor:pointer;
+  z-index: 2;
+}
+
+/* 按钮位置 */
+.pc-prev{ left: 16px; }
+.pc-next{ right: 16px; }
+
+/* 小箭头（用CSS画，干净） */
+.pc-btn::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width: 14px;
+  height: 14px;
+  border-right: 3px solid rgba(0,0,0,.65);
+  border-bottom: 3px solid rgba(0,0,0,.65);
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+.pc-next::before{
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* hover 的轻微弹一下（PC） */
+@media (hover:hover){
+  .pc-btn:hover{
+    transform: translateY(-50%) scale(1.04);
+  }
+}
+
+/* 手机：按钮稍微小一点 */
+@media (max-width: 560px){
+  .pc-viewport{ height: 240px; border-radius: 14px; }
+  .pc-btn{ width: 62px; height: 62px; }
+  .pc-prev{ left: 12px; }
+  .pc-next{ right: 12px; }
+}
+/* =========================
+   Spec table + seat image (below carousel)
+   ========================= */
+.spec-wrap{
+  max-width: 560px;
+  margin: 22px auto 8px;
+  padding: 0 20px;
+}
+
+.spec-title{
+  margin: 0 0 16px;
+  font-size: 22px;
+  letter-spacing: .06em;
+  font-weight: 700;
+}
+
+/* 主表格：三行两列（像截图那种粗细的格子） */
+.spec-grid{
+  border: 2px solid rgba(0,0,0,.10);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.spec-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.spec-row + .spec-row{
+  border-top: 2px solid rgba(0,0,0,.10);
+}
+
+.spec-th,
+.spec-td{
+  padding: 18px 18px;
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+.spec-th{
+  color: rgba(0,0,0,.70);
+  font-weight: 650;
+  border-right: 2px solid rgba(0,0,0,.10);
+}
+
+.spec-th small{
+  font-weight: 600;
+  opacity: .85;
+}
+
+.spec-td{
+  color: rgba(0,0,0,.85);
+  font-weight: 650;
+}
+
+/* 尺寸小表格：两行两列 */
+.spec-mini{
+  margin-top: 18px;
+  border: 2px solid rgba(0,0,0,.10);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.spec-mini-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.spec-mini-row + .spec-mini-row{
+  border-top: 2px solid rgba(0,0,0,.10);
+}
+
+.spec-mini-cell{
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(0,0,0,.82);
+  font-weight: 650;
+}
+
+.spec-mini-cell + .spec-mini-cell{
+  border-left: 2px solid rgba(0,0,0,.10);
+}
+
+.spec-mini-cell span{
+  color: rgba(0,0,0,.58);
+  font-weight: 650;
+}
+
+/* 座位图区域（图片块） */
+.seat-figure{
+  margin: 18px 0 0;
+  border: 2px solid rgba(0,0,0,.10);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  text-align: center;
+}
+
+.seat-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 18px;
+}
+
+.seat-figure figcaption{
+  padding: 12px 0 16px;
+  font-size: 14px;
+  color: rgba(0,0,0,.60);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+/* 手机：留白更舒服一点 */
+@media (max-width: 560px){
+  .spec-wrap{ padding: 0 18px; }
+  .spec-th,.spec-td{ padding: 16px 14px; }
+}
+/* =========================
+   車種紹介：更小的 2x2 + 横向 4:3
+   ========================= */
+
+/* 整个区域变窄：避免卡片太宽 */
+.other-grid{
+  max-width: 600px;      /* ✅ 更小：你还想更小就 440 / 420 */
+  margin: 18px auto 0;
+  padding: 0 16px;
+
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;             /* ✅ 间距小一点就不会“压住对方”的视觉 */
+}
+
+/* 卡片：强制 4:3（横向） */
+.other-card{
+  aspect-ratio: 4 / 3;   /* ✅ 宽4高3 */
+  width: 100%;
+  height: auto;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.06);
+
+  text-decoration: none;
+}
+
+/* 图片：建议用 cover，不会出现“图很小留很多白”的感觉 */
+.other-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;     /* ✅ 视觉更饱满 */
+  display:block;
+}
+
+/* 文本：控制在卡片内正常宽度，不挤 */
+.other-card .make{
+  position:absolute;
+  left: 12px;
+  right: 12px;           /* ✅ 让文字有最大宽度，不会挤成一坨 */
+  bottom: 10px;
+  z-index: 2;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color:#fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 让文字更清楚（底部轻渐变） */
+.other-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0) 55%);
+  pointer-events:none;
+}
+/* =========================
+   車種紹介：2x2 小一点 + 横向 4:3 + hover 动画
+   ========================= */
+.other-grid{
+  max-width: 460px;
+  margin: 20px auto 0;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.other-card{
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+
+  aspect-ratio: 4 / 3;  /* ✅ 宽4高3 */
+
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+  text-decoration: none;
+
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  will-change: transform;
+}
+
+.other-card img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* ✅ 视觉饱满，hover 更明显 */
+  z-index: 1;
+}
+
+.other-card .make{
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  z-index: 2;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 文字可读性 */
+.other-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0) 55%);
+  pointer-events:none;
+}
+
+/* ✅ hover 动画（PC） */
+@media (hover:hover){
+  .other-card:hover{
+    transform: translateY(-2px) scale(1.03);
+    filter: brightness(1.02);
+    box-shadow:
+      0 0 0 2px rgba(201,162,77,.75) inset,
+      0 0 18px rgba(230,197,122,.35),
+      0 14px 28px rgba(0,0,0,.10);
+  }
+}
+
+/* 手机点击反馈 */
+@media (max-width: 1000px){
+  .other-card:active{
+    transform: scale(0.98);
+    box-shadow: 0 0 0 2px rgba(201,162,77,.75) inset;
+  }
+}
+/* =========================
+   車種紹介：电脑更大 / 手机别放太大（仍保持2×2）
+   ========================= */
+
+/* 默认（电脑端）：更大一点 */
+.other-grid{
+  max-width: 620px;                 /* 关键：电脑端变大 */
+  margin: 20px auto 0;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+

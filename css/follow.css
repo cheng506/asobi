@@ -1,0 +1,285 @@
+/* ASOBI shared: floating nav / right car / contact grid */
+.floating-nav-wrapper {
+  position: sticky;
+  top: calc(20vh + 400px);  /* ✅ 往下 600px，同时继续跟随滚动 */
+  margin-left: 10px;
+  z-index: 120;             /* ✅ 提升层级：盖在 .bg-car (z-index:80) 上面 */
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/*
+  ✅ 重要：在某些布局组合（例如 body:flex + 复杂容器）里，Chrome 会让 sticky 偶发失效。
+  电脑端我们直接改用 fixed，保证“永远跟随视口”，同时通过 left:50% + translateX
+  把它锁在中间白色屏幕（--w-screen）的右侧。
+*/
+@media (min-width: 1001px){
+  .floating-nav-wrapper{
+    position: fixed !important;
+    top: calc(20vh + 400px) !important; /* ✅ 默认比原来更自然一点：你要更低就加大 120px */
+    left: 50% !important;
+    margin-left: 0 !important;
+    right: auto !important;
+    transform: translateX(calc((var(--w-screen) / 2) + 18px)) !important;
+  }
+}
+
+
+    
+.nav-tag {
+        width: var(--w-nav);
+        height: var(--h-nav);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        text-decoration: none;
+        color: #000;
+        position: relative;
+        transition: transform 0.2s;
+        
+        /* 关键：右侧内凹的燕尾/丝带效果 */
+        clip-path: polygon(0% 0%, 100% 0%, 92% 50%, 100% 100%, 0% 100%);
+        filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+    }
+    
+.nav-icon {
+        font-size: 24px;
+        margin-right: 12px;
+        display: flex; align-items: center; justify-content: center;
+        width: 32px;
+    }
+    
+.nav-txt {
+        display: flex; flex-direction: column;
+        line-height: 1.2;
+    }
+    
+.nav-img{
+  padding: 0;
+  background: none;
+  clip-path: none;   /* 关闭原本燕尾裁切 */
+}
+
+
+.nav-img img{
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+  transition: transform .2s ease;
+}
+
+
+.nav-img:hover img{
+  transform: translateX(-5px);
+}
+
+.bg-car{
+  position: fixed;
+  top: 0px;
+  right: -166px;
+  width: min(52vw, 980px);
+  max-width: 980px;
+  z-index: 80;
+  pointer-events: none;
+}
+
+
+
+.bottom-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 420px;   /* ✅ 保持“细” */
+  margin: 0 auto;
+}
+
+    
+.sq-small {
+        width: 188px; height: 188px;
+        background: #ddd;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: 0.3s;
+    }
+    
+.sq-img{
+	display: block;
+  padding: 0;
+  background: none;
+}
+
+
+.sq-img img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+
+.sq-img:hover img{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+
+@keyframes carFloat {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  35%  { transform: translate3d(-10px, -8px, 0) scale(1.006) rotate(-0.4deg); }
+  70%  { transform: translate3d(-4px, -14px, 0) scale(1.003) rotate(0.2deg); }
+  100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+}
+
+/* 右侧车装饰：呼吸漂浮（可选） */
+.bg-car{
+  position: fixed;
+  top: 72px;
+  right: -166px;
+  width: min(52vw, 980px);
+  max-width: 980px;
+  z-index: 80;
+  pointer-events: none;
+  animation: carFloat 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ✅ P5 位置：正文里的 3 个小导航（和右侧一致） */
+.mini-nav-row{
+  padding: 14px 18px 0;
+  display:flex;
+  justify-content:center;
+  gap: 14px;
+}
+.mini-nav-row a{
+  display:block;
+  width: min(210px, 30vw);
+}
+.mini-nav-row img{
+  width:100%;
+  height:auto;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+  transition: transform .2s ease;
+}
+.mini-nav-row a:hover img{ transform: translateY(-3px); }
+
+/* 电脑端：右侧已经有跟随导航，所以隐藏这条条小导航 */
+@media (min-width: 1001px){
+  .mini-nav-row{ display:none; }
+}
+
+/* 响应式：和 0-asobi 一样，窄屏右侧导航变底部 */
+@media (max-width: 1000px) {
+  .stage{ display:block; padding:0 12px 0; }
+  .paper{ width:100%; max-width: 520px; margin: 0 auto; border-radius: 0; }
+
+  .floating-nav-wrapper{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 10px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+  }
+
+  .nav-img{ width: 32%; max-width: 220px; }
+  .nav-img img{ width:100%; height:auto; }
+
+  .mini-nav-row{ display:none; } /* 手机端用底部浮动导航即可 */
+}
+
+@media (max-width: 768px){
+  .bg-car{ display:none !important; }
+  .bottom-grid{ max-width: 360px; gap: 14px; }
+}
+
+@media (min-width: 1600px){
+  .bg-car{ width: 50vw; right: -120px; }
+}
+
+.sns-guide{ padding: 30px 18px 120px; background: #fff; }
+.sns-guide .sec-title-block{ text-align:center; margin:40px 0 20px; }
+/* =========================
+   CTA hover micro-jitter (global)
+   ========================= */
+@keyframes ctaJitter {
+  0%   { transform: translateX(0); }
+  35%  { transform: translateX(-6px); }
+  65%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+/* PC：右侧竖排时 hover 抖动 */
+@media (min-width: 1001px){
+  .nav-img img{ transition: none !important; }
+  .nav-img:hover img{ animation: ctaJitter .28s ease-out both; }
+}
+
+/* Mobile：不做 hover 抖动（避免粘住/乱跳），用点击反馈 */
+@media (max-width: 1000px){
+  .nav-img:hover img{ animation: none !important; }
+  .nav-img:active img{
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+/* 页尾横条容器 */
+.site-footer-bar {
+    background: #fff; /* 纯白背景 */
+    border-top: 1px solid rgba(0,0,0,0.08); /* 极细的分割线 */
+    padding: 24px 0;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* 链接之间的间距 */
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #000; /* 悬停变黑 */
+}
+
+.copyright {
+    margin-top: 16px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 0.05em;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .footer-links {
+        gap: 15px;
+    }
+    .site-footer-bar {
+        padding: 20px 10px 100px; /* 为底部浮动导航预留空间 */
+    }
+}

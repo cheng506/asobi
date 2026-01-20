@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ASOBI 株式会社｜ご提案できるサービス</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/follow.css">
+<style>
+    :root{
+      /* ✅ 保留 sheen 的颜色/字体基调 */
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --muted:#666;
+      --line:rgba(0,0,0,.08);
+      --ph:#d9d9d9;
+      --max:720px;
+      --transition: 0.7s cubic-bezier(.2,1,.3,1);
+      --w-screen: 664px;
+--max: 664px;
+
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+    img{max-width:100%; display:block;}
+    a{color:inherit; text-decoration:none;}
+
+    /* 中间白框（sheen 保留） */
+    .stage{min-height:100vh; display:flex; justify-content:center; align-items:flex-start; gap:10px; padding:0 18px 60px;}
+    .paper{
+      width:min(var(--max),100%);
+      background:var(--paper);
+      min-height:100vh;
+      border-radius:10px 10px 0 0;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    /* 顶部 */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px;
+    }
+    .brand{font-weight:700; letter-spacing:.02em; font-size:16px;}
+    .nav{display:flex; gap:18px; font-size:13px; color:var(--muted);} 
+
+    /* 顶部大图（sheen 保留） */
+    .hero-ph{height:46vh; min-height:320px; background:var(--ph);}
+    .hero-ph.hero-smile{
+      position:relative;
+      overflow:hidden;
+      background-image:url("images/hero.jpg");
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph.hero-smile .smile-wave{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:100%;
+      height:90px;
+      display:block;
+      pointer-events:none;
+    }
+    .hero-ph.hero-smile .smile-wave path{ fill: var(--paper); }
+    @media (max-width:560px){
+      .hero-ph{ min-height:260px; }
+      .hero-ph.hero-smile .smile-wave{ height:72px; }
+      .paper{ border-radius:0; }
+      .topbar-inner{ padding:14px; }
+    }
+
+    /* Hero 文案（sheen 保留） */
+    .hero-message{ padding: 54px 20px 42px; text-align:center; }
+    .hero-message-inner{ max-width: 560px; margin: 0 auto; }
+    .hero-quote{ font-size: 22px; line-height: 1.9; letter-spacing: .03em; margin: 0 0 18px; font-weight: 520; }
+    .hero-lead{ font-size: 14px; line-height: 2.0; color: #222; margin: 0; }
+
+    /* 标题 */
+    .sec-title{ text-align:center; padding:40px 18px 30px; }
+    .sec-title .jp{ margin:0 0 6px; font-size:30px; font-weight:800; line-height:1.25; }
+    .sec-title .en{ margin:0; font-size:22px; font-weight:700; letter-spacing:.02em; }
+    @media (max-width:560px){
+      .sec-title{ padding:34px 14px 24px; }
+      .sec-title .jp{ font-size:26px; }
+      .sec-title .en{ font-size:20px; }
+    }
+
+    /* =========================================
+       ✅ 统一为 service 文件的布局/动画
+       - 文字居左、图片居右（PC固定）
+       - 删除 sheen 原本的遮罩/白色椭圆卡片
+       ========================================= */
+
+    .service-wrap{ padding: 10px 18px 90px; }
+    .service-container{ max-width: 640px; margin: 0 auto; }
+
+    .svc-block{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 34px;
+      margin: 0 0 88px;
+    }
+
+    /* ✅ 文字居左 / 图片居右：不做偶数反转 */
+    .svc-text{ width: 46%; }
+    .svc-image{ width: 54%; position:relative; }
+
+    .svc-image{
+      overflow:hidden;
+      border-radius: 16px;
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .95s ease, transform .95s ease;
+      background: rgba(0,0,0,.02);
+    }
+
+    /* 揭幕遮罩 */
+    .svc-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--paper);
+      transform: translateY(0);
+      transition: transform 1.05s cubic-bezier(.2,1,.2,1);
+      z-index:2;
+    }
+
+    .svc-image img{
+      width:100%;
+      height:auto;
+      transform: scale(1.05);
+      transition: transform 1.35s cubic-bezier(.2,1,.2,1);
+      translate: 0 var(--parallax, 0px);
+      will-change: transform, translate;
+    }
+
+    /* 排版 */
+    .svc-num{
+      display:block;
+      font-size: 36px;
+      line-height:1;
+      font-weight: 900;
+      letter-spacing: .02em;
+      color: rgba(0,0,0,.18);
+      margin-bottom: 6px;
+    }
+    .svc-heading{
+      font-size: 18px;
+      font-weight: 900;
+      margin: 0 0 14px;
+      line-height: 1.45;
+    }
+    .svc-desc{
+      margin:0;
+      font-size: 13px;
+      line-height: 2.15;
+      letter-spacing: .02em;
+      color:#222;
+      white-space: pre-line;
+      text-align:left;
+    }
+
+    /* 文字节奏 */
+    .svc-text .svc-num,
+    .svc-text .svc-heading,
+    .svc-text .svc-desc{
+      opacity:0;
+      transform: translateY(18px);
+      filter: blur(3px);
+      transition: opacity .9s ease, transform .9s ease, filter .9s ease;
+    }
+
+    .svc-block.is-in .svc-text .svc-num{ transition-delay:.06s; opacity:1; transform:none; filter:none; }
+    .svc-block.is-in .svc-text .svc-heading{ transition-delay:.14s; opacity:1; transform:none; filter:none; }
+    .svc-block.is-in .svc-text .svc-desc{ transition-delay:.22s; opacity:1; transform:none; filter:none; }
+
+    .svc-block.is-in .svc-image{ opacity:1; transform:none; }
+    .svc-block.is-in .svc-image::after{ transform: translateY(-105%); }
+    .svc-block.is-in .svc-image img{ transform: scale(1.0); }
+
+    @media (hover:hover){
+      .svc-block:hover .svc-image img{ transform: scale(1.03); }
+    }
+
+    /* 分隔线：更干净 */
+    .svc-block + .svc-block{ border-top: 1px solid rgba(0,0,0,.06); padding-top: 42px; }
+
+    /* 手机端 */
+    @media (max-width: 768px){
+      .service-wrap{ padding: 0 14px 70px; }
+      .service-container{ max-width: 100%; }
+
+      /* 手机：图片在上、文字在下（统一 service 的阅读顺序） */
+      .svc-block{
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 18px;
+        margin-bottom: 64px;
+      }
+      .svc-text{ width:100%; }
+      .svc-image{ width: 92%; margin-left:auto; }
+      .svc-num{ font-size: 30px; }
+      .svc-heading{ font-size: 17px; }
+    }
+
+    /* 减少动态偏好 */
+    @media (prefers-reduced-motion: reduce){
+      .svc-image, .svc-image::after, .svc-image img,
+      .svc-text *{ transition:none !important; transform:none !important; filter:none !important; opacity:1 !important; }
+    }
+
+    /* 首屏标题渐入（service 文件风格） */
+    .reveal-head{ opacity:0; transform: translateY(22px); transition: opacity 1.05s ease, transform 1.05s ease; }
+    .reveal-head.is-in{ opacity:1; transform:none; }
+  
+
+    /* ===============================
+       UMINO-HOTEL 风格：松弛感排版块
+       - 大留白 + 窄文字列 + 居中大图
+       - 右下角 Read more + 轻装饰
+       =============================== */
+
+    .umi-section{ padding: 64px 0 10px; }
+    .umi-inner{ padding: 0 18px; }
+
+    /* 图：居中 + 充足白边 */
+    .umi-photo{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 10px 0 0;
+    }
+    .umi-photo img{
+      width: 100%;
+      height: auto;
+      border-radius: 2px; /* 近似直角 */
+    }
+
+    /* 标题区：左对齐，但整体居中在窄列内 */
+    .umi-text{
+      max-width: 560px;
+      margin: 40px auto 0;
+      position: relative;
+      padding: 0 2px 78px;
+    }
+
+    .umi-head{
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      margin: 0 0 14px;
+    }
+
+    .umi-title{
+      font-family: ui-serif, "Didot", "Bodoni 72", "Times New Roman", Georgia, serif;
+      font-weight: 400;
+      font-size: 56px;
+      letter-spacing: .02em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .umi-slash{
+      width: 2px;
+      height: 70px;
+      background: rgba(0,0,0,.55);
+      transform: rotate(28deg);
+      transform-origin: center;
+      margin-bottom: 6px;
+    }
+
+    .umi-sub{
+      font-size: 13px;
+      letter-spacing: .22em;
+      color: rgba(0,0,0,.7);
+      margin: 0 0 6px;
+      white-space: nowrap;
+    }
+
+    .umi-body{
+      margin: 0;
+      font-size: 13px;
+      line-height: 2.2;
+      letter-spacing: .04em;
+      color: rgba(0,0,0,.78);
+      white-space: pre-line;
+    }
+
+    .umi-readmore{
+      position: absolute;
+      right: 0;
+      bottom: 14px;
+      font-size: 13px;
+      letter-spacing: .06em;
+      color: rgba(0,0,0,.8);
+      padding-bottom: 8px;
+    }
+    .umi-readmore::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom: 2px;
+      height: 2px;
+      background: rgba(0,0,0,.35);
+      border-radius: 99px;
+      transform: scaleX(.72);
+      transform-origin: left;
+    }
+
+    /* 右侧“预订”泡泡（可选） */
+    .umi-badge{
+      position: absolute;
+      right: -64px;
+      bottom: -6px;
+      width: 170px;
+      height: 150px;
+      background: #76cfd0;
+      color: #fff;
+      border-radius: 58% 42% 55% 45% / 55% 45% 55% 45%;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+      text-align: center;
+      padding: 14px;
+    }
+    .umi-badge .jp{ font-size: 12px; letter-spacing:.18em; margin: 0 0 6px; opacity:.95; }
+    .umi-badge .en{ font-size: 16px; letter-spacing:.05em; margin: 0 0 10px; font-weight: 700; }
+    .umi-badge .mini{
+      width: 94px;
+      height: 58px;
+      background: #fff;
+      color: #3aa7a9;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.1;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 768px){
+      .umi-section{ padding: 52px 0 6px; }
+      .umi-photo{ max-width: 620px; }
+      .umi-text{ max-width: 520px; padding-bottom: 92px; }
+      .umi-title{ font-size: 46px; }
+      .umi-slash{ height: 58px; }
+      .umi-badge{ right: -10px; bottom: -8px; transform: scale(.92); }
+    }
+
+    @media (max-width: 420px){
+      .umi-title{ font-size: 40px; }
+      .umi-sub{ letter-spacing: .14em; }
+      .umi-badge{ right: -6px; transform: scale(.86); }
+    }
+/* 呼吸感正文 */
+.breath-text{
+  color: rgba(0,0,0,.78);
+  font-size: 14px;
+  line-height: 2.2;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0,0,0,.06);
+  -webkit-font-smoothing: antialiased;
+}
+/* 呼吸感标题 */
+.breath-title{
+  color: #111;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+/* 给手机端底部导航预留空间，避免压住正文 */
+@media (max-width: 1000px){
+  .paper{ padding-bottom: 110px; }
+}
+/* --- 电脑端 1001px 以上的偏移逻辑 --- */
+@media (min-width: 1001px){
+  .paper{
+    transform: translateX(-140px);
+  }
+}
+@media (min-width: 1001px){
+  .floating-nav-wrapper{
+    transform: translateX(
+      calc((var(--w-screen) / 2) + 18px - 140px)
+    ) !important;
+  }
+}
+
+
+    
+
+/* (moved to css/follow.css) */
+</style>
+</head>
+<body><img alt="" aria-hidden="true" class="bg-car" src="youce.png"/>
+<div class="stage">
+<main class="paper">
+<header class="topbar">
+<div class="topbar-inner">
+<div class="brand">ASOBI 株式会社</div>
+<nav class="nav">
+<a href="#about">会社概要</a>
+<a href="#news">お知らせ</a>
+</nav>
+</div>
+</header>
+<section aria-label="Hero" class="hero-ph hero-smile">
+<svg aria-hidden="true" class="smile-wave" preserveaspectratio="none" viewbox="0 0 1440 120">
+<path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+</svg>
+</section>
+<section class="hero-message">
+<div class="hero-message-inner">
+<p class="hero-quote">
+            「移動の不安をなくしたい」<br/>
+            「ワンランク上の体験を提供したい」
+          </p>
+<p class="hero-lead">
+            そんなニーズに応えるパートナーとして、<br/>
+            ぜひ当社のハイヤーサービスをご活用ください。
+          </p>
+</div>
+</section>
+<!-- ✅ UMINO 风格：松弛感示例块（放在 hero 文案后面） -->
+<section class="sec-title reveal-head" id="service">
+<h2 class="jp">ご提案できるサービス</h2>
+<p class="en">Our service</p>
+</section>
+<section class="service-wrap">
+<div class="service-container">
+<article class="svc-block reveal" id="svc1">
+<div class="svc-text">
+<span class="svc-num">01</span>
+<h3 class="svc-heading">観光ハイヤー</h3>
+<p class="svc-desc">京都・大阪・奈良など関西エリアの観光地を、お客様だけのプライベート車両でゆったり巡れるのが観光ハイヤーです。
+あらかじめ行きたい場所を決めて観光ルートを自由に組むことができ、お客様のペースに合わせた旅程を実現します。
+
+公共交通機関の時間を気にする必要がなく、複数都市にまたがる観光もスムーズです。</p>
+</div>
+<div class="svc-image">
+<img alt="観光ハイヤー" src="images/svc-1.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc2">
+<div class="svc-text">
+<span class="svc-num">02</span>
+<h3 class="svc-heading">ドライバー付き観光ハイヤー</h3>
+<p class="svc-desc">
+
+観光ガイドのように案内できるドライバーが同乗するのが「ドライバー付き観光ハイヤー」。
+
+観光に精通した経験豊富な乗務員がお客様の旅をエスコートいたしますので、初めて訪れる土地でも安心です。
+
+当社には英語や中国語を話せるスタッフがおりますので、
+海外からのゲストをお迎えする際やインバウンド観光にも安心してご利用いただけます。</p>
+</div>
+<div class="svc-image">
+<img alt="ドライバー付き観光ハイヤー" src="images/svc-2.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc3">
+<div class="svc-text">
+<span class="svc-num">03</span>
+<h3 class="svc-heading">ビジネス送迎</h3>
+<p class="svc-desc">当社のビジネス送迎サービスは、プロのドライバーが指定の時間・場所に合わせて待機し、大切な目的地へ確実にお送りするものです。
+
+                忙しい経営者や役員の方々の通勤・移動手段として、多くの企業様にもご利用いただいています。</p>
+</div>
+<div class="svc-image">
+<img alt="ビジネス送迎" src="images/service-03.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc4">
+<div class="svc-text">
+<span class="svc-num">04</span>
+<h3 class="svc-heading">イベント・式典</h3>
+<p class="svc-desc">結婚式や記念式典、各種イベントの日には、移動も特別な演出の一部です。
+人生の大切な一日を彩るお手伝いします。新郎新婦やご親族の送迎、撮影ロケへの移動、VIP来賓の送迎など、シーンに応じて最適な車両で対応します。</p>
+</div>
+<div class="svc-image">
+<img alt="イベント・式典" src="images/service-04.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc5">
+<div class="svc-text">
+<span class="svc-num">05</span>
+<h3 class="svc-heading">5：空港送迎</h3>
+<p class="svc-desc">関西国際空港や大阪国際空港をご利用の際は、ぜひ当社の空港送迎サービスをご活用ください。
+
+空港とホテルやご自宅、観光先など目的地をドア・ツー・ドアで直結し、大きな荷物があっても移動がラクになります。早朝や深夜便でも対応可能です。</p>
+</div>
+<div class="svc-image">
+<img alt="空港送迎" src="images/service-02.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc6">
+<div class="svc-text">
+<span class="svc-num">06</span>
+<h3 class="svc-heading">家族旅行・三世代旅行</h3>
+<p class="svc-desc">ご家族でのご旅行、特に小さなお子様やご高齢のご家族を含む旅行では、「移動の負担」が旅の満足度を大きく左右します。共交通機関の乗り換え、時間管理や体力面に不安を感じる方も少なくありません。
+
+「祖父母の体調を見ながら観光したい」
+「子どものペースに合わせたい」
+
+といったご要望にも柔軟に対応できるのは、専属ドライバー付きハイヤーならではの強みです。</p>
+</div>
+<div class="svc-image">
+<img alt="家族旅行・三世代旅行" src="images/svc-6.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc7">
+<div class="svc-text">
+<span class="svc-num">07</span>
+<h3 class="svc-heading">社内旅行・研修旅行</h3>
+<p class="svc-desc">企業様の社員旅行・研修旅行においても、ハイヤーは非常に有効な移動手段です。
+参加人数やスケジュールに応じて車両を手配し、集合場所から目的地までをスムーズにつなぐことで、幹事様の負担を軽減します。
+
+車内での打ち合わせや交流など、移動時間も有効活用できます。</p>
+</div>
+<div class="svc-image">
+<img alt="社内旅行・研修旅行" src="images/svc-7.png"/>
+</div>
+</article>
+</div>
+</section>
+
+<section class="mini-nav-row" aria-label="Quick contact">
+  <a href="https://line.me/" target="_blank"><img src="images/cta-line.png" alt="LINEでお問い合わせ"></a>
+  <a href="mailto:info@asobi.co.jp"><img src="images/cta-mail.png" alt="メールでお問い合わせ"></a>
+  <a href="https://instagram.com/" target="_blank"><img src="images/insta.png" alt="Instagram"></a>
+</section>
+<section class="sns-guide"><div class="sec-title-block" style="margin:40px 0 20px;">
+<div class="sec-en" style="font-size:20px;">Contact Us</div>
+<div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.jp">
+      <img src="images/contact-mail.svg" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+</div></section>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="asobi.html">ホーム</a></li>
+        <li><a href="service.html">サービス一覧</a></li>
+        <li><a href="alphard_detail.html">車両ラインナップ</a></li>
+        <li><a href="about_asobi.html">会社概要</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI 株式会社. All Rights Reserved.
+    </div>
+</footer></main>
+
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="LINEでお問い合わせ" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:info@asobi.co.jp">
+<img alt="メールでお問い合わせ" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+</div>
+<script>
+    // ===== Scroll reveal + subtle parallax（service文件同款） =====
+    window.addEventListener('DOMContentLoaded', () => {
+      const head = document.querySelector('.reveal-head');
+      const blocks = Array.from(document.querySelectorAll('.svc-block.reveal'));
+      const targets = [head, ...blocks].filter(Boolean);
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: "0px 0px -10% 0px" });
+
+      targets.forEach(el => io.observe(el));
+
+      // subtle parallax（只对图片：很轻）
+      const imgs = document.querySelectorAll('.svc-image img');
+      const onScroll = () => {
+        const vh = window.innerHeight;
+        imgs.forEach(img => {
+          const r = img.getBoundingClientRect();
+          const t = ((r.top + r.height/2) - vh/2) / (vh/2);
+          const px = Math.max(-10, Math.min(18, -t * 18));
+          img.style.setProperty('--parallax', px.toFixed(2) + 'px');
+        });
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', onScroll);
+    });
+  </script>
+</body>
+</html>
