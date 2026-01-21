@@ -745,8 +745,23 @@ body{
   color: rgba(0,0,0,.55);
   letter-spacing: .04em;
 }
+/* 让返回顶部按钮居中显示，并与下方拉开一点距离 */
+.back-to-top-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 
-
+/* ✅ 建议加上这一行，让点击跳转时有平滑滚动的效果 */
+html {
+  scroll-behavior: smooth;
+}
+/* 2. 核心：强制去掉鼠标悬停时的灰色方块背景和上浮动画 */
+.back-to-top-wrap .sq-small:hover {
+    background: transparent !important; /* 【关键】去掉灰色背景 */
+    transform: none !important;         /* 去掉上浮动效 */
+}
 </style>
 </link></head>
 <body>
@@ -1072,6 +1087,11 @@ body{
 <div class="qa-answer"><div class="qa-answer-pad">直前のスケジュール変更や、急な追加のご依頼にも、可能な限り柔軟に対応します。まずご連絡ください。</div></div>
 </div>
 </div>
+<div class="back-to-top-wrap">
+  <a class="sq-small sq-img" href="#"> <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+
 <div class="sec-title-block" style="margin:40px 0 20px;">
 <div class="sec-en" style="font-size:20px;">Contact Us</div>
 <div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
