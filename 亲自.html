@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>家族旅｜ASOBI 株式会社</title>
+
+  <!-- ✅ 统一基础 -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+
+  <style>
+ :root {
+  --bg: #FFF4E0;           /* 👈 这里改回温暖的米色，不要那个亮蓝色 */
+  --paper: #fff;
+  --text: #111;
+  --muted: #666;
+  --line: rgba(0,0,0,.08);
+  --ph: #d9d9d9;
+  --max: 664px;
+  --transition: 0.7s cubic-bezier(.2,1,.3,1);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  /* 👈 核心字体：使用 Optima 和 游明朝，这种字体才有高级感 */
+  font-family: "Optima", "Yu Mincho", "Hiragino Mincho ProN", serif; 
+  overflow-x: hidden;
+}
+ 
+.stage {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; /* 恢复居中 */
+  gap: 12px;               /* 白色纸张与导航栏的固定间距 */
+  padding: 0 18px 60px;
+  position: relative;
+  left: 0;                 /* 移除之前的偏移 */
+}
+
+/* ✅ 修正 paper：移除 auto margin，让它在 flex 流中排队 */
+.paper {
+  flex-shrink: 0;           /* 防止宽度被挤压 */
+  width: min(var(--max), 100%);
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  overflow: hidden;
+  margin: 0;                /* 必须改为0，否则 nav 无法贴合 */
+}
+
+ 
+
+
+    /* 顶部（轻、干净） */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar .brand{ font-weight:700; letter-spacing:.5px; }
+    .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
+
+    /* ✅ Hero：保留“你现在的 hero + smile wave” */
+    .hero-ph{
+      height:46vh; min-height:320px;
+      background: #d9d9d9;
+      position: relative;
+      background-image:url("images/hero.jpg"); /* 你已有的hero图 */
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph .smile-wave{
+      position:absolute;
+      left:0; bottom:-1px;
+      width:100%;
+      height:90px;
+      pointer-events:none;
+    }
+    .hero-ph .smile-wave path{ fill:#fff; }
+
+     
+ 
+ 
+
+    /* 手机：更窄更松 */
+    @media (max-width: 1000px){
+      .stage{ display:block; padding: 0 12px 60px; }
+      .paper{ border-radius: 0; width:100%; max-width: 520px; }
+     
+    }
+
+    /* ✅ 手机底部三色导航预留空间（不挡内容） */
+    @media (max-width: 1000px){
+      .paper{ padding-bottom: 110px; }
+    }
+    @media (min-width: 1001px){
+  :root{
+    --paper-shift: 140px;
+  }
+
+}
+
+/* ✅ 右侧三色导航：作为第二列，贴着 paper */
+/* =========================
+   Desktop：nav 贴白色纸右侧
+   ========================= */
+.floating-nav-wrapper{
+  
+
+  margin-left: 12px;        /* ✅ 贴着 paper */
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 手机端：底部固定（你 follow 也是这个思路） */
+@media (max-width: 1000px){
+  .floating-nav-wrapper{
+    
+    left: 0;
+    
+    bottom: 0;
+    top: auto;
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+  }
+}
+/* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
+@media (min-width: 1001px) {
+  .floating-nav-wrapper {
+    position: sticky !important; 
+    top: 528px !important;       /* 距离视口顶部的距离 */
+    left: auto !important;
+    margin-left: 0 !important;   /* 靠 gap 控制间距 */
+    transform: none !important;  /* 必须清除 base/follow 里的位移 */
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation: 
+  carFloat 9s ease-in-out infinite;
+}
+/* =========================
+   Footer（底部版权栏）
+   ========================= */
+
+.site-footer-bar{
+  margin-top: 64px;
+  padding: 28px 18px 34px;
+  background: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,.7);
+}
+
+/* 链接列表 */
+.site-footer-bar .footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.site-footer-bar .footer-links li{
+  margin: 0;
+}
+
+.site-footer-bar .footer-links a{
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bar .footer-links a:hover{
+  text-decoration: underline;
+}
+
+/* 版权行 */
+.site-footer-bar .copyright{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  letter-spacing: .04em;
+}
+/* 文章の距離感デザイン */
+.svc-desc {
+  letter-spacing: 0.1em !important;
+  line-height: 2.2 !important;
+  font-size: 15px !important;
+  color: #333 !important;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.svc-heading {
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.hero-quote {
+  font-size: 26px;
+  line-height: 1.6;
+  letter-spacing: .15em;
+  margin: 0 0 24px;
+  font-weight: 600;
+  color: #222;
+}
+.toc-area {
+  max-width: 520px;
+  margin: 20px auto 80px;
+  padding: 40px 20px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  text-align: center;
+}
+.toc-title {
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  color: #888;
+  margin-bottom: 20px;
+}
+.toc-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.toc-links a {
+  font-size: 15px;
+  color: #444;
+  transition: color 0.3s;
+  text-decoration: none;
+  font-weight: 500;
+}
+.toc-links a:hover { color: #e67e22; }
+.svc-block { 
+  display: flex; 
+  align-items: flex-start; 
+  justify-content: space-between; 
+  gap: 40px; 
+  padding: 0 40px; 
+  margin-bottom: 140px !important; 
+}
+
+.svc-text { width: 100%; }
+
+.svc-image { 
+  width: 100%; 
+  margin-top: 30px; 
+  position: relative; 
+  overflow: hidden; 
+  border-radius: 12px; 
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: 1s; 
+}
+
+/* 配合 JS 触发显示 */
+.svc-block.is-in .svc-image { opacity: 1; transform: none; }
+
+.svc-num { 
+  display: block; 
+  font-size: 42px; 
+  font-weight: 900; 
+  color: rgba(0,0,0,0.05); 
+  margin-bottom: 10px; 
+}
+.age-guide-box {
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+.age-title {
+  font-weight: bold;
+  color: #e67e22;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  .svc-block { 
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 0 25px; 
+  }
+  .hero-message { padding: 40px 20px; }
+}
+/* ✅ 底部 SNS 图标排列（解决你底部插图乱掉的问题） */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4列横排 */
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.sq-small.sq-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+/* ✅ 右侧悬浮导航按钮的大小控制 */
+.nav-tag {
+  display: block;
+  width: 140px; /* 限制宽度，防止图片过大 */
+  transition: transform 0.3s;
+}
+.nav-tag img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 适配手机端的 SNS 图标 */
+@media (max-width: 480px) {
+  .bottom-grid {
+    grid-template-columns: repeat(2, 1fr); /* 手机上变 2x2 排列 */
+  }
+}
+/* 标题颜色与粗细 */
+.svc-heading {
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: #2c3e50; /* 👈 这种深青蓝色比纯黑更高级 */
+}
+
+/* 正文文字细节 */
+.svc-desc {
+  letter-spacing: 0.1em !important;
+  line-height: 2.2 !important;
+  font-size: 15px !important;
+  color: #333 !important; /* 👈 控制文字深浅 */
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+/* 目录链接的橙色点缀 */
+.toc-links a:hover { 
+  color: #e67e22; /* 👈 这种暖橙色是原版的点睛之笔 */
+}
+
+/* 年龄标题颜色 */
+.age-title {
+  font-weight: bold;
+  color: #e67e22; /* 👈 这里的颜色也要统一 */
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+//* ✅ 1. 容器：确保背景和间距统一 */
+.sns-guide {
+  padding: 80px 18px 120px; /* 底部多留点空间给手机导航 */
+  background: #fff;
+  text-align: center;
+}
+
+.sns-guide .sec-title-block {
+  margin-bottom: 40px;
+}
+
+/* ✅ 2. 网格：核心自适应逻辑 */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 电脑端：4列 */
+  gap: 18px;                             /* 间距 */
+  max-width: 560px;                      /* 限制整体宽度，保持精致 */
+  margin: 0 auto;
+}
+
+/* ✅ 3. 项目：去掉固定宽高，改用自适应比例 */
+.sq-small.sq-img {
+  width: 100% !important;   /* 覆盖 follow.css 的 188px */
+  height: auto !important;  /* 覆盖 follow.css 的 188px */
+  background: none;
+  aspect-ratio: 1 / 1;      /* 保持正方形 */
+}
+
+.sq-small.sq-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* 确保图片填满格子 */
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* ✅ 4. 响应式：针对平板和手机切换布局 */
+@media (max-width: 1000px) {
+  .bottom-grid {
+    grid-template-columns: repeat(2, 1fr); /* 1000px以下变 2x2 */
+    max-width: 360px;                      /* 手机端收窄 */
+    gap: 14px;                             /* 间距稍微调小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-grid {
+    max-width: 280px;                      /* 小屏手机更紧凑 */
+  }
+  .sns-guide {
+    padding: 60px 18px 100px;              /* 缩减间距 */
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <!-- 右侧装饰车（保留统一） -->
+  <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+
+  <div class="stage">
+    <main class="paper" role="main">
+
+      <header class="topbar">
+        <div class="brand">ASOBI 株式会社</div>
+        <nav aria-label="top">
+          <a href="company.html">会社概要</a>
+          <a href="news.html">お知らせ</a>
+        </nav>
+      </header>
+
+      <!-- ✅ HERO（保留） -->
+      <section class="hero-ph" aria-label="Hero">
+        <svg class="smile-wave" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1440 120">
+          <path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+        </svg>
+      </section>
+<section class="hero-message">
+<div class="hero-message-inner">
+<h1 class="hero-quote">ASOBI 株式会社は<br>みんなの旅を応援します。</h1>
+<div class="svc-desc">
+  <div style="border-left: 3px solid #9CE0FC; padding-left: 15px; margin-bottom: 30px; font-weight: bold; color: #2c3e50;">
+    「移動」を「自由な家族の時間」へ
+  </div>
+  <p>子连れ旅行における最大の悩みは、移動中のお子様の「ぐずり」や周囲への気兼ねです。ハイヤーサービスなら、公共交通機関のような混雑や乗り換えのストレスから完全に解放されます。</p>
+
+  <p>ASOBIでは、<span style="border-bottom: 1.5px solid #9CE0FC;">大阪発、または大阪着のご旅行であれば、行先を問わず承っております。</span></p>
+  
+  <p>さらに、ベビーカーや大量のおむつバッグなどの重い荷物も、トランクに預けたまま目的地まで「ドア to ドア」で移動できるため、親御様の体力的な消耗も最小限に抑えられます。</p>
+</div>
+
+</section>
+
+<nav class="toc-area">
+    <div class="toc-title">INSIGHTS</div>
+    <ul class="toc-links">
+        
+        <li><a href="#area1">01. 精神的な負担をゼロにする「プライベート空間」</a></li>
+        <li><a href="#area2">02. 年齢別の変化に寄り添う「柔軟な行程」</a></li>
+        <li><a href="#area3">03. お手軽料金で「プロのサポート」を！</a></li>
+    </ul>
+</nav>
+
+<section class="service-wrap">
+<div class="service-container">
+<article class="svc-block reveal" id="area1">
+<div class="svc-text">
+<span class="svc-num">01</span>
+<h3 class="svc-heading">精神的な負担をゼロにする<br>「プライベート空間」</h3>
+<p class="svc-desc">
+子連れ旅行における最大の悩みは、移動中のお子様の「ぐずり」や周囲への気兼ねです。
+ハイヤーサービスなら、公共交通機関のような混雑や乗り換えのストレスから完全に解放されます。
+車内は家族だけの完全なプライベート空間。
+お子様が泣いても、大きな声で笑っても、誰にも気兼ねする必要はありません。
+さらに、ベビーカーや大量のおむつバッグなどの重い荷物も、トランクに預けたまま目的地まで「ドア to ドア」で移動できるため、親御様の体力的な消耗も最小限に抑えられます。
+</p>
+<div class="svc-image">
+<img alt="プライベート空間" src="relaxpics/point-1.png"/>
+</div>
+</div>
+</article>
+
+<article class="svc-block reveal" id="area2">
+<div class="svc-text">
+<span class="svc-num">02</span>
+<h3 class="svc-heading">年齢別の変化に寄り添う<br>「柔軟なスケジュール」</h3>
+<p class="svc-desc">
+　お子様の年齢によって、旅の「ちょうどいいリズム」は異なります。
+　ハイヤーサービスは、その場その場でスケジュールを調整できる柔軟性にあります。
+急なトイレやおむつ替え、授乳が必要になった際も、ドライバーと相談して近くの施設へ立ち寄ることが可能です。
+</p>
+<div class="age-guide-box">
+    <span class="age-title">● 0〜2歳（乳幼児期）</span>
+    授乳や午睡を最優先した「ゆるやか旅程」。車内を休憩室として活用し、無理なく2〜3スポットを巡るのが理想です。
+    <span class="age-title">● 3〜6歳（未就学児）</span>
+    好奇心旺盛な時期。動物園やワークショップなど「体験型」をメインに据え、移動中にしっかり休息を取ることで、ぐずりを防ぎます。
+    <span class="age-title">● 7〜12歳（小学生）</span>
+    学習意欲が高まる時期。歴史スポットや科学館など、学びと体験をセットに。体力がついてくるため、少し距離を伸ばした行程も可能です。
+</div>
+<div class="svc-image">
+<img alt="柔軟なプランニング" src="babypics/point-2.png"/>
+</div>
+</div>
+</article>
+
+<article class="svc-block reveal" id="area3">
+<div class="svc-text">
+<span class="svc-num">03</span>
+<h3 class="svc-heading">旅の質を劇的に高める<br>「プロのサポート」</h3>
+<p class="svc-desc">
+　ASOBIが提供するのは単なる移動ではなく、上質な「ハイヤー体験」です。
+プロのドライバーがドアの開閉や荷物の積み降ろしを手伝い、親御様が「お子様と向き合う時間」を最大化します。
+　車両は、多人数でもゆったり過ごせるプレミアムミニバン「アルファード」や、三世代旅行にも対応する最大9名乗りの「ハイエース・グランドキャビン」など、用途に合わせて選択可能です。
+
+　6歳未満のお子様に不可欠なチャイルドシートも、事前にご予約いただくことで万全の状態でお迎えにあがります。
+
+　安全と快適が約束された移動空間は、旅の満足度を一段上のものへと引き上げます。
+</p>
+<div class="svc-image">
+<img alt="プロフェッショナルなサービス" src="relaxpics/point-3.png"/>
+</div>
+</div>
+</article>
+
+</div>
+
+
+     
+
+      
+        <!-- ✅ 最下方 SNS（保留统一：bottom-grid class） -->
+        <section class="sns-guide">
+          <div class="sec-title-block" style="margin:40px 0 20px;">
+            <div class="sec-en" style="font-size:20px;">Contact Us</div>
+            <div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
+          </div>
+
+          <div class="bottom-grid">
+            <a class="sq-small sq-img" href="https://line.me/" target="_blank">
+              <img src="images/contact-line.png" alt="LINE">
+            </a>
+            <a class="sq-small sq-img" href="mailto:info@asobi.co.jp">
+              <img src="images/contact-mail.png" alt="Mail">
+            </a>
+            <a class="sq-small sq-img" href="https://instagram.com/" target="_blank">
+              <img src="images/contact-instagram.svg" alt="Instagram">
+            </a>
+            <a class="sq-small sq-img" href="#" target="_blank">
+              <img src="images/contact-wechat.png" alt="WeChat">
+            </a>
+          </div>
+        </section>
+
+      </section>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+    <li><a href=“asobi.html">ホーム</a></li>
+    <li><a href="service.html">サービス一覧</a></li>
+<li><a href="./alphard_detail.html#vehicle-photos">車両ラインナップ</a></li>
+    <li><a href=“about_asobi.html">会社概要</a></li>
+    <li><a href=“#”>プライバシーポリシー</a></li>
+  </ul>
+
+  <div class="copyright">
+    © 2026 ASOBI 株式会社. All Rights Reserved.
+  </div>
+</footer>
+    </main>
+    
+
+
+    <!-- ✅ 右侧三色导航（保留统一） -->
+    <aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="LINEでお問い合わせ" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:info@asobi.co.jp">
+<img alt="メールでお問い合わせ" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // 找到所有带 reveal 类的块
+      const blocks = Array.from(document.querySelectorAll('.svc-block.reveal'));
+      
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            // 当滚动到这个位置时，添加 'is-in' 类，图片就会显示
+            e.target.classList.add('is-in');
+          }
+        });
+      }, { threshold: 0.15 });
+      
+      blocks.forEach(el => io.observe(el));
+    });
+</script>
+</body>
+</html>
