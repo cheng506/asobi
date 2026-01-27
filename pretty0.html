@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>おすすめ観光コース｜ASOBI 株式会社</title>
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+
+  <style>
+    :root{
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --accent: #E60012; /* おすすめの赤色 */
+      --muted:rgba(0,0,0,.62);
+      --line:rgba(0,0,0,.08);
+      --max:664px;
+      /* フォント指定（元のコードより） */
+      --font-miyabi: "SicTake-Miyabi", serif;
+      --font-gothic: "Sawarabi Gothic", sans-serif;
+    }
+
+    body{ margin:0; background:var(--bg); color:var(--text); font-family: var(--font-gothic); overflow-x:hidden; }
+
+    .stage {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center; 
+      gap: 12px;
+      padding: 0 18px 60px;
+      position: relative;
+    }
+
+    .paper {
+      flex-shrink: 0;
+      width: min(var(--max), 100%);
+      background: var(--paper);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar .brand{ font-weight:700; letter-spacing:.5px; }
+
+    /* --- コンテンツ独自のスタイル --- */
+    
+    .course-header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .course-header .sub { font-size: 20px; margin-bottom: 10px; }
+    .course-header h1 { font-family: var(--font-miyabi); font-size: 48px; margin: 10px 0; }
+    .course-header .lead { font-family: var(--font-miyabi); font-size: 24px; }
+    .course-header .accent { color: var(--accent); font-weight: bold; }
+
+    /* 各観光地セクション */
+    .spot-section {
+      position: relative;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .spot-image-box {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      background: #d9d9d9; /* 画像がない場合のプレースホルダー */
+      background-size: cover;
+      background-position: center;
+      border-radius: 4px;
+    }
+
+    /* 文字盤のオーバーレイ */
+    .spot-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 60px;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spot-overlay h2 { font-family: var(--font-miyabi); font-size: 24px; margin-bottom: 10px; border-bottom: 1px solid #333; display: inline-block; width: fit-content; }
+    .spot-overlay p { font-size: 15px; line-height: 1.6; margin: 5px 0; }
+
+    /* 縦書きの地名 */
+    .vertical-label {
+      position: absolute;
+      left: -5px;
+      top: 10px;
+      writing-mode: vertical-rl;
+      font-family: var(--font-miyabi);
+      font-size: 54px;
+      line-height: 1;
+      z-index: 2;
+    }
+
+    /* スタッフ紹介 */
+    .staff-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+      padding-left: 60px;
+    }
+/* staff-thumb の中身を空から画像対応に変更 */
+.staff-thumb {
+  width: 100px;
+  height: 100px;
+  background: none; /* 灰色の背景を削除 */
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden; /* 画像を丸く切り抜く */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 少し立体感を出す */
+}
+
+.staff-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 縦横比を保って収める */
+}
+    
+    .staff-name { font-size: 16px; font-weight: bold; }
+/* 追加：行程表样式 */
+.itinerary-container {
+  margin: 20px;
+  padding: 30px 20px;
+  border: 4px dashed #D9D9D9; /* 对应 React 代码中的 StyledRectangle6 */
+  position: relative;
+  background: #fff;
+}
+
+.itinerary-title {
+  font-family: var(--font-miyabi);
+  margin-bottom: 30px;
+}
+.itinerary-title .small { font-size: 16px; }
+.itinerary-title .large { font-size: 48px; display: block; line-height: 1; }
+
+.itinerary-item {
+  font-family: var(--font-miyabi);
+  font-size: 20px; /* ← 这里改成 20px */
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 为了兼容你京都和奈良用的新类名，建议把这个也加上 */
+.itinerary-text {
+  font-family: var(--font-miyabi);
+  font-size: 20px; /* ← 统一设定为 20px */
+}
+
+/* 修改或确认以下样式，确保行程表内图片能够灵活排列 */
+.itinerary-photos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.photo-card.right { transform: rotate(5deg); }
+.photo-card.left { transform: rotate(-5deg); }
+
+.caption {
+  font-size: 14px; /* ← 这里锁定 14px */
+  color: #333;
+  display: block;
+  margin-top: 5px;
+  line-height: 1.4;
+}/* 这样写能保证所有照片下的文字（无论带不带类名）都是 14px */
+.itinerary-photos span, 
+.photo-card span, 
+.caption {
+  font-size: 14px;
+}
+/* 调整文字样式 */
+.itinerary-note {
+  font-family: var(--font-miyabi);
+  font-size: 18px;
+  text-align: right;
+  margin-top: 20px;
+  color: #333;
+}
+    /* レスポンシブ調整 */
+    @media (max-width: 1000px){
+      .stage{ display:block; padding: 0; }
+      .paper{ width:100%; border-radius: 0; }
+      .vertical-label { font-size: 40px; left: 5px; }
+      .spot-overlay { left: 45px; }
+      .staff-info { padding-left: 20px; }
+      .course-header h1 { font-size: 32px; }
+    }
+
+/* ✅ 右侧三色导航：作为第二列，贴着 paper */
+/* =========================
+   Desktop：nav 贴白色纸右侧
+   ========================= */
+.floating-nav-wrapper{
+  
+
+  margin-left: 12px;        /* ✅ 贴着 paper */
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 手机端：底部固定（你 follow 也是这个思路） */
+@media (max-width: 1000px){
+  .floating-nav-wrapper{
+    
+    left: 0;
+    
+    bottom: 0;
+    top: auto;
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+  }
+}
+/* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
+@media (min-width: 1001px) {
+  .floating-nav-wrapper {
+    position: sticky !important; 
+    top: 528px !important;       /* 距离视口顶部的距离 */
+    left: auto !important;
+    margin-left: 0 !important;   /* 靠 gap 控制间距 */
+    transform: none !important;  /* 必须清除 base/follow 里的位移 */
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation: 
+  carFloat 9s ease-in-out infinite;
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation: 
+  carFloat 9s ease-in-out infinite;
+}
+/* =========================
+   Footer（底部版权栏）
+   ========================= */
+
+.site-footer-bar{
+  margin-top: 64px;
+  padding: 28px 18px 34px;
+  background: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,.7);
+}
+
+/* 链接列表 */
+.site-footer-bar .footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.site-footer-bar .footer-links li{
+  margin: 0;
+}
+
+.site-footer-bar .footer-links a{
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bar .footer-links a:hover{
+  text-decoration: underline;
+}
+
+/* 版权行 */
+.site-footer-bar .copyright{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  letter-spacing: .04em;
+}
+/* 文章の距離感デザイン */
+/* ✅ 1. 容器：确保背景和间距统一 */
+.sns-guide {
+  padding: 80px 18px 120px; /* 底部多留点空间给手机导航 */
+  background: #fff;
+  text-align: center;
+}
+
+.sns-guide .sec-title-block {
+  margin-bottom: 40px;
+}
+
+/* ✅ 2. 网格：核心自适应逻辑 */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 电脑端：4列 */
+  gap: 18px;                             /* 间距 */
+  max-width: 560px;                      /* 限制整体宽度，保持精致 */
+  margin: 0 auto;
+}
+
+/* ✅ 3. 项目：去掉固定宽高，改用自适应比例 */
+.sq-small.sq-img {
+  width: 100% !important;   /* 覆盖 follow.css 的 188px */
+  height: auto !important;  /* 覆盖 follow.css 的 188px */
+  background: none;
+  aspect-ratio: 1 / 1;      /* 保持正方形 */
+}
+
+.sq-small.sq-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* 确保图片填满格子 */
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* ✅ 4. 响应式：针对平板和手机切换布局 */
+@media (max-width: 1000px) {
+  .bottom-grid {
+    grid-template-columns: repeat(2, 1fr); /* 1000px以下变 2x2 */
+    max-width: 360px;                      /* 手机端收窄 */
+    gap: 14px;                             /* 间距稍微调小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-grid {
+    max-width: 280px;                      /* 小屏手机更紧凑 */
+  }
+  .sns-guide {
+    padding: 60px 18px 100px;              /* 缩减间距 */
+  }
+}
+    /* 图片随机倾斜效果，模拟手贴照片的感觉 */
+.tilt-left { transform: rotate(-6deg); }
+.tilt-right { transform: rotate(5deg); }
+.tilt-slight-right { transform: rotate(3deg); }
+
+/* 每一行的高度和对齐 */
+.itinerary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px; /* 行间距 */
+  min-height: 150px;
+}
+/* --- 京都部分特有的推荐评价布局 --- */
+.itinerary-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+/* 那个灰色的圆形图片框 */
+.recommendation-circle {
+  width: 140px;
+  height: 140px;
+  background-color: #D9D9D9; /* 默认灰色背景 */
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recommendation-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recommendation-text-block {
+  font-family: var(--font-miyabi);
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: left; /* 评价文字左对齐 */
+  color: #000;
+}
+html {
+  scroll-behavior: smooth; /* 点击标签时平滑滚动到目标位置 */
+}
+
+/* 抵消顶部粘性导航栏可能遮挡标题的问题 */
+.itinerary-container {
+  scroll-margin-top: 80px; /* 根据您 topbar 的高度调整此数值 */
+}
+/* 标题下方的点击引导文字样式 */
+.course-header .click-hint {
+  font-size: 16px;              /* 设置为 16px */
+  color: var(--muted);          /* 使用您已有的半透明灰色变量 */
+  margin-top: 10px;             /* 与上方句子的间距 */
+  font-family: var(--font-gothic); /* 使用哥特体增加易读性 */
+  animation: bounce 2s infinite; /* 可选：增加一个微弱的跳动动画引导点击 */
+}
+
+/* 如果想让小手图标跳动，可以加上这个（可选） */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+/* ✅ 让 TOP 按钮变得精致小巧 */
+.back-to-top-wrap {
+  text-align: center;   /* 居中显示 */
+  margin: 40px 0;       /* 上下留出一点呼吸感 */
+}
+
+.back-to-top-wrap a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.back-to-top-wrap img {
+  width: 43x;          /* 1. 缩小尺寸（原来的图片可能太大） */
+  height: auto;
+  opacity: 0.8;         /* 2. 增加一点半透明感，显得高级不扎眼 */
+  transition: all 0.3s ease; /* 3. 增加平滑过渡动画 */
+  cursor: pointer;
+}
+
+.back-to-top-wrap img:hover {
+  opacity: 1;           /* 鼠标悬停时变亮 */
+  transform: scale(1.1) translateY(-5px); /* 4. 轻轻向上跳一下，非常灵动精致 */
+}
+/* 写真の基本スタイル（白い枠と影をつけてポラロイド風に） */
+.photo-frame {
+  background: #fff;
+  padding: 8px 8px 20px 8px; /* 下側を少し広くしてキャプション風に */
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.15);
+  border: 1px solid #ddd;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- パターンA：1枚だけ（傾ける） --- */
+.single-photo {
+  max-width: 280px;
+}
+
+/* --- パターンB：2枚重ねる（スタック） --- */
+.photo-stack {
+  position: relative;
+  width: 320px;   /* 全体の幅 */
+  height: 240px;  /* 全体の高さ */
+  margin-right: 40px;
+}
+
+.photo-stack .photo-frame {
+  position: absolute;
+  width: 200px; /* 1枚あたりのサイズ */
+}
+
+/* 下になる写真 */
+.photo-stack .bottom-photo {
+  top: 0;
+  left: 0;
+  transform: rotate(-6deg);
+  z-index: 1;
+}
+
+/* 上になる写真 */
+.photo-stack .top-photo {
+  bottom: 0;
+  right: 0;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+/* ホバー時に少し動く演出（任意） */
+.photo-stack:hover .top-photo { transform: rotate(0deg) scale(1.05); z-index: 10; }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 给各个大的板块加这个动画 */
+.spot-section, .itinerary-container {
+  animation: fadeInUp 1s ease-out both;
+}
+@keyframes swing {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.floating-nav-wrapper .nav-tag:hover {
+  animation: swing 0.5s ease-in-out;
+}
+/* 让照片悬停时更有互动感 */
+.photo-frame {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05) rotate(0deg) translateY(-10px) !important; /* 悬停时放大、变正、上浮 */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <main class="paper">
+      <header class="topbar">
+  <a href="index.html" style="text-decoration: none; color: inherit;">
+    <div class="brand">ASOBI 株式会社</div>
+  </a>
+  
+  <nav aria-label="top">
+    <a href="company.html">会社概要</a>
+    <a href="news.html">お知らせ</a>
+  </nav>
+</header>
+
+      <section class="course-header">
+        <p class="sub">お客様も大好評！</p>
+        <h1>大阪・京都・奈良</h1>
+        <p class="lead">社員が考えた<span class="accent">おすすめ</span>観光コース</p>
+  
+  <p class="click-hint">👇 各画像をクリックして詳細ルートをチェック！</p>
+      </section>
+
+<section class="spot-section">
+  <a href="#itinerary-osaka" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">大阪</div>
+  </a>
+  <a href="#itinerary-osaka"> <div class="spot-image-box" style="background-image: url('images/osaka_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>おすすめポイント</h2>
+            <p>大阪の魅力を語るなら、一言で言うと「とにかくエネルギーがすごい街」ですね！天下の台所でもあり、美味しいものたくさん！</p>
+            <p>道頓堀や新世界など、ド派手な観光地もございます。もちろん百貨店も、カフェもたくさんあります。きっと思い出に残る旅が叶えられます！</p>
+      </div>
+    </div>
+  </a> <div class="staff-info">
+    <div class="staff-thumb">
+      <img src="images/nakayama.jpg" alt="中山さん">
+    </div>
+    <div class="staff-name">英語堪能な中山さん</div>
+  </div>
+</section>
+
+    <section class="spot-section">
+  <a href="#itinerary-kyoto" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">京都</div>
+  </a>
+  <a href="#itinerary-kyoto">
+    <div class="spot-image-box" style="background-image: url('images/kyoto_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>おすすめポイント</h2>
+            <p>京都は千年の都でありながら、今はさらに進化中！「あ、今自分は特別な場所にいるんだな」と思わせてくれる魔法のような空間があります。</p>
+            <p>ハイヤーサービスを使えば、絶景スポットへスムーズにご案内できます！ぜひ一度京都へお越しくださいませ。</p>
+          </div>
+        </div>
+        <div class="staff-info">
+  <div class="staff-name" style="margin-left: auto;">韓国語堪能な金さん</div>
+  <div class="staff-thumb">
+    <img src="images/kimu.jpg" alt="金さん"> </div>
+</div>
+      </section>
+ <section class="spot-section">
+  <a href="#itinerary-nara" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">奈良</div>
+  </a>
+  <a href="#itinerary-nara">
+    <div class="spot-image-box" style="background-image: url('images/nara_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>おすすめポイント</h2>
+            <p>奈良公園の鹿・東大寺の大仏さまを目にし、ゆったり時が流れる... そんな体験をお求めの方におすすめ</p>
+            <p>ハイヤーサービスなら早朝も送迎可能です！ぜひ奈良の「朝」をお勧めします。あと、意外と歩くので履き慣れた靴は必須です！</p>
+          </div>
+        </div>
+        </a><div class="staff-info">
+  <div class="staff-thumb">
+    <img src="images/ou.png" alt="方さん"> </div>
+  <div class="staff-name">中国生まれ日本育ちの王さん</div>
+</div>
+      </section>
+
+ <div class="itinerary-container" id="itinerary-osaka">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">大阪</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00 お迎え<br>（ホテル・指定された場所）
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:30 - 11:30 大阪城公園
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/osaka_castle.png" alt="大阪城">
+      <span class="caption">絢爛豪華！秀吉の黄金の世界。</span>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/shinsekai.jpg" alt="新世界グルメ">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/tsutenkaku.png" alt="通天閣">
+        <span class="caption">賑やかな浪速のシンボル！</span>
+      </div>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      11:30 - 14:30 通天閣＆新世界
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      14:30 ～ 15:00 四天王寺
+    </div>
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/shitennoji.png" alt="四天王寺">
+      <span class="caption">日本仏法最初の官寺</span>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/aquarium.jpg" alt="海遊館">
+      <span class="caption">カフェ併設、ゆっくり休憩。</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:30 - 17:30 海遊館
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      18:00 - 19:00 道頓堀＆心斎橋
+    </div>
+    <div class="photo-stack" style="margin-right: 0; margin-left: 40px;">
+      <div class="photo-frame bottom-photo">
+        <img src="images/glico.jpg" alt="グリコ">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/dotonbori.jpg" alt="道頓堀">
+        <span class="caption">大阪ほんま素敵やわ！</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>19:00~ ホテルへ送迎</p>
+      <p style="font-size: 14px;">（現地解散して夜景を楽しむこともおすすめ）</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/kimu.jpg" alt="建議">
+      </div>
+      <div class="recommendation-text-block">
+        大阪へようこそ！<br>
+        「地元民しか知らない、行列のできない穴場グルメ」をお教えします。<br>
+        渋滞を避けた最適なルートでご案内します。
+      </div>
+    </div>
+  </div>
+</div>
+   <div class="itinerary-container" id="itinerary-kyoto">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">京都</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00～10:30 合流して<br>京都へ移動
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/kyoto_van.png" alt="移動中">
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/fushimi_inari.png" alt="伏見稲荷大社">
+      <span class="caption">着物体験もおすすめ！<br>ハイヤーで移動楽々〜</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      10:30-12:00 伏見稲荷大社
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      12:20-15:00 清水寺
+    </div>
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/kiyomizu1.jpg" alt="観光">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/kiyomizu.png" alt="清水寺">
+        <span class="caption">二年坂・産寧坂<br>可愛いお店たくさん〜</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/kinkakuji.png" alt="金閣寺">
+      <span class="caption">何度見てもこの存在感が<br>やはりすごい！</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:40-16:40 金閣寺
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      17:20-18:00 祇園＆花見小路
+    </div>
+    <div class="photo-stack">
+  <div class="photo-frame bottom-photo">
+    <img src="images/gion.jpg" alt="gion">
+  </div>
+<div class="photo-frame single-photo tilt-left">
+  <img src="images/gion.png" alt="祇園">
+  <span class="caption">お買い物もグルメも充実！</span>
+</div>
+  </div>
+  </div>
+
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>18:00~ 大阪へ</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/nakayama.jpg" alt="中山さん">
+      </div>
+      <div class="recommendation-text-block">
+        朝の京都もとてもおすすめです！<br>
+        混雑をさけて、ゆっくり観光ができます。<br>
+        ぜひ便利なハイヤーサービスご利用ください！
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="itinerary-container" id="itinerary-nara">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">奈良</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00 お迎え<br>（ホテル・指定場所）
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/nara_pickup.png" alt="お迎え">
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/toshodaiji.png" alt="唐招提寺">
+      <span class="caption">静かな時間が流れる...</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      10:00-11:00 唐招提寺
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      11:30-15:30<br>奈良公園＆東大寺
+    </div>
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/daibutsu.jpg" alt="大仏">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/nara_lunch.png" alt="グルメ">
+        <span class="caption">  美味しいお店もたくさん！</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/kasuga_shrine.png" alt="春日大社">
+      <span class="caption">鹿せんべいをあげる時は<br>気をつけてね！</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:40-16:30 春日大社
+    </div>
+  </div>
+<div class="itinerary-row">
+  <div class="photo-frame single-photo tilt-left">
+    <img src="images/wakakusa.jpg" alt="若草山">
+    <span class="caption">奈良市内を一望できます</span>
+  </div>
+  <div class="itinerary-text" style="text-align: left;">
+    17:00-17:40 若草山
+  </div>
+</div>
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>19:00~ 大阪ホテルに到着</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/ou.png" alt="方さん">
+      </div>
+      <div class="recommendation-text-block">
+        午前（奈良）午後（宇治）<br>
+        「大仏・シカ・抹茶」を1日で全部楽しむ、<br>
+        関西の『いいとこ取り』ルートも大人気です！<b><br><br>ぜひ一度ご相談ください。</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <div class="back-to-top-wrap">
+  <a href="pretty0.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+<section class="sns-guide">
+      <div class="sec-title-block" style="margin:40px 0 20px;">
+        <div class="sec-en" style="font-size:20px;">Contact Us</div>
+        <div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
+      </div>
+      <div class="bottom-grid">
+        <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+          <img src="images/contact-line.png" alt="LINE">
+        </a>
+        <a class="sq-small sq-img" href="mailto:cheng@asobi.jp">
+          <img src="images/contact-mail.png" alt="Mail">
+        </a>
+        <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+          <img src="images/contact-instagram.svg" alt="Instagram">
+        </a>
+        <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+          <img src="images/contact-wechat.png" alt="WeChat">
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer-bar">
+      <ul class="footer-links">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="service.html">サービス一覧</a></li>
+        <li><a href="alphard_detail.html">車両ラインナップ</a></li>
+        <li><a href="about_asobi.html">会社概要</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+      </ul>
+      <div class="copyright">© 2026 ASOBI 株式会社. All Rights Reserved.</div>
+    </footer>
+  </main> <aside class="floating-nav-wrapper">
+    <a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img alt="LINE" src="images/cta-line.png"/>
+    </a>
+    <a class="nav-tag nav-img" href="mailto:info@asobi.co.jp">
+      <img alt="Email" src="images/cta-mail.png"/>
+    </a>
+    <a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+      <img alt="Instagram" src="images/insta.png"/>
+    </a>
+  </aside>
+
+</div> <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>AOS.init();</script>
+
+  </body> 
+</html>
