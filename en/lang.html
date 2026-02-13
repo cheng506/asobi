@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>ASOBI 株式会社</title>
+<title>ASOBI Co., Ltd.</title>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -762,6 +762,82 @@ html {
     background: transparent !important; /* 【关键】去掉灰色背景 */
     transform: none !important;         /* 去掉上浮动效 */
 }
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
+#dify-chatbot-bubble-window {
+    position: fixed !important;
+    right: auto !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+    
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important; 
+}
+
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* 针对移动端的适配 */
+@media (max-width: 1000px) {
+    /* 1. 聊天窗口往上挪 */
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
+        width: 90vw !important; 
+        height: 65vh !important; 
+    }
+
+    /* 2. 聊天气泡按钮往上挪 */
+    #dify-chatbot-bubble-button {
+        left: 15px !important;
+        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
+        z-index: 999999 !important;
+    }
+}
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px; 
+    bottom: -10px;
+    
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999; 
+    
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 50px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
 /* --- 语言切换器样式 --- */
 .lang-widget {
   position: fixed;
@@ -871,8 +947,6 @@ html {
   .photo-frame { width: 56px; height: 56px; }
   .lang-badge { width: 24px; height: 24px; font-size: 10px; }
 }
-
-
 </style>
 </link></head>
 <body>
@@ -881,10 +955,10 @@ html {
 <div class="frame-grey">
 <div class="screen-white">
 <header class="header">
-  <div class="brand">ASOBI 株式会社</div>
+  <div class="brand">ASOBI Co., Ltd.</div>
   <div class="top-menu">
-    <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
-    <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
+    <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>About Us</span></a>
+    <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
   </div>
 </header>
 <section class="hero">
@@ -902,8 +976,8 @@ html {
 
     <div aria-hidden="true" class="hero-copy">
       <p class="hero-title">
-        お客様のシーンに合わせて<br/>
-        最適な一台をご提案いたします
+        We propose the perfect vehicle<br/>
+        to match your specific needs
       </p>
     </div>
   </div>
@@ -922,31 +996,32 @@ html {
   </a>
 </div>
 <section class="merit-section">
-<div class="merit-head">年間1000案件以上</div>
-<h2 class="merit-sub">ASOBIが選ばれる理由</h2>
+<div class="merit-head">Over 1,000 trips annually</div>
+<h2 class="merit-sub">Why Choose ASOBI</h2>
 <div class="merit-grid">
 <div class="circle-card" style="border-color:#32CCFF;">
-<h3>事前確定制<br/>安心料金</h3>
-<p>頑張り価格で挑戦します！</p>
+<h3>Fixed Advance Rates<br/>Worry-free Pricing</h3>
+<p>Safe even in traffic</p>
 </div>
 <div class="circle-card" style="border-color:#FFFFA7;">
-<h3>直前変更ok!<br/>柔軟なVIP対応</h3>
-<p>お気軽にご利用できます</p>
+<h3>Last-minute changes OK!<br/>Flexible VIP Support</h3>
+<p>Even sudden schedule changes</p>
 </div>
+
 <div class="circle-card" style="border-color:#00C87F;">
-<h3>LINEで対応<br/>お気軽にご相談</h3>
-<p>サクッと連絡</p>
+<h3>Support via LINE<br/>Feel free to contact us</h3>
+<p>Quick & Easy Contact</p>
 </div>
 <div class="circle-card" style="border-color:#3647EB;">
-<h3>英語・中国語堪能<br/>インバウンド客の</h3>
-<p>おもてなしも安心</p>
+<h3>English & Chinese<br/>Supported</h3>
+<p>Inbound Travelers Welcome</p>
 </div>
 </div>
 </section>
 <section class="slider-section">
 <div class="sec-title-block">
 <div class="sec-en">SERVICE</div>
-<h2 class="sec-jp">ご提案できるサービス</h2>
+<h2 class="sec-jp">Our Services</h2>
 </div>
 <a href="service.html" class="btn-img">
   <img src="images/readmore.png" alt="Read More">
@@ -962,8 +1037,8 @@ html {
         <div class="big-num">01</div>
       </div>
       <div class="card-info">
-        <h3 class="card-h">観光ハイヤー</h3>
-        <p class="card-desc">京都・大阪・奈良など、関西エリアの主要観光地を、お客様専用のプライベート空間で巡ります。</p>
+        <h3 class="card-h">Sightseeing Hire Car</h3>
+        <p class="card-desc">Tour major Kansai tourist spots like Kyoto, Osaka, and Nara in your own private space.</p>
       </div>
     </div>
 
@@ -973,8 +1048,8 @@ html {
         <div class="big-num">02</div>
       </div>
       <div class="card-info">
-        <h3 class="card-h">ドライバー付き観光ハイヤー</h3>
-        <p class="card-desc">観光に精通した乗務員が街をご案内いたします。多言語に対応！</p>
+        <h3 class="card-h">Chauffeur-Driven Tour</h3>
+        <p class="card-desc">Our sightseeing-savvy crew will guide you through the city. Multi-language support available!</p>
       </div>
     </div>
 
@@ -984,8 +1059,8 @@ html {
         <div class="big-num">03</div>
       </div>
       <div class="card-info">
-        <h3 class="card-h">ビジネス送迎</h3>
-        <p class="card-desc">会食・視察・出張など、時間厳守の移動をスムーズにサポートします。</p>
+        <h3 class="card-h">Business Transfer</h3>
+        <p class="card-desc">We smoothly support punctual travel for business dinners, site visits, and business trips.</p>
       </div>
     </div>
 
@@ -995,8 +1070,8 @@ html {
         <div class="big-num">04</div>
       </div>
       <div class="card-info">
-        <h3 class="card-h">イベント・式典</h3>
-        <p class="card-desc">結婚式・撮影・VIP来賓対応など、特別な一日の移動を丁寧にお手伝いします。</p>
+        <h3 class="card-h">Events & Ceremonies</h3>
+        <p class="card-desc">We carefully assist with transportation for your special day, such as weddings, photo shoots, and VIP guests.</p>
       </div>
     </div>
 
@@ -1006,8 +1081,8 @@ html {
         <div class="big-num">05</div>
       </div>
       <div class="card-info">
-        <h3 class="card-h">空港送迎</h3>
-        <p class="card-desc">関西国際空港（KIX）・伊丹空港（ITM）と、ホテルや目的地をドア・ツー・ドアで結びます。</p>
+        <h3 class="card-h">Airport Transfer</h3>
+        <p class="card-desc">Door-to-door connection between Kansai International Airport (KIX)/Itami Airport (ITM) and your hotel or destination.</p>
       </div>
     </div>
 
@@ -1019,8 +1094,8 @@ html {
 </section>
 <section class="slider-section" id="vehicle-lineup" style="background:#fff;">
 <div class="sec-title-block">
-<div class="sec-en">Vehicle Lineup</div>
-<h2 class="sec-jp">車両ラインナップ</h2>
+<div class="sec-en"> </div>
+<h2 class="sec-jp">Vehicle Lineup</h2>
 </div>
 <a href="alphard_detail.html#vehicle-photos" class="btn-img"> <img src="images/readmore.png" alt="Read More">
 </a>
@@ -1034,16 +1109,16 @@ html {
         <img alt="Alphard" src="images/alphard2.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・ヴェルファイア</h3>
-        <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
+        <h3 class="card-h">Toyota Vellfire</h3>
+        <p class="card-desc">Max 7 people / Recommended: 4-5 people + suitcases.</p>
       </div>
     </div>    <div class="swiper-slide info-card">
       <div class="card-img-top">
         <img alt="Alphard" src="images/alphard2.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・ヴェルファイア</h3>
-        <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
+        <h3 class="card-h">Toyota Vellfire</h3>
+        <p class="card-desc">Max 7 people / Recommended: 4-5 people + suitcases.</p>
       </div>
     </div>
     <div class="swiper-slide info-card">
@@ -1051,8 +1126,8 @@ html {
         <img alt="hiace" src="images/hiace1.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・ハイエース</h3>
-        <p class="card-desc">荷物スペース広々！荷物の多い旅も安心/最大9名 </p>
+        <h3 class="card-h">Toyota Hiace</h3>
+        <p class="card-desc">Spacious luggage area! Great for trips with lots of luggage / Max 9 people</p>
       </div>
     </div>
 
@@ -1061,8 +1136,8 @@ html {
         <img alt="Alphard" src="images/hiace2.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・ハイエース</h3>
-        <p class="card-desc">荷物スペース広々！荷物の多い旅も安心 /最大9名 </p>
+        <h3 class="card-h">Toyota Hiace</h3>
+        <p class="card-desc">Spacious luggage area! Great for trips with lots of luggage / Max 9 people</p>
       </div>
     </div>
 
@@ -1071,8 +1146,8 @@ html {
         <img alt="Grand Hiace" src="images/grandhiace1.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・グランエース</h3>
-        <p class="card-desc">究極の座り心地を追求する方へ/ 推奨：2〜5名</p>
+        <h3 class="card-h">Toyota GranAce</h3>
+        <p class="card-desc">For those seeking the ultimate ride comfort / Recommended: 2-5 people</p>
       </div>
     </div>
 
@@ -1081,8 +1156,8 @@ html {
         <img alt="Grand Hiace" src="images/grandhiace2.png"/>
       </div>
       <div class="card-info">
-        <h3 class="card-h">トヨタ・グランエース</h3>
-        <p class="card-desc">究極の座り心地を追求する方へ / 推奨：2〜5名。</p>
+        <h3 class="card-h">Toyota GranAce</h3>
+        <p class="card-desc">For those seeking the ultimate ride comfort / Recommended: 2-5 people.</p>
       </div>
     </div>
 
@@ -1091,7 +1166,6 @@ html {
   <!-- ✅ 给 vehSwiper 单独一个分页器 -->
   <div class="swiper-pagination"></div>
 </div>
-</section>
 
 <div class="lang-widget" id="langWidget">
   <div class="lang-panel">
@@ -1107,15 +1181,14 @@ html {
     <div class="photo-frame">
       <img src="images/earth_japan.png" alt="Language" class="user-img">
     </div>
-    <div class="lang-badge" id="currentLangBadge">jp</div>
+    <div class="lang-badge" id="currentLangBadge">EN</div>
   </button>
 </div>
-
-
+</section>
 <section class="process-area">
   <div class="sec-title-block">
     <div class="sec-en">The Process</div>
-    <h2 class="sec-jp">ご利用の流れ</h2>
+    <h2 class="sec-jp">Service Flow</h2>
   </div>
 
   <div class="proc-item">
@@ -1123,9 +1196,9 @@ html {
       <img src="images/process-01.png" alt="Contact">
     </div>
     <div class="proc-info">
-      <h3>お問い合わせ</h3>
-      <div class="sub">Contact</div>
-      <p>各種SNS・メールから<br/>お問い合わせいただけます</p>
+      <h3>Contact</h3>
+      <div class="sub"></div>
+ <p>You can contact us via<br/>various SNS or email.</p>>
     </div>
   </div>
 
@@ -1134,9 +1207,9 @@ html {
       <img src="images/process-02.png" alt="Planning">
     </div>
     <div class="proc-info">
-      <h3>ご相談・契約</h3>
-      <div class="sub">Planning &amp; Contract</div>
-      <p>お客様の目的・人数<br/>日程に合わせてプランをご提案します。</p>
+      <h3>Planning</h3>
+      <div class="sub"> &amp; Contract</div>
+ <p>We will propose a plan tailored to<br/>your purpose, number of people, and schedule.</p>
     </div>
   </div>
 
@@ -1145,9 +1218,10 @@ html {
       <img src="images/process-03.png" alt="Adjustment">
     </div>
     <div class="proc-info">
-      <h3>調整・相談</h3>
-      <div class="sub">Adjustment</div>
-      <p>予定のご変更が<br/>ございましたら<br/>まずご相談を。</p>
+      <h3>Adjustment</h3>
+      <div class="sub"></div>
+ <p>If there are any<br/>changes to your plans,<br/>please consult us first.</p>
+    </div>
     </div>
   </div>
 
@@ -1156,9 +1230,9 @@ html {
       <img src="images/process-04.png" alt="Service Start">
     </div>
     <div class="proc-info">
-      <h3>サービス開始</h3>
-      <div class="sub">Service Start</div>
-      <p>プランに沿って、<br/>サービスを開始いたします。</p>
+      <h3>Service Start</h3>
+      <div class="sub"></div>
+      <p>We will begin the service<br/>according to the agreed plan.</p>
     </div>
   </div>
 </section>
@@ -1166,36 +1240,34 @@ html {
 <section class="qa-area">
 <div class="sec-title-block">
 <div class="sec-en">Q&amp;A</div>
-<h2 class="sec-jp">よくあるご質問</h2>
+<h2 class="sec-jp">Frequently Asked Questions</h2>
 </div>
 <div class="qa-list">
 <div class="qa-row">
-<button class="qa-trigger">ハイヤーとタクシーの違いは？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">最大の違いは「完全予約制」と「おもてなしの質」です。ハイヤーは流し営業一切ございません。専属ドライバーがお客様だけのために空間を提供します。</div></div>
+<button class="qa-trigger">What is the difference between a hire car and a taxi?  <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">The main differences are the "complete reservation system" and the "quality of hospitality." A dedicated driver provides a private space exclusively for the guest.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">当日の予約は可能ですか？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">原則として事前予約制ですが、空き状況により当日の手配も可能な場合がございます。</div></div>
+<button class="qa-trigger">Is it possible to make a reservation on the same day?  <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">As a general rule, we operate on a pre-reservation basis, but same-day arrangements may be possible depending on availability.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">支払方法は？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">事前振込、法人契約の場合は請求書払い（後日払い）に対応しています。ご相談に応じます、まずご連絡をお願いします。</div></div>
+
+<div class="qa-row">
+<button class="qa-trigger">Can I specify the vehicle type? <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">Yes, it is possible. You can specify vehicles such as the Alphard or Hiace according to the number of passengers and your purpose.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">車種の指定はできますか？ ベビシートと車椅子はありますか？<span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">はい、可能です。アルファードやハイエースなど、人数や用途に合わせてご指定いただけます。ベビシート・車椅子も備えております。 お気軽にご利用ください。</div></div>
+<button class="qa-trigger">Which areas do you cover? <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">We cover the entire Kansai region, centered on departures and arrivals within Osaka City. Our services are widely available for airport transfers, sightseeing, and more.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">対応エリアはどこですか？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">大阪市発着を中心とした関西全域に対応しています。空港送迎や観光など幅広くご利用いただけます。</div></div>
+<button class="qa-trigger">Is there a cancellation fee? <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">Cancellations are free of charge up to 2 days before use. For cancellations made the day before or on the day of service, a prescribed cancellation fee will be charged.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">キャンセル料はかかりますか？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">ご利用の2日前までは無料です。前日・当日のキャンセルについては規定のキャンセル料を申し受けます。</div></div>
-</div>
-<div class="qa-row">
-<button class="qa-trigger">予約内容の変更は可能でしょうか？ <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">直前のスケジュール変更や、急な追加のご依頼にも、可能な限り柔軟に対応します。まずご連絡ください。</div></div>
+<button class="qa-trigger">Is it possible to change the reservation details? <span>+</span></button>
+<div class="qa-answer"><div class="qa-answer-pad">We respond as flexibly as possible to last-minute schedule changes or sudden additional requests. Please contact us first.</div></div>
 </div>
 </div>
 <div class="back-to-top-wrap">
@@ -1205,7 +1277,7 @@ html {
 
 <div class="sec-title-block" style="margin:40px 0 20px;">
 <div class="sec-en" style="font-size:20px;">Contact Us</div>
-<div style="font-size:14px; color:#666;">お問い合わせはこちらから</div>
+<div style="font-size:14px; color:#666;"> </div>
 </div>
 <div class="bottom-grid" id="contact-sns">
 
@@ -1228,19 +1300,18 @@ html {
 </div>
 
 </div>
+<div style="height:120px"></div>
 <footer class="site-footer-bar">
-  <ul class="footer-links">
-    <li><a href=“index.html">ホーム</a></li>
-    <li><a href="service.html">サービス一覧</a></li>
-<li><a href="./alphard_detail.html#vehicle-photos">车辆ラインナップ</a></li>
-    <li><a href=“about_asobi.html">会社概要</a></li>
-    <li><a href=“#”>プライバシーポリシー</a></li>
-  </ul>
-
-
-  <div class="copyright">
-    © 2026 ASOBI 株式会社. All Rights Reserved.
-  </div>
+    <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Our Services</a></li>
+        <li><a href="vehicles.html">Vehicle Lineup</a></li>
+        <li><a href="#">Company Profile</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    </div>
 </footer>
 
 </section>
@@ -1321,9 +1392,6 @@ const vehSwiper = new Swiper('#vehSwiper', {
         });
     });
 </script>
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="Chat Decor">
-</div>
 <script>
  window.difyChatbotConfig = {
   token: 'UdHmrJYfs7wR2k4Y',
@@ -1342,7 +1410,13 @@ const vehSwiper = new Swiper('#vehSwiper', {
     // name: 'YOU CAN DEFINE USER NAME HERE',
   },
  }
+ // --- 核心改动在这里 ---
+  inputs: {
+    site_lang: document.documentElement.lang || 'zh' 
+  }
+ 
 </script>
+
 <script
  src="https://udify.app/embed.min.js"
  id="UdHmrJYfs7wR2k4Y"
@@ -1356,84 +1430,12 @@ const vehSwiper = new Swiper('#vehSwiper', {
     width: 24rem !important;
     height: 40rem !important;
   }
-  /* --- Dify 聊天机器人左侧固定位 --- */
-/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
-#dify-chatbot-bubble-window {
-    position: fixed !important;
-    right: auto !important;
-    left: 30px !important;   /* 匹配你之前的左侧定位 */
-    bottom: 90px !important; /* 距离底部距离 */
-    z-index: 999999 !important; /* 确保在所有元素之上 */
-    
-    /* 解决“只显示在顶端”的问题 */
-    top: auto !important; 
-}
-
-/* 同时确保气泡按钮也是固定定位 */
-#dify-chatbot-bubble-button {
-    position: fixed !important;
-    right: auto !important;
-    left: 20px !important;
-    bottom: 20px !important;
-    z-index: 999999 !important;
-}
-
-/* 针对移动端的适配 */
-@media (max-width: 1000px) {
-    /* 1. 聊天窗口往上挪 */
-    #dify-chatbot-bubble-window {
-        left: 10px !important;
-        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
-        width: 90vw !important; 
-        height: 65vh !important; 
-    }
-
-    /* 2. 聊天气泡按钮往上挪 */
-    #dify-chatbot-bubble-button {
-        left: 15px !important;
-        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
-        z-index: 999999 !important;
-    }
-}
-.dify-cover-wrapper {
-    position: fixed;
-    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
-    left: -10px; 
-    bottom: -10px;
-    
-    /* 确保层级足够高，盖在 Dify 气泡之上 */
-    z-index: 999999; 
-    
-    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
-    pointer-events: none; 
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dify-cover-wrapper img {
-    /* 进一步放大尺寸 */
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    
-    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
-    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
-}
-
-/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
-@media (max-width: 1000px) {
-    .dify-cover-wrapper {
-        left: -5px;
-        bottom: 50px; /* 避开您网页底部的移动端导航栏 */
-    }
-    .dify-cover-wrapper img {
-        width: 120px;
-        height: 120px;
-    }
-}
+  
 </style>
+
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="">
+</div>
 <script>
   // 1. 切换面板显示/隐藏
   function toggleWidget(event) {

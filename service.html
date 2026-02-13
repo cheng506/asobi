@@ -634,5 +634,95 @@
       window.addEventListener('resize', onScroll);
     });
   </script>
+  <div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+  /* --- Dify 聊天机器人左侧固定位 --- */
+#dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+    position: fixed !important; /* 强制固定在视口 */
+    right: auto !important;
+    left: 20px !important;      /* 靠左 */
+    bottom: 20px !important;    /* 靠下 */
+    z-index: 1000000 !important; /* 确保在最顶层 */
+}
+
+#dify-chatbot-bubble-window {
+    position: fixed !important; /* 强制固定在视口 */
+    width: 24rem !important;
+    height: 40rem !important;
+    right: auto !important;
+    left: 20px !important;      /* 窗口也靠左 */
+    bottom: 90px !important;    /* 位于按钮上方 */
+    z-index: 1000001 !important;
+}
+
+/* --- 左下角装饰图微调 --- */
+.dify-cover-wrapper {
+    position: fixed !important; /* 必须是 fixed 才能跟随页面 */
+    left: -10px;      
+    bottom: -5px;     
+    z-index: 999999;  /* 位于聊天窗口下方 */
+    pointer-events: none; /* 穿透点击，不影响点击聊天按钮 */
+}
+
+.dify-cover-wrapper img {
+    width: 180px;     
+    height: auto;     
+    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.12));
+}
+
+/* 移动端适配 */
+@media (max-width: 1000px) {
+    #dify-chatbot-bubble-button {
+        bottom: 80px !important; /* 避开手机端底部导航栏 */
+        left: 15px !important;
+    }
+    #dify-chatbot-bubble-window {
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;   /* 手机端全屏展示感 */
+        height: 80% !important;
+    }
+    .dify-cover-wrapper {
+        bottom: 65px; 
+    }
+    .dify-cover-wrapper img {
+        width: 120px; 
+    }
+}
+</style>
 </body>
 </html>
