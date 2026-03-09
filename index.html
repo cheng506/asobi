@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>ASOBI 株式会社</title>
+<meta name="description" content="ASOBI株式会社は、関西（京都・大阪・奈良）を中心に、観光ハイヤー、空港送迎、ビジネスVIP対応を提供するハイヤーサービス会社です。アルファードやハイエースなど、お客様のシーンに合わせた最適な一台をご提案いたします。英語・中国語対応も可能です。">
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -166,17 +167,67 @@
   filter: drop-shadow(0 6px 12px rgba(0,0,0,.2));
 }
 
+/* --- 新版 Topbar 样式 --- */
+.topbar {
+    width: 100%;
+    /* 这里的 0.85 让背景更通透，视频色彩能透一点出来 */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px); /* 模糊度稍微加深一点点 */
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* 增加一个极其微弱的阴影，让它悬浮在视频上 */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+}
 
-    /* Header */
-    .header {
-        padding: 20px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .brand { font-size: 20px; font-weight: 900; font-family: var(--font-title); color: var(--c-navy); }
-    .top-menu { font-size: 13px; font-weight: bold; color: #666; font-family: var(--font-title); }
-    .top-menu span { margin-left: 12px; }
+.topbar-inner {
+    /* 关键：使其与中间 699px 的白色屏幕对齐，或者设为 1200px 居中 */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar .brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.topbar .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 语言切换专用胶囊按钮 */
+.lang-switch {
+    text-decoration: none;
+    color: #3647EB;
+    font-size: 13px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #e2e8f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.lang-switch:hover {
+    background: #f8fafc;
+    border-color: #3647EB;
+    transform: translateY(-1px);
+}
+ 
 
     /* Fig 1: Hero */
     .hero-pink-area {
@@ -201,12 +252,24 @@
     .hero-swiper { width: 100%; height: 100%; z-index: 1; }
     .hero-swiper img { width: 100%; height: 100%; object-fit: cover; }
 
+  .banner-container {
+    padding: 20px;
+    display: grid;               /* 改为 Grid 布局 */
+    grid-template-columns: 1fr 1fr; /* 关键：平分为两列 */
+    gap: 12px;                  /* 格子之间的间距 */
+}
+
+/* 确保 Banner 图片在格子里能自适应填充 */
+.banner-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media (max-width: 480px) {
     .banner-container {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+        grid-template-columns: 1fr; /* 手机端恢复成一列排开 */
     }
+}
 
     /* Fig 2: Merit (Circles) */
     .merit-section { padding: 40px 0; text-align: center; }
@@ -309,7 +372,7 @@
     
     .proc-sq {
         width: 200px; height: 200px;
-        background: none；
+        background: none;
         flex-shrink: 0;
         display: flex; align-items: center; justify-content: center;
         color: #fff; font-size: 18px; font-weight: bold;
@@ -389,25 +452,7 @@
 /* =========================
 
 
-/* --- Top bar full width --- */
-
-
-.header{
-  position: relative;
-  top: auto; left: auto; right: auto;
-  width: 100%;
-  z-index: 10;
-  background: #fff;
-  padding: 14px 0;
-  box-shadow: 0 1px 0 rgba(15,23,42,0.10);
-  display: grid;
-  grid-template-columns: 1fr var(--w-screen) 1fr;
-  align-items: center;
-}
-
-.header .brand{ grid-column: 2; justify-self: start; padding-left: 24px; }
-.header .top-menu{ grid-column: 2; justify-self: end; padding-right: 24px; }
-
+ 
 /* keep the grey frame a bit “shy” under the full-width top bar */
 .layout-center{ padding-top: 0; } /* header already reserves space via body padding */
 
@@ -420,18 +465,7 @@
 
 
 
-/* responsive: let header content breathe on narrow screens */
-@media (max-width: 720px){
-  body{ padding-top: 64px; }
-  .header{
-    grid-template-columns: 12px 1fr 12px;
-  }
-  .header .brand{ grid-column: 2; padding-left: 0; font-size: 18px; justify-self: center;}
-  .header .top-menu{ grid-column: 2; padding-right: 0; font-size: 12px; }
-  .hero-slider-wrap{ height: 340px; }
-  .hero-title{ font-size: 18px; }
-}
-
+ 
 
 /* =========================
    HERO like PayPay: image + text overlay (single block)
@@ -486,6 +520,7 @@ body{
   font-size: 15px;
   line-height: 1.85;
   letter-spacing: .02em;
+  padding-top: 60px; /* 预留出 Header 的高度 */
 }
 .merit-sub{ font-size: 22px; }
 .merit-head{ font-size: 14px; letter-spacing:.12em; }
@@ -762,117 +797,15 @@ html {
     background: transparent !important; /* 【关键】去掉灰色背景 */
     transform: none !important;         /* 去掉上浮动效 */
 }
-/* --- 语言切换器样式 --- */
-.lang-widget {
-  position: fixed;
-  left: 20px;       /* 距离左侧稍微留一点呼吸感，也可以改成 0 */
-  top: 0px !important; /* 强制拉到屏幕最顶端 */
-  bottom: auto;     /* 确保底部定位失效 */
-  z-index: 1000001; 
-  display: flex;
-  flex-direction: column; /* 保持按钮在上，菜单在下 */
-  align-items: flex-start;
+ 
+
+/* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
+@media (max-width: 1024px) {
+    .bg-car {
+        z-index: -1 !important; /* 确保它不会遮挡任何文字或点击区域 */
+        opacity: 0.98;           /* 可选：调淡一点，增加背景感 */
+    }
 }
-
-.photo-trigger {
-  margin-top: 5px; /* 离顶边缘留 5px，防止白边被切断，看起来更像贴纸 */
-  position: relative;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.photo-trigger:hover {
-  transform: scale(1.1) rotate(-5deg);
-}
-
-.photo-frame {
-  width: 72px; /* PC端大小 */
-  height: 72px;
-  border-radius: 45%; 
-  border: 4px solid #ffffff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  overflow: hidden;
-  background: #fff;
-}
-
-.user-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.lang-badge {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  background-color: #fab1a0; /* 珊瑚粉 */
-  color: white;
-  font-weight: 800;
-  font-size: 12px;
-  width: 28px;
-  height: 28px;
-  border: 3px solid #ffffff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lang-panel {
-  background: #fff;
-  border-radius: 20px;
-  padding: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  
-  /* 调整面板弹出的间距，让它离照片近一点 */
-  margin-top: 5px; 
-  margin-bottom: 0; 
-  
-  opacity: 0;
-  transform: translateY(-10px) scale(0.9); /* 改为向上轻微偏移 */
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  width: 160px;
-  transform-origin: top left;
-}
-
-.lang-widget.open .lang-panel {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.lang-option {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  text-align: left;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.lang-option:hover { background: #f0f7ff; color: #32CCFF; }
-.lang-option.active { color: #32CCFF; font-weight: 800; }
-.panel-header { font-size: 11px; font-weight: bold; color: #ccc; margin: 0 0 8px 10px; text-transform: uppercase; }
-
-/* 移动端适配 */
-@media (max-width: 1000px) {
-.lang-widget {
-    left: 10px;
-    top: 0px !important;
-  }
-  .photo-frame { width: 56px; height: 56px; }
-  .lang-badge { width: 24px; height: 24px; font-size: 10px; }
-}
-
-
 </style>
 </link></head>
 <body>
@@ -880,11 +813,23 @@ html {
 <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
 <div class="frame-grey">
 <div class="screen-white">
-<header class="header">
-  <div class="brand">ASOBI 株式会社</div>
-  <div class="top-menu">
-    <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
-    <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <a href="index.html" style="text-decoration: none; color: inherit; display: block;">ASOBI 株式会社</a>
+    </div>
+    <nav class="nav">
+      <a href="en/index.html" class="lang-switch">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        English
+      </a>
+      <a href="about_asobi_jp.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
+    </nav>
   </div>
 </header>
 <section class="hero">
@@ -918,6 +863,14 @@ html {
 
   <a href="#contact-sns">
     <img src="images/banner-2.png" alt="Banner 2"
+         style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
+  </a>
+  <a href="#contact-sns">
+    <img src="images/banner-3.png" alt="Banner 3"
+         style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
+  </a>
+  <a href="#contact-sns">
+    <img src="images/banner4.png" alt="Banner 4"
          style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
   </a>
 </div>
@@ -1028,24 +981,44 @@ html {
 <div class="swiper card-swiper" id="vehSwiper">
   <div class="swiper-wrapper">
 
-
         <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Alphard" src="images/alphard2.png"/>
+        <img alt="vellfire" src="images/vellfa1.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">トヨタ・ヴェルファイア</h3>
         <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
       </div>
-    </div>    <div class="swiper-slide info-card">
+    </div>  
+      <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Alphard" src="images/alphard2.png"/>
+        <img alt="vellfire" src="images/vellfa2.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">トヨタ・ヴェルファイア</h3>
         <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
       </div>
     </div>
+
+        <div class="swiper-slide info-card">
+      <div class="card-img-top">
+        <img alt="Alphard" src="images/alpha2.jpg"/>
+      </div>
+      <div class="card-info">
+        <h3 class="card-h">トヨタ・アルファード</h3>
+        <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
+      </div>
+    </div>   
+     <div class="swiper-slide info-card">
+      <div class="card-img-top">
+        <img alt="Alphard" src="images/alpha5.jpg"/>
+      </div>
+      <div class="card-info">
+        <h3 class="card-h">トヨタ・アルファード</h3>
+        <p class="card-desc">最大7名 / 推奨：4〜5名 + スーツケース。</p>
+      </div>
+    </div>
+    
     <div class="swiper-slide info-card">
       <div class="card-img-top">
         <img alt="hiace" src="images/hiace1.png"/>
@@ -1068,7 +1041,7 @@ html {
 
     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Grand Hiace" src="images/grandhiace1.png"/>
+        <img alt="GranAce" src="images/grandhiace1.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">トヨタ・グランエース</h3>
@@ -1078,7 +1051,7 @@ html {
 
     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Grand Hiace" src="images/grandhiace2.png"/>
+        <img alt="GranAce" src="images/grandhiace2.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">トヨタ・グランエース</h3>
@@ -1093,23 +1066,10 @@ html {
 </div>
 </section>
 
-<div class="lang-widget" id="langWidget">
-  <div class="lang-panel">
-    <div class="panel-header">Select Language</div>
-    <div class="lang-list">
-      <button class="lang-option active" onclick="changeLanguage('en')">EN English</button>
-      <button class="lang-option" onclick="changeLanguage('zh')">中 简体中文</button>
-      <button class="lang-option" onclick="changeLanguage('jp')">日 日本語</button>
-    </div>
-  </div>
+ 
 
-  <button class="photo-trigger" onclick="toggleWidget(event)">
-    <div class="photo-frame">
-      <img src="images/earth_japan.png" alt="Language" class="user-img">
-    </div>
-    <div class="lang-badge" id="currentLangBadge">jp</div>
-  </button>
-</div>
+ 
+ 
 
 
 <section class="process-area">
@@ -1226,14 +1186,13 @@ html {
 </a>
 
 </div>
-
-</div>
+ 
 <footer class="site-footer-bar">
   <ul class="footer-links">
-    <li><a href=“index.html">ホーム</a></li>
+    <li><a href="index.html">ホーム</a></li>
     <li><a href="service.html">サービス一覧</a></li>
-<li><a href="./alphard_detail.html#vehicle-photos">车辆ラインナップ</a></li>
-    <li><a href=“about_asobi.html">会社概要</a></li>
+<li><a href="./alphard_detail.html#vehicle-photos">車両ラインナップ</a></li>
+    <li><a href="about_asobi.html">会社概要</a></li>
     <li><a href=“#”>プライバシーポリシー</a></li>
   </ul>
 
@@ -1356,7 +1315,6 @@ const vehSwiper = new Swiper('#vehSwiper', {
     width: 24rem !important;
     height: 40rem !important;
   }
-  /* --- Dify 聊天机器人左侧固定位 --- */
 /* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
 #dify-chatbot-bubble-window {
     position: fixed !important;
@@ -1380,19 +1338,21 @@ const vehSwiper = new Swiper('#vehSwiper', {
 
 /* 针对移动端的适配 */
 @media (max-width: 1000px) {
-    /* 1. 聊天窗口往上挪 */
     #dify-chatbot-bubble-window {
         left: 10px !important;
-        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
-        width: 90vw !important; 
-        height: 65vh !important; 
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
     }
-
-    /* 2. 聊天气泡按钮往上挪 */
     #dify-chatbot-bubble-button {
-        left: 15px !important;
-        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
-        z-index: 999999 !important;
+        left: 10px !important;
+        bottom: 66px !important;
+    }
+            .dify-cover-wrapper {
+        bottom: 65px; 
+    }
+    .dify-cover-wrapper img {
+        width: 120px; 
     }
 }
 .dify-cover-wrapper {
@@ -1426,7 +1386,7 @@ const vehSwiper = new Swiper('#vehSwiper', {
 @media (max-width: 1000px) {
     .dify-cover-wrapper {
         left: -5px;
-        bottom: 50px; /* 避开您网页底部的移动端导航栏 */
+        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
     }
     .dify-cover-wrapper img {
         width: 120px;
@@ -1434,56 +1394,6 @@ const vehSwiper = new Swiper('#vehSwiper', {
     }
 }
 </style>
-<script>
-  // 1. 切换面板显示/隐藏
-  function toggleWidget(event) {
-      // 阻止事件冒泡，防止触发下面的全局点击关闭逻辑
-      event.stopPropagation(); 
-      document.getElementById('langWidget').classList.toggle('open');
-  }
-
-  // 2. 点击页面其他区域自动关闭面板
-  document.addEventListener('click', function() {
-      const widget = document.getElementById('langWidget');
-      if (widget) {
-          widget.classList.remove('open');
-      }
-  });
-
-  // 3. 核心：语言切换处理
-  function changeLanguage(lang) {
-      console.log("正在切换语言至:", lang);
-      
-      // 更新小角标上的文字 (EN/ZH/JP)
-      const badge = document.getElementById('currentLangBadge');
-      if (badge) {
-          badge.innerText = lang.toUpperCase() === 'ZH' ? '中' : lang.toUpperCase();
-      }
-      
-      // 更新菜单中选项的激活状态 (高亮当前选中的语言)
-      document.querySelectorAll('.lang-option').forEach(opt => {
-          opt.classList.remove('active');
-          // 检查按钮文字是否包含目标语言
-          if(opt.innerText.toLowerCase().includes(lang)) {
-              opt.classList.add('active');
-          }
-      });
-
-      // --- 💡 进阶：如果你有不同语言的页面，可以在这里设置跳转 ---
-      /*
-      const pageMap = {
-          'en': 'index.html',
-          'zh': 'index_zh.html',
-          'jp': 'index_jp.html'
-      };
-      window.location.href = pageMap[lang];
-      */
-      
-      // 切换完后自动关掉面板，增加一点点延迟让用户看清点击效果
-      setTimeout(() => {
-          document.getElementById('langWidget').classList.remove('open');
-      }, 300);
-  }
-</script>
+ 
 </body>
 </html>

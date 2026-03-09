@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us｜ASOBI Co., Ltd.</title>
+  
+  <meta name="description" content="ASOBI Co., Ltd. provides premium private chauffeur services in the Kansai area, including Kyoto, Osaka, and Nara. We specialize in sightseeing tours, airport transfers, and VIP business transport with English-speaking drivers and a luxury fleet of Alphard and Hiace vehicles.">
+
+  <!-- ✅ 统一基础 -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+
+  <style>
+    :root{
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --muted:rgba(0,0,0,.62);
+      --line:rgba(0,0,0,.08);
+      --max:664px;
+      --w-screen: 664px;
+  --w-nav: 228px;
+  --h-nav: 64px;
+    }
+
+    body{ margin:0; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    /* 跟你现有 follow/detail 的 stage/paper 结构靠拢 */
+    /* ✅ 修正 stage：让主体和导航作为一个整体居中 */
+.stage {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; /* 恢复居中 */
+  gap: 12px;               /* 白色纸张与导航栏的固定间距 */
+  padding: 0 18px 60px;
+  position: relative;
+  left: 0;                 /* 移除之前的偏移 */
+}
+
+/* ✅ 修正 paper：移除 auto margin，让它在 flex 流中排队 */
+.paper {
+  flex-shrink: 0;           /* 防止宽度被挤压 */
+  width: min(var(--max), 100%);
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  overflow: hidden;
+  margin: 0;                /* 必须改为0，否则 nav 无法贴合 */
+}
+
+    .paper{
+  width: min(var(--max), 100%);
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  overflow: hidden;
+
+  /* ❌ 不要 auto */
+  margin: 0 auto；
+}
+
+
+    /* 顶部（轻、干净） */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar .brand{ font-weight:700; letter-spacing:.5px; }
+    .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
+
+    /* ✅ Hero：保留“你现在的 hero + smile wave” */
+    .hero-ph{
+      height:46vh; min-height:320px;
+      background: #d9d9d9;
+      position: relative;
+      background-image:url("images/hero.jpg"); /* 你已有的hero图 */
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph .smile-wave{
+      position:absolute;
+      left:0; bottom:-1px;
+      width:100%;
+      height:90px;
+      pointer-events:none;
+    }
+    .hero-ph .smile-wave path{ fill:#fff; }
+
+    /* ✅ hero 下方介绍文字（开阔一点） */
+    .hero-message{
+      padding: 56px 22px 26px;
+      text-align: center;
+    }
+    .hero-message .quote{
+      margin: 0 0 16px;
+      font-size: 22px;
+      line-height: 1.95;
+      letter-spacing: .04em;
+      font-weight: 520;
+    }
+    .hero-message .lead{
+      margin: 0;
+      font-size: 14px;
+      line-height: 2.05;
+      color: rgba(0,0,0,.78);
+    }
+
+    /* ✅ 开阔内容区：不用卡片盒子，改为“长文排版 + 细线” */
+    .content{
+      padding: 10px 22px 40px;
+    }
+
+    .page-title{
+      text-align:center;
+      margin: 18px 0 30px;
+    }
+    .page-title .en{
+      font-size: 12px;
+      letter-spacing: .22em;
+      color: rgba(0,0,0,.55);
+      margin-bottom: 10px;
+    }
+    .page-title h1{
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: .08em;
+    }
+
+    .block{
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .intro{
+      margin: 0 0 22px;
+      color: rgba(0,0,0,.78);
+      line-height: 2.05;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    .divider{
+      height:1px;
+      background: var(--line);
+      margin: 26px 0;
+    }
+
+    .h2{
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: .08em;
+    }
+
+    /* ✅ “小表格”：轻量、开阔、像 aquastand 那种信息块:contentReference[oaicite:1]{index=1} */
+    .info-table{
+      width:100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      line-height: 2.0;
+    }
+    .info-table th,
+    .info-table td{
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .info-table th{
+      width: 120px;
+      text-align: left;
+      font-weight: 600;
+      color: rgba(0,0,0,.62);
+      letter-spacing: .04em;
+      padding-right: 16px;
+    }
+    .info-table td{
+      color: rgba(0,0,0,.86);
+    }
+    .info-table a{ text-decoration: underline; text-underline-offset: 3px; }
+
+    /* 业务内容：用“宽松列表”，不要卡片 */
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(0,0,0,.86);
+      line-height: 2.05;
+      font-size: 14px;
+    }
+    .list li{ margin: 6px 0; }
+
+    /* 实绩：用数字行（开阔） */
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 26px;
+      margin-top: 10px;
+    }
+    .kpi{
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .kpi .label{
+      font-size: 12px;
+      letter-spacing:.14em;
+      color: rgba(0,0,0,.55);
+      margin-bottom: 6px;
+    }
+    .kpi .val{
+      font-size: 16px;
+      letter-spacing:.04em;
+      font-weight: 650;
+    }
+
+    /* 手机：更窄更松 */
+    @media (max-width: 1000px){
+      .stage{ display:block; padding: 0 12px 60px; }
+      .paper{ border-radius: 0; width:100%; max-width: 520px; }
+      .hero-message{ padding: 46px 18px 22px; }
+      .content{ padding: 6px 18px 34px; }
+      .kpis{ grid-template-columns: 1fr; }
+    }
+
+    /* ✅ 手机底部三色导航预留空间（不挡内容） */
+    @media (max-width: 1000px){
+      .paper{ padding-bottom: 110px; }
+    }
+    @media (min-width: 1001px){
+  :root{
+    --paper-shift: 140px;
+  }
+
+}
+
+/* ✅ 右侧三色导航：作为第二列，贴着 paper */
+/* =========================
+   Desktop：nav 贴白色纸右侧
+   ========================= */
+.floating-nav-wrapper{
+  
+
+  margin-left: 12px;        /* ✅ 贴着 paper */
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 手机端：底部固定（你 follow 也是这个思路） */
+@media (max-width: 1000px){
+  .floating-nav-wrapper{
+    
+    left: 0;
+    
+    bottom: 0;
+    top: auto;
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+  }
+}
+/* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
+@media (min-width: 1001px) {
+  .floating-nav-wrapper {
+    position: sticky !important; 
+    top: 528px !important;       /* 距离视口顶部的距离 */
+    left: auto !important;
+    margin-left: 0 !important;   /* 靠 gap 控制间距 */
+    transform: none !important;  /* 必须清除 base/follow 里的位移 */
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation: 
+  carFloat 9s ease-in-out infinite;
+}
+/* =========================
+   Footer（底部版权栏）
+   ========================= */
+
+.site-footer-bar{
+  margin-top: 64px;
+  padding: 28px 18px 34px;
+  background: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,.7);
+}
+
+/* 链接列表 */
+.site-footer-bar .footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.site-footer-bar .footer-links li{
+  margin: 0;
+}
+
+.site-footer-bar .footer-links a{
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bar .footer-links a:hover{
+  text-decoration: underline;
+}
+
+/* 版权行 */
+.site-footer-bar .copyright{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  letter-spacing: .04em;
+}
+
+/* --- Dify 聊天机器人左侧固定位 --- */
+#dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+    position: fixed !important; /* 强制固定在视口 */
+    right: auto !important;
+    left: 20px !important;      /* 靠左 */
+    bottom: 20px !important;    /* 靠下 */
+    z-index: 1000000 !important; /* 确保在最顶层 */
+}
+
+#dify-chatbot-bubble-window {
+    position: fixed !important; /* 强制固定在视口 */
+    width: 24rem !important;
+    height: 40rem !important;
+    right: auto !important;
+    left: 20px !important;      /* 窗口也靠左 */
+    bottom: 90px !important;    /* 位于按钮上方 */
+    z-index: 1000001 !important;
+}
+
+/* --- 左下角装饰图微调 --- */
+.dify-cover-wrapper {
+    position: fixed !important; /* 必须是 fixed 才能跟随页面 */
+    left: -10px;      
+    bottom: -5px;     
+    z-index: 999999;  /* 位于聊天窗口下方 */
+    pointer-events: none; /* 穿透点击，不影响点击聊天按钮 */
+}
+
+.dify-cover-wrapper img {
+    width: 180px;     
+    height: auto;     
+    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.12));
+}
+
+/* 移动端适配 */
+@media (max-width: 1000px) {
+    /* 1. 聊天窗口往上挪 */
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
+        width: 90vw !important; 
+        height: 65vh !important; 
+    }
+
+    /* 2. 聊天气泡按钮往上挪 */
+    #dify-chatbot-bubble-button {
+        left: 15px !important;
+        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
+        z-index: 999999 !important;
+    }
+.dify-cover-wrapper img {
+        width: 99px !important;  /* 从 180px 缩小到 110px */
+        height: auto !important;
+        opacity: 0.8 !important;  /* 稍微透明，不抢戏 */
+    }
+
+    /* 2. 调整位置，避开底部导航栏 */
+    .dify-cover-wrapper {
+        left: -5px !important;
+        bottom: 65px !important;  /* ✅ 关键：向上挪一点，避开底部的 LINE/Mail 按钮 */
+    }
+}
+  </style>
+
+
+
+
+
+
+</head>
+
+<body>
+  <!-- 右侧装饰车（保留统一） -->
+  <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+
+  <div class="stage">
+    <main class="paper" role="main">
+
+<header class="topbar">
+  <div class="topbar-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+    
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <div class="brand" style="font-weight: 800; font-size: 20px;">ASOBI Co., Ltd.</div>
+    </a>
+
+    <nav aria-label="top" style="display: flex; align-items: center;">
+      
+      <a href="../about_asobi.html" style="text-decoration: none; color: #ff5500; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        日本語
+      </a>
+
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit; margin-right: 15px;"><span>About Us</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+    </nav>
+  </div>
+</header>
+
+      <!-- ✅ HERO（保留） -->
+      <section class="hero-ph" aria-label="Hero">
+        <svg class="smile-wave" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1440 120">
+          <path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+        </svg>
+      </section>
+
+      <!-- ✅ HERO下介绍文字（保留） -->
+      <section class="hero-message">
+<p class="hero-quote">
+  "Eliminating the stress of travel."<br/>
+  "Delivering an experience a cut above the rest."
+</p>
+<p class="lead">
+  As your partner dedicated to meeting these needs,<br/>
+  we invite you to experience the excellence of our premium chauffeur service.
+</p>
+      </section>
+
+      <section class="content">
+        <div class="page-title">
+          <div class="en">COMPANY</div>
+          <h1>About Us</h1>
+        </div>
+
+<div class="block">
+  <p class="intro">
+    Thank you very much for visiting our website. 
+    Based in the Osaka area, ASOBI provides chauffeur services that transform travel itself into a comfortable experience. 
+    We carefully suggest the ideal vehicle and itinerary tailored to your purpose, group size, and specific requests.
+  </p>
+
+          <div class="divider"></div>
+
+          <h2 class="h2">Company Profile</h2>
+          <table class="info-table" aria-label="Company Profile">
+            <tr><th>Company Name</th><td>ASOBI　株式会社</td></tr>
+            <tr><th>Address</th><td>大阪府堺市北区新金岡町５町 ３−３０６−１０１</td></tr>
+            <tr><th>Representative</th><td>程　思量</td></tr>
+            <tr><th>Business Activities</th><td>一般乗用旅客自動車運送事業（近運自二第 870 号）</td></tr>
+            <tr><th>Phone Number</th><td><a href="tel:072-260-9798">072-260-9798</a></td></tr>
+            <tr><th>Mail Address</th><td><a href="mailto:cheng@asobi.ltd">cheng@asobi.ltd</a></td></tr>
+          </table>
+
+          <div class="divider"></div>
+
+     <h2 class="h2">Our Services</h2>
+          <ul class="list">
+            <li><strong>Sightseeing Chauffeur Service:</strong> Private tours of major sightseeing spots departing from and returning to Osaka City.</li>
+            <li><strong>Airport Transfers:</strong> Seamless door-to-door service between KIX / ITM and Osaka City hotels or destinations.</li>
+            <li><strong>Corporate Transfers:</strong> Supporting punctual transportation for business dinners, site inspections, and business trips.</li>
+            <li><strong>Event Support:</strong> Tailored transportation for special occasions, including filming, ceremonies, and VIP guest escorting.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+<h2 class="h2">Track Record</h2>
+          <div class="kpis" aria-label="Achievements">
+            <div class="kpi">
+              <div class="label">ANNUAL CASES</div>
+              <div class="val">1,000+ per year</div>
+            </div>
+            <div class="kpi">
+              <div class="label">LANGUAGES</div>
+              <div class="val">Japanese / English / Chinese / Korean</div>
+            </div>
+            <div class="kpi">
+              <div class="label">AREA</div>
+              <div class="val">Osaka City (Pickup or Drop-off)</div>
+            </div>
+            <div class="kpi">
+              <div class="label">VEHICLES</div>
+              <div class="val">Alphard / Vellfire / Hiace / GranAce</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+<h2 class="h2">Contact Us</h2>
+          <p class="intro" style="margin-bottom:0;">
+            To ensure a smooth booking process, please provide details such as your preferred date/time, number of passengers, destination, and amount of luggage.
+          </p>
+        </div>
+<div class="back-to-top-wrap">
+  <a href="en/about_asobi.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+        <!-- ✅ 最下方 SNS（保留统一：bottom-grid class） -->
+        <section class="sns-guide">
+          <div class="sec-title-block" style="margin:40px 0 20px;">
+<div class="sec-en" style="font-size:20px;">Contact Us</div>
+<div style="font-size:14px; color:#666;">Get in touch with our team</div>
+
+          <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.jp">
+      <img src="images/contact-mail.png" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+          </div>
+        </section>
+
+      </section>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Our Services</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
+        <li><a href="about_asobi.html">Company Profile</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    </div>
+</footer>
+    </main>
+    
+
+
+    <!-- ✅ 右侧三色导航（保留统一） -->
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="Contact us via LINE" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
+<img alt="Contact us via Email" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Follow us on Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+  </div>
+  <div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+</style>
+</body>
+</html>

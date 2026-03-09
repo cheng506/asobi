@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>トヨタ アルファード｜ASOBI 株式会社</title>
+
+  <meta name="description" content="ASOBI株式会社は、関西（京都・大阪・奈良）を中心に、観光ハイヤー、空港送迎、ビジネスVIP対応を提供するハイヤーサービス会社です。アルファードやハイエースなど、お客様のシーンに合わせた最適な一台をご提案いたします。英語・中国語対応も可能です。">
+
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/follow.css" />
   <link rel="stylesheet" href="css/vehicle_detail.css" />
@@ -18,11 +21,20 @@
   <div class="stage">
 
     <main class="paper" role="main">
-      <header class="topbar">
+<header class="topbar">
   <a href="index.html" style="text-decoration: none; color: inherit;">
     <div class="brand">ASOBI 株式会社</div>
   </a>
-  <nav aria-label="top">
+  <nav aria-label="top" style="display: flex; align-items: center;">
+    <a href="en/alphard_detail.html" style="text-decoration: none; color: #3647EB; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      English
+    </a>
+
     <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
     <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
   </nav>
@@ -35,7 +47,7 @@
 さまざまなシーンにご対応できます。
 快適な旅を実現します</p>
 
-        <img class="car-illu" src="images/vellfa.png" alt="トヨタ アルファード" />
+        <img class="car-illu" src="images/alpha1.png" alt="トヨタ アルファード" />
 
         <div class="badges" aria-label="scenes">
           <div class="badge">家族旅</div>
@@ -55,9 +67,11 @@
       <div class="pc-viewport" id="pcViewport">
         <div class="pc-track" id="pcTrack">
           <!-- ✅ 换成你的4张照片路径 -->
-          <div class="pc-slide"><img src="images/vellfa1.png" alt="Photo 01"></div>
-          <div class="pc-slide"><img src="images/alphard2.png" alt="Photo 02"></div>
-
+          <div class="pc-slide"><img src="images/alpha2.jpg" alt="Photo 01"></div>
+          <div class="pc-slide"><img src="images/alpha5.jpg" alt="Photo 02"></div>
+          <div class="pc-slide"><img src="images/alpha4.png" alt="Photo 02"></div>
+          <div class="pc-slide"><img src="images/alpha3.png" alt="Photo 02"></div>
+ 
         </div>
       </div>
 
@@ -119,9 +133,9 @@
 
 <div class="photo-carousel" aria-label="写真スライダー"></div>
 <div class="other-grid">
-  <a class="other-card" href="alphard_detail.html" aria-label="トヨタ ヴェルファイヤー">
-    <img src="images/imagesb.png" alt="ヴェルファイヤー">
-    <div class="make">ヴェルファイヤー</div>
+  <a class="other-card" href="Vellfire.html" aria-label="トヨタ ヴェルファイア ">
+    <img src="images/imagesb.png" alt="ヴェルファイア ">
+    <div class="make">ヴェルファイア </div>
   </a>
 
   <a class="other-card" href="alphard_detail.html"aria-label="トヨタ アルファード">
@@ -134,7 +148,7 @@
     <div class="make">ハイエース</div>
   </a>
 
-  <a class="other-card" href="grandice.html"トヨタ グランエース">
+  <a class="other-card" href="granace.html"aria-label="トヨタ グランエース">
     <img src="images/imagesg.png" alt="グランエース">
     <div class="make">グランエース</div>
   </a>
@@ -181,8 +195,8 @@
     <ul class="footer-links">
         <li><a href="index.html">ホーム</a></li>
         <li><a href="service.html">サービス一覧</a></li>
-        <li><a href="vehicles.html">車両ラインナップ</a></li>
-        <li><a href="#">会社概要</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">車両ラインナップ</a></li>
+        <li><a href="about_asobi.html">会社概要</a></li>
         <li><a href="#">プライバシーポリシー</a></li>
     </ul>
     <div class="copyright">
@@ -275,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="dify-cover-wrapper">
     <img src="images/left.svg" alt="Chat Decor">
 </div>
-<script>
+  <script>
  window.difyChatbotConfig = {
   token: 'UdHmrJYfs7wR2k4Y',
   inputs: {
@@ -307,60 +321,134 @@ document.addEventListener('DOMContentLoaded', () => {
     width: 24rem !important;
     height: 40rem !important;
   }
-  /* --- Dify 聊天机器人左侧固定位 --- */
-#dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-    position: fixed !important; /* 强制固定在视口 */
-    right: auto !important;
-    left: 20px !important;      /* 靠左 */
-    bottom: 20px !important;    /* 靠下 */
-    z-index: 1000000 !important; /* 确保在最顶层 */
-}
+  
+</style>
+ 
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="">
+</div>
 
-#dify-chatbot-bubble-window {
-    position: fixed !important; /* 强制固定在视口 */
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script> 
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
     width: 24rem !important;
     height: 40rem !important;
+  }
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
+#dify-chatbot-bubble-window {
+    position: fixed !important;
     right: auto !important;
-    left: 20px !important;      /* 窗口也靠左 */
-    bottom: 90px !important;    /* 位于按钮上方 */
-    z-index: 1000001 !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+    
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important; 
 }
 
-/* --- 左下角装饰图微调 --- */
-.dify-cover-wrapper {
-    position: fixed !important; /* 必须是 fixed 才能跟随页面 */
-    left: -10px;      
-    bottom: -5px;     
-    z-index: 999999;  /* 位于聊天窗口下方 */
-    pointer-events: none; /* 穿透点击，不影响点击聊天按钮 */
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
 }
 
-.dify-cover-wrapper img {
-    width: 180px;     
-    height: auto;     
-    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.12));
-}
-
-/* 移动端适配 */
+/* 针对移动端的适配 */
 @media (max-width: 1000px) {
-    #dify-chatbot-bubble-button {
-        bottom: 80px !important; /* 避开手机端底部导航栏 */
-        left: 15px !important;
-    }
     #dify-chatbot-bubble-window {
-        left: 0 !important;
-        bottom: 0 !important;
-        width: 100% !important;   /* 手机端全屏展示感 */
-        height: 80% !important;
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
     }
-    .dify-cover-wrapper {
+    #dify-chatbot-bubble-button {
+        left: 10px !important;
+        bottom: 66px !important;
+    }
+            .dify-cover-wrapper {
         bottom: 65px; 
     }
     .dify-cover-wrapper img {
         width: 120px; 
     }
 }
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px; 
+    bottom: -10px;
+    
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999; 
+    
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
+/* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
+@media (max-width: 1024px) {
+    .bg-car {
+        z-index: -1 !important; /* 将其置于底层，防止遮挡文字或按钮 */
+        /* 如果您觉得画面还是有点乱，也可以考虑在这里调低透明度，例如：
+        opacity: 0.3 !important; */
+    }
+}
 </style>
+
+
+ 
 </body>
 </html>

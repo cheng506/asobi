@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>ASOBI 株式会社｜ご提案できるサービス</title>
+<meta name="description" content="ASOBI株式会社は、関西（京都・大阪・奈良）を中心に、観光ハイヤー、空港送迎、ビジネスVIP対応を提供するハイヤーサービス会社です。アルファードやハイエースなど、お客様のシーンに合わせた最適な一台をご提案いたします。英語・中国語対応も可能です。">
 
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/follow.css">
@@ -417,15 +418,24 @@
 <div class="stage">
 <main class="paper">
 <header class="topbar">
-<div class="topbar-inner">
- <div class="brand">
-    <a href="index.html" style="text-decoration: none; color: inherit; display: block;">ASOBI 株式会社</a>
-</div>
-<nav class="nav">
-<a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
-    <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
-</nav>
-</div>
+  <div class="topbar-inner">
+    <div class="brand">
+      <a href="index.html" style="text-decoration: none; color: inherit; display: block;">ASOBI 株式会社</a>
+    </div>
+    <nav class="nav" style="display: flex; align-items: center;">
+      <a href="en/service.html" style="text-decoration: none; color: #3647EB; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        English
+      </a>
+
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>会社概要</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>お知らせ</span></a>
+    </nav>
+  </div>
 </header>
 <section aria-label="Hero" class="hero-ph hero-smile">
 <svg aria-hidden="true" class="smile-wave" preserveaspectratio="none" viewbox="0 0 1440 120">
@@ -534,11 +544,11 @@
 <article class="svc-block reveal" id="svc7">
 <div class="svc-text">
 <span class="svc-num">07</span>
-<h3 class="svc-heading">社内旅行・研修旅行</h3>
-<p class="svc-desc">企業様の社員旅行・研修旅行においても、ハイヤーは非常に有効な移動手段です。
-参加人数やスケジュールに応じて車両を手配し、集合場所から目的地までをスムーズにつなぐことで、幹事様の負担を軽減します。
-
-車内での打ち合わせや交流など、移動時間も有効活用できます。</p>
+<h3 class="svc-heading">修学旅行</h3>
+<p class="svc-desc">慣れない土地で路線バスや電車を乗り継ぐのは、思っている以上に時間と神経を使います。
+  「逆方向の電車に乗っちゃった！」というトラブルも防げますし、
+  ドア・ツー・ドアで移動できるため事故やトラブル、防犯面でのリスクが激減します。
+  これは送り出す親御さんや、管理する先生方にとって非常に大きなメリットです。</p>
 </div>
 <div class="svc-image">
 <img alt="社内旅行・研修旅行" src="images/svc-7.png"/>
@@ -578,7 +588,7 @@
     <ul class="footer-links">
         <li><a href="index.html">ホーム</a></li>
         <li><a href="service.html">サービス一覧</a></li>
-        <li><a href="alphard_detail.html">車両ラインナップ</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">車両ラインナップ</a></li>
         <li><a href="about_asobi.html">会社概要</a></li>
         <li><a href="#">プライバシーポリシー</a></li>
     </ul>
@@ -669,60 +679,87 @@
     width: 24rem !important;
     height: 40rem !important;
   }
-  /* --- Dify 聊天机器人左侧固定位 --- */
-#dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-    position: fixed !important; /* 强制固定在视口 */
-    right: auto !important;
-    left: 20px !important;      /* 靠左 */
-    bottom: 20px !important;    /* 靠下 */
-    z-index: 1000000 !important; /* 确保在最顶层 */
-}
-
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
 #dify-chatbot-bubble-window {
-    position: fixed !important; /* 强制固定在视口 */
-    width: 24rem !important;
-    height: 40rem !important;
+    position: fixed !important;
     right: auto !important;
-    left: 20px !important;      /* 窗口也靠左 */
-    bottom: 90px !important;    /* 位于按钮上方 */
-    z-index: 1000001 !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+    
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important; 
 }
 
-/* --- 左下角装饰图微调 --- */
-.dify-cover-wrapper {
-    position: fixed !important; /* 必须是 fixed 才能跟随页面 */
-    left: -10px;      
-    bottom: -5px;     
-    z-index: 999999;  /* 位于聊天窗口下方 */
-    pointer-events: none; /* 穿透点击，不影响点击聊天按钮 */
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
 }
 
-.dify-cover-wrapper img {
-    width: 180px;     
-    height: auto;     
-    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.12));
-}
-
-/* 移动端适配 */
+/* 针对移动端的适配 */
 @media (max-width: 1000px) {
-    #dify-chatbot-bubble-button {
-        bottom: 80px !important; /* 避开手机端底部导航栏 */
-        left: 15px !important;
-    }
     #dify-chatbot-bubble-window {
-        left: 0 !important;
-        bottom: 0 !important;
-        width: 100% !important;   /* 手机端全屏展示感 */
-        height: 80% !important;
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
     }
-    .dify-cover-wrapper {
+    #dify-chatbot-bubble-button {
+        left: 10px !important;
+        bottom: 66px !important;
+    }
+            .dify-cover-wrapper {
         bottom: 65px; 
     }
     .dify-cover-wrapper img {
         width: 120px; 
     }
 }
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px; 
+    bottom: -10px;
+    
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999; 
+    
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
 </style>
+
+
+ 
 </body>
 </html>

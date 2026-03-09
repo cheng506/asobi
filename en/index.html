@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>ASOBI Co., Ltd.</title>
+<meta name="description" content="ASOBI Co., Ltd. provides premium private chauffeur services in the Kansai area, including Kyoto, Osaka, and Nara. We specialize in sightseeing tours, airport transfers, and VIP business transport with English-speaking drivers and a luxury fleet of Alphard and Hiace vehicles.">
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -167,18 +168,70 @@
 }
 
 
-    /* Header */
-    .header {
-        padding: 20px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .brand { font-size: 20px; font-weight: 900; font-family: var(--font-title); color: var(--c-navy); }
-    .top-menu { font-size: 13px; font-weight: bold; color: #666; font-family: var(--font-title); }
-    .top-menu span { margin-left: 12px; }
+ /* --- 新版 Topbar 样式 --- */
+.topbar {
+    width: 100%;
+    /* 这里的 0.85 让背景更通透，视频色彩能透一点出来 */
+    background: rgba(255, 255, 255, 0.85); 
+backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* 增加一个极其微弱的阴影，让它悬浮在视频上 */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+}
+.topbar-inner {
+    /* 关键：使其与中间 699px 的白色屏幕对齐，或者设为 1200px 居中 */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.topbar .brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+}
+
+.topbar .nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 语言切换专用胶囊按钮 */
+.lang-switch {
+    text-decoration: none;
+    color: #3647EB;
+    font-size: 13px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #e2e8f0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.lang-switch:hover {
+    background: #f8fafc;
+    border-color: #3647EB;
+    transform: translateY(-1px);
+}
     /* Fig 1: Hero */
+    .hero {
+    margin-top: 64px; /* 这里的数值应等于或略大于你的 topbar 高度 */
+    overflow: hidden;
+}
     .hero-pink-area {
         background-color: #fff0f0; /* 略红背景 */
         padding: 30px 20px;
@@ -201,12 +254,25 @@
     .hero-swiper { width: 100%; height: 100%; z-index: 1; }
     .hero-swiper img { width: 100%; height: 100%; object-fit: cover; }
 
+
+  .banner-container {
+    padding: 20px;
+    display: grid;               /* 改为 Grid 布局 */
+    grid-template-columns: 1fr 1fr; /* 关键：平分为两列 */
+    gap: 12px;                  /* 格子之间的间距 */
+}
+
+/* 确保 Banner 图片在格子里能自适应填充 */
+.banner-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media (max-width: 480px) {
     .banner-container {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+        grid-template-columns: 1fr; /* 手机端恢复成一列排开 */
     }
+}
 
     /* Fig 2: Merit (Circles) */
     .merit-section { padding: 40px 0; text-align: center; }
@@ -309,7 +375,7 @@
     
     .proc-sq {
         width: 200px; height: 200px;
-        background: none；
+        background: none;
         flex-shrink: 0;
         display: flex; align-items: center; justify-content: center;
         color: #fff; font-size: 18px; font-weight: bold;
@@ -389,25 +455,7 @@
 /* =========================
 
 
-/* --- Top bar full width --- */
-
-
-.header{
-  position: relative;
-  top: auto; left: auto; right: auto;
-  width: 100%;
-  z-index: 10;
-  background: #fff;
-  padding: 14px 0;
-  box-shadow: 0 1px 0 rgba(15,23,42,0.10);
-  display: grid;
-  grid-template-columns: 1fr var(--w-screen) 1fr;
-  align-items: center;
-}
-
-.header .brand{ grid-column: 2; justify-self: start; padding-left: 24px; }
-.header .top-menu{ grid-column: 2; justify-self: end; padding-right: 24px; }
-
+ 
 /* keep the grey frame a bit “shy” under the full-width top bar */
 .layout-center{ padding-top: 0; } /* header already reserves space via body padding */
 
@@ -422,12 +470,7 @@
 
 /* responsive: let header content breathe on narrow screens */
 @media (max-width: 720px){
-  body{ padding-top: 64px; }
-  .header{
-    grid-template-columns: 12px 1fr 12px;
-  }
-  .header .brand{ grid-column: 2; padding-left: 0; font-size: 18px; justify-self: center;}
-  .header .top-menu{ grid-column: 2; padding-right: 0; font-size: 12px; }
+ 
   .hero-slider-wrap{ height: 340px; }
   .hero-title{ font-size: 18px; }
 }
@@ -521,12 +564,12 @@ body{
     aspect-ratio: 16 / 9;      /* ✅ 核心 */
   }
 
-  .hero-video{
+.hero-video {
     width: 100%;
     height: 100%;
-    object-fit: cover;         /* 保持铺满，不变形 */
-  }
-
+    object-fit: cover; /* 关键：确保视频比例正确地填充整个区域 */
+    display: block;
+}
 }
 
 .content-inner img{ max-width:100%; height:auto; }
@@ -762,25 +805,86 @@ html {
     background: transparent !important; /* 【关键】去掉灰色背景 */
     transform: none !important;         /* 去掉上浮动效 */
 }
-/* 强制将 Dify 气泡移到左下角 */
-#dify-chatbot-bubble-button {
-    right: auto !important;  /* 取消右侧定位 */
-    left: 20px !important;   /* 靠左 20 像素 */
-    bottom: 20px !important; /* 靠下 20 像素 */
-}
-
-/* 强制让对话窗口也在左边弹出 */
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
 #dify-chatbot-bubble-window {
-    right: auto !important;  /* 取消右侧定位 */
-    left: 20px !important;   /* 靠左对齐气泡 */
-    bottom: 80px !important; /* 位于气泡上方 */
+    position: fixed !important;
+    right: auto !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+    
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important; 
 }
 
-/* 如果在手机端觉得挡住了文字，可以适当调小一点 */
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* 针对移动端的适配 */
 @media (max-width: 1000px) {
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
+    }
     #dify-chatbot-bubble-button {
         left: 10px !important;
-        bottom: 70px !important; /* 避开手机端的底部导航条 */
+        bottom: 20px !important;
+    }
+}
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px; 
+    bottom: -10px;
+    
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999; 
+    
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+.dify-cover-wrapper img {
+        width: 99px !important;  /* 从 180px 缩小到 110px */
+        height: auto !important;
+        opacity: 0.8 !important;  /* 稍微透明，不抢戏 */
+    }
+
+    /* 2. 调整位置，避开底部导航栏 */
+    .dify-cover-wrapper {
+        left: -5px !important;
+        bottom: 65px !important;  /* ✅ 关键：向上挪一点，避开底部的 LINE/Mail 按钮 */
+    }
+}
+/* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
+@media (max-width: 1024px) {
+    .bg-car {
+        z-index: -1 !important; /* 确保它不会遮挡任何文字或点击区域 */
+        opacity: 0.98;           /* 可选：调淡一点，增加背景感 */
     }
 }
 </style>
@@ -790,11 +894,23 @@ html {
 <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
 <div class="frame-grey">
 <div class="screen-white">
-<header class="header">
-  <div class="brand">ASOBI Co., Ltd.</div>
-  <div class="top-menu">
-    <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>About Us</span></a>
-    <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <a href="index.html" style="text-decoration: none; color: inherit; display: block;">ASOBI Co., Ltd.</a>
+    </div>
+    <nav class="nav">
+      <a href="../index.html" class="lang-switch">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        日本語
+      </a>
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>About Us</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+    </nav>
   </div>
 </header>
 <section class="hero">
@@ -828,6 +944,14 @@ html {
 
   <a href="#contact-sns">
     <img src="images/banner-2.png" alt="Banner 2"
+         style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
+  </a>
+    <a href="#contact-sns">
+    <img src="images/banner-3.png" alt="Banner 3"
+         style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
+  </a>
+    <a href="#contact-sns">
+    <img src="images/banner4.png" alt="Banner 4"
          style="border-radius:6px; box-shadow:0 4px 10px rgba(0,0,0,0.1); cursor:pointer;" />
   </a>
 </div>
@@ -939,10 +1063,9 @@ html {
 <div class="swiper card-swiper" id="vehSwiper">
   <div class="swiper-wrapper">
 
-
-        <div class="swiper-slide info-card">
+     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Alphard" src="images/alphard2.png"/>
+        <img alt="Vellfire" src="images/vellfa1.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">Toyota Vellfire</h3>
@@ -950,10 +1073,28 @@ html {
       </div>
     </div>    <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Alphard" src="images/alphard2.png"/>
+        <img alt="vellfire" src="images/vellfa2.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">Toyota Vellfire</h3>
+        <p class="card-desc">Max 7 people / Recommended: 4-5 people + suitcases.</p>
+      </div>
+    </div>
+
+        <div class="swiper-slide info-card">
+      <div class="card-img-top">
+        <img alt="Alphard" src="images/alpha2.jpg"/>
+      </div>
+      <div class="card-info">
+        <h3 class="card-h">Toyota Alphard</h3>
+        <p class="card-desc">Max 7 people / Recommended: 4-5 people + suitcases.</p>
+      </div>
+    </div>    <div class="swiper-slide info-card">
+      <div class="card-img-top">
+        <img alt="Alphard" src="images/alpha5.jpg"/>
+      </div>
+      <div class="card-info">
+        <h3 class="card-h">Toyota Alphard</h3>
         <p class="card-desc">Max 7 people / Recommended: 4-5 people + suitcases.</p>
       </div>
     </div>
@@ -969,7 +1110,7 @@ html {
 
     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Alphard" src="images/hiace2.png"/>
+        <img alt="hiace" src="images/hiace2.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">Toyota Hiace</h3>
@@ -979,7 +1120,7 @@ html {
 
     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Grand Hiace" src="images/grandhiace1.png"/>
+        <img alt="Granace" src="images/grandhiace1.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">Toyota GranAce</h3>
@@ -989,7 +1130,7 @@ html {
 
     <div class="swiper-slide info-card">
       <div class="card-img-top">
-        <img alt="Grand Hiace" src="images/grandhiace2.png"/>
+        <img alt="Granace" src="images/grandhiace2.png"/>
       </div>
       <div class="card-info">
         <h3 class="card-h">Toyota GranAce</h3>
@@ -1020,7 +1161,7 @@ html {
       <div class="sub"></div>
  <p>You can contact us via<br/>various SNS or email.</p>>
     </div>
-  </div>
+ </div>
 
   <div class="proc-item">
     <div class="proc-sq">
@@ -1043,7 +1184,7 @@ html {
  <p>If there are any<br/>changes to your plans,<br/>please consult us first.</p>
     </div>
     </div>
-  </div>
+  
 
   <div class="proc-item">
     <div class="proc-sq">
@@ -1072,9 +1213,7 @@ html {
 <div class="qa-answer"><div class="qa-answer-pad">As a general rule, we operate on a pre-reservation basis, but same-day arrangements may be possible depending on availability.</div></div>
 </div>
 <div class="qa-row">
-<button class="qa-trigger">What are the payment methods? <span>+</span></button>
-<div class="qa-answer"><div class="qa-answer-pad">We accept credit card payments, advance bank transfers, and invoice payments (deferred payment) for corporate contracts.</div></div>
-</div>
+
 <div class="qa-row">
 <button class="qa-trigger">Can I specify the vehicle type? <span>+</span></button>
 <div class="qa-answer"><div class="qa-answer-pad">Yes, it is possible. You can specify vehicles such as the Alphard or Hiace according to the number of passengers and your purpose.</div></div>
@@ -1122,13 +1261,14 @@ html {
 </div>
 
 </div>
+ 
 <div style="height:120px"></div>
 <footer class="site-footer-bar">
     <ul class="footer-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="service.html">Our Services</a></li>
-        <li><a href="vehicles.html">Vehicle Lineup</a></li>
-        <li><a href="#">Company Profile</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
+        <li><a href="about_asobi.html">Company Profile</a></li>
         <li><a href="#">Privacy Policy</a></li>
     </ul>
     <div class="copyright">
@@ -1214,6 +1354,10 @@ const vehSwiper = new Swiper('#vehSwiper', {
         });
     });
 </script>
+</script>
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
 <script>
  window.difyChatbotConfig = {
   token: 'UdHmrJYfs7wR2k4Y',
@@ -1246,6 +1390,84 @@ const vehSwiper = new Swiper('#vehSwiper', {
     width: 24rem !important;
     height: 40rem !important;
   }
+  /* --- Dify 聊天机器人左侧固定位 --- */
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
+#dify-chatbot-bubble-window {
+    position: fixed !important;
+    right: auto !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+    
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important; 
+}
+
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* 针对移动端的适配 */
+@media (max-width: 1000px) {
+    /* 1. 聊天窗口往上挪 */
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
+        width: 90vw !important; 
+        height: 65vh !important; 
+    }
+
+    /* 2. 聊天气泡按钮往上挪 */
+    #dify-chatbot-bubble-button {
+        left: 15px !important;
+        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
+        z-index: 999999 !important;
+    }
+}
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px; 
+    bottom: -10px;
+    
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999; 
+    
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 50px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
 </style>
+
 </body>
 </html>

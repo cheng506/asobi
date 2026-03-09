@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Toyota GranAce | ASOBI Co., Ltd.</title>
+<meta name="description" content="ASOBI Co., Ltd. provides premium private chauffeur services in the Kansai area, including Kyoto, Osaka, and Nara. We specialize in sightseeing tours, airport transfers, and VIP business transport with English-speaking drivers and a luxury fleet of Alphard and Hiace vehicles.">
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+  <link rel="stylesheet" href="css/vehicle_detail.css" />
+  <!-- width + right-nav sizing are unified in follow.css / vehicle_detail.css (match asobi) -->
+</head>
+<body>
+
+  <!-- optional right-side decorative car (same class name as your framework) -->
+  <!-- If you don't want this on this page, delete this img line. -->
+<img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+
+  <div class="stage">
+
+    <main class="paper" role="main">
+<header class="topbar">
+  <div class="topbar-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+    
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <div class="brand" style="font-weight: 800; font-size: 20px;">ASOBI Co., Ltd.</div>
+    </a>
+
+    <nav aria-label="top" style="display: flex; align-items: center;">
+      
+      <a href="../granace.html" style="text-decoration: none; color: #ff5500; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        日本語
+      </a>
+
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit; margin-right: 15px;"><span>About Us</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+    </nav>
+  </div>
+</header>
+
+      <!-- 01 hero (your screenshot + figma export) -->
+<section class="hero" id="top">
+        <h1 class="h">Toyota<br>GranAce</h1>
+        <p class="desc">Each seat offers generous individual space,
+with an expansive luggage compartment,
+making it perfect for golf transfers and journeys with heavy luggage.</p>
+
+        <img class="car-illu" src="images/grand.png" alt="GranAce（TOYOTA） " />
+
+      <div class="badges" aria-label="scenes">
+          <div class="badge">Golf</div>
+          <div class="badge">Business</div>
+          <div class="badge">Sightseeing</div>
+          <div class="badge">Events</div>
+        </div>
+      </section>
+
+      <!-- ✅ 4张照片轮播（左右白色圆按钮） -->
+<section class="content">
+  <div class="block">
+
+    <div class="photo-carousel" aria-label="写真スライダー">
+      <button class="pc-btn pc-prev" type="button" aria-label="前へ"></button>
+
+      <div class="pc-viewport" id="pcViewport">
+        <div class="pc-track" id="pcTrack">
+          <!-- ✅ 换成你的4张照片路径 -->
+          <div class="pc-slide"><img src="images/grandhiace1.png" alt="Photo 01"></div>
+          <div class="pc-slide"><img src="images/grandhiace2.png" alt="Photo 02"></div>
+
+        </div>
+      </div>
+
+      <button class="pc-btn pc-next" type="button" aria-label="次へ"></button>
+    </div>
+
+  </div>
+</section>
+<!-- ✅ 规格表格 + 座位图（放在轮播下面） -->
+<section class="spec-wrap" aria-label="Vehicle Specifications">
+  <h2 class="spec-title">GranAce (TOYOTA)</h2>
+
+  <div class="spec-grid">
+    <div class="spec-row">
+      <div class="spec-th">Max Capacity<br></div>
+      <div class="spec-td">5 people</div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-th">Recommended</div>
+      <div class="spec-td">4–5 people</div>
+    </div>
+
+    <div class="spec-row">
+      <div class="spec-th">Luggage Capacity</div>
+      <div class="spec-td">
+        Golf Bags: Up to 4<br>
+        Suitcases: Up to 4
+      </div>
+    </div>
+  </div>
+
+  <!-- 中：尺寸信息（两列两行） -->
+  <div class="spec-mini">
+    <div class="spec-mini-row">
+      <div class="spec-mini-cell"><span>Length (mm)</span>：5300</div>
+      <div class="spec-mini-cell"><span>Width (mm)</span>：1970</div>
+    </div>　
+    <div class="spec-mini-row">
+      <div class="spec-mini-cell"><span>Height (mm)</span>：1990</div>
+      <div class="spec-mini-cell"><span>AC Power</span>：Yes</div>
+    </div>
+  </div>
+
+  <!-- 下：图片区域（座位图） -->
+  <figure class="seat-figure">
+    <!-- ✅ 换成你的座位图图片 -->
+    <img src="images/grandace-seatmap.png" alt="車内座席図">
+    <figcaption>Seating Chart</figcaption>
+  </figure>
+</section>
+
+
+      <div class="others-title" id="vehicle-photos">
+  <span style="font-size: 14px; display: block; color: #999; font-weight: 400; margin-bottom: 5px;">Lineup</span>
+  Vehicle Models
+</div>
+
+<div class="photo-carousel" aria-label="Photo Slider"></div>
+<div class="other-grid">
+  <a class="other-card" href="Vellfire.html" aria-label="Toyota Vellfire">
+    <img src="images/imagesb.png" alt="Vellfire">
+    <div class="make">Vellfire</div>
+  </a>
+
+  <a class="other-card" href="alphard_detail.html" aria-label="Toyota Alphard">
+    <img src="images/imagesa.png" alt="Alphard">
+    <div class="make">Alphard</div>
+  </a>
+
+  <a class="other-card" href="hiace.html" aria-label="Toyota Hiace">
+    <img src="images/imagesh.png" alt="Hiace">
+    <div class="make">Hiace</div>
+  </a>
+
+  <a class="other-card" href="granace.html" aria-label="Toyota GranAce">
+    <img src="images/imagesg.png" alt="GranAce">
+    <div class="make">GranAce</div>
+  </a>
+</div>
+<div class="back-to-top-wrap">
+  <a href="granace.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+
+      </section>
+      <section class="sns-guide">
+  <div class="sec-title-block" style="margin:40px 0 20px;">
+    <div class="sec-en" style="font-size:20px;">Contact Us</div>
+    <div style="font-size:14px; color:#666;">Please feel free to contact us here</div>
+  </div>
+
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.jp">
+      <img src="images/contact-mail.png" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+ 
+  </div>
+</section>
+
+
+      <!-- bottom space (avoid mobile bottom floating nav overlay) -->
+<div style="height:120px"></div>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="en/index.html">Home</a></li>
+        <li><a href="service.html">Our Services</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
+        <li><a href="about_asobi.html">Company Profile</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    </div>
+</footer>
+    </main>
+
+    <!-- right floating nav (uses your follow.css). Put your image buttons here. -->
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="Contact us via LINE" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
+<img alt="Contact us via Email" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Follow us on Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+
+  </div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('pcTrack');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.pc-next');
+    const prevButton = document.querySelector('.pc-prev');
+    
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+
+    // 更新位置的函数
+    const updateSlide = (index) => {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
+    };
+
+    // 切换到下一张的逻辑
+    const moveToNext = () => {
+        currentIndex++;
+        if (currentIndex >= slides.length) {
+            currentIndex = 0; // 循环回到第一张
+        }
+        updateSlide(currentIndex);
+    };
+
+    // 切换到上一张的逻辑
+    const moveToPrev = () => {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = slides.length - 1; // 循环回到最后一张
+        }
+        updateSlide(currentIndex);
+    };
+
+    // --- 自动播放逻辑 ---
+    const startAutoPlay = () => {
+        stopAutoPlay(); // 先清除旧的，防止重叠
+        autoPlayTimer = setInterval(moveToNext, 3000); // 每3秒自动切下一张
+    };
+
+    const stopAutoPlay = () => {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    };
+
+    // 点击按钮切换
+    nextButton.addEventListener('click', () => {
+        moveToNext();
+        startAutoPlay(); // 用户操作后重新计时
+    });
+
+    prevButton.addEventListener('click', () => {
+        moveToPrev();
+        startAutoPlay(); // 用户操作后重新计时
+    });
+
+    // 鼠标悬停时停止自动播放，离开时恢复
+    const viewport = document.getElementById('pcViewport');
+    viewport.addEventListener('mouseenter', stopAutoPlay);
+    viewport.addEventListener('mouseleave', startAutoPlay);
+
+    // 窗口大小改变时重置
+    window.addEventListener('resize', () => updateSlide(currentIndex));
+
+    // 初始化启动
+    startAutoPlay();
+});
+</script>
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+  /* --- Dify 聊天机器人左侧固定位 --- */
+#dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+    position: fixed !important; /* 强制固定在视口 */
+    right: auto !important;
+    left: 20px !important;      /* 靠左 */
+    bottom: 20px !important;    /* 靠下 */
+    z-index: 1000000 !important; /* 确保在最顶层 */
+}
+
+#dify-chatbot-bubble-window {
+    position: fixed !important; /* 强制固定在视口 */
+    width: 24rem !important;
+    height: 40rem !important;
+    right: auto !important;
+    left: 20px !important;      /* 窗口也靠左 */
+    bottom: 90px !important;    /* 位于按钮上方 */
+    z-index: 1000001 !important;
+}
+
+/* --- 左下角装饰图微调 --- */
+.dify-cover-wrapper img {
+        width: 99px !important;  /* 从 180px 缩小到 110px */
+        height: auto !important;
+        opacity: 0.8 !important;  /* 稍微透明，不抢戏 */
+    }
+
+    /* 2. 调整位置，避开底部导航栏 */
+    .dify-cover-wrapper {
+        left: -5px !important;
+        bottom: 65px !important;  /* ✅ 关键：向上挪一点，避开底部的 LINE/Mail 按钮 */
+    }
+
+/* 移动端适配 */
+@media (max-width: 1000px) {
+    /* 1. 聊天窗口往上挪 */
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important; /* 从 100px 增加到 150px，避开弹出的菜单 */
+        width: 90vw !important; 
+        height: 65vh !important; 
+    }
+
+    /* 2. 聊天气泡按钮往上挪 */
+    #dify-chatbot-bubble-button {
+        left: 15px !important;
+        bottom: 66px !important; /* 从 20px 增加到 80px，确保在导航栏上方 */
+        z-index: 999999 !important;
+    }
+        .dify-cover-wrapper {
+        bottom: 65px; 
+    }
+    .dify-cover-wrapper img {
+        width: 120px; 
+    }
+}
+</style>
+
+ 
+
+
+</body>
+</html>
