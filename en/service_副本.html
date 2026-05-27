@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Japan Chauffeur Service for Travel Agents — 2026 Partner Guide｜ASOBI Co., Ltd.</title>
+<meta name="description" content="A practical 2026 guide for travel agents, DMCs and concierge desks partnering with a Japan private chauffeur operator — vehicles, drivers, pricing, vetting, and how to book.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/follow.css">
+<style>
+    :root{
+      /* ✅ 原 service 基调 */
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --muted:#666;
+      --line:rgba(0,0,0,.08);
+      --ph:#d9d9d9;
+      --max:664px;
+      --transition: 0.7s cubic-bezier(.2,1,.3,1);
+      --w-screen: 664px;
+
+      /* ✅ partner-guide 文章排版用变量 */
+      --ink:#1a1a1a;
+      --ink-soft:rgba(0,0,0,.78);
+      --ink-mute:rgba(0,0,0,.50);
+      --accent:#8B1A1A;       /* 克制的朱色 */
+      --warm:#f5f1e9;          /* 米色照片占位底 */
+      --hair:rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+    img{max-width:100%; display:block;}
+    a{color:inherit; text-decoration:none;}
+
+    /* 中间白框（service 原版） */
+    .stage{min-height:100vh; display:flex; justify-content:center; align-items:flex-start; gap:10px; padding:0 18px 60px;}
+    .paper{
+      width:min(var(--max),100%);
+      background:var(--paper);
+      min-height:100vh;
+      border-radius:10px 10px 0 0;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    /* 顶部 */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px;
+    }
+    .brand{font-weight:700; letter-spacing:.02em; font-size:16px;}
+    .nav{display:flex; gap:18px; font-size:13px; color:var(--muted);}
+
+    /* 顶部大图 */
+    .hero-ph{height:46vh; min-height:320px; background:var(--ph);}
+    .hero-ph.hero-smile{
+      position:relative;
+      overflow:hidden;
+      background-image:url("images/hero.jpg");
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph.hero-smile .smile-wave{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:100%;
+      height:90px;
+      display:block;
+      pointer-events:none;
+    }
+    .hero-ph.hero-smile .smile-wave path{ fill: var(--paper); }
+    @media (max-width:560px){
+      .hero-ph{ min-height:260px; }
+      .hero-ph.hero-smile .smile-wave{ height:72px; }
+      .paper{ border-radius:0; }
+      .topbar-inner{ padding:14px; }
+    }
+
+    /* =========================
+       ✅ Article — 日式呼吸感（来自 partner-guide）
+       ========================= */
+
+    .article-shell{
+      padding: 64px 36px 12px;
+    }
+    .article-eyebrow{
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 24px;
+    }
+    .article-title{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.38;
+      color: var(--ink);
+      margin: 0 0 28px;
+      letter-spacing: -0.005em;
+    }
+    .article-lede{
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+      font-weight: 300;
+    }
+    .article-meta{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      font-size: 11.5px;
+      color: var(--ink-mute);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .article-meta span.dot{
+      width:3px; height:3px; border-radius:50%;
+      background: var(--ink-mute);
+      display:inline-block;
+    }
+
+    .article-divider{
+      border: 0;
+      height: 1px;
+      background: var(--hair);
+      margin: 56px 22% 56px;
+    }
+
+    .article-body{
+      padding: 0 36px;
+      color: var(--ink);
+    }
+    .article-body p{
+      font-size: 15px;
+      line-height: 1.95;
+      margin: 0 0 22px;
+      color: var(--ink-soft);
+    }
+    .article-body p:last-child{ margin-bottom: 0; }
+    .article-body strong{ color: var(--ink); font-weight: 600; }
+    .article-body em{ font-style: italic; color: rgba(0,0,0,.65); }
+
+    .article-body h2{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 64px 0 24px;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      position: relative;
+    }
+    .article-body h2::before{
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 18px;
+      opacity: 0.85;
+    }
+
+    .article-body ul{
+      padding-left: 0;
+      list-style: none;
+      margin: 0 0 28px;
+    }
+    .article-body li{
+      font-size: 15px;
+      line-height: 1.85;
+      margin-bottom: 14px;
+      color: var(--ink-soft);
+      padding-left: 22px;
+      position: relative;
+    }
+    .article-body li::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 8px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    /* 照片：跨越 paper 全宽 */
+    .photo-frame{
+      margin: 64px -36px;
+      position: relative;
+      background: var(--warm);
+      border-top: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+    }
+    .photo-frame--wide{ aspect-ratio: 16/9; }
+    .photo-frame--portrait{ aspect-ratio: 4/3; }
+    .photo-frame--narrow{ aspect-ratio: 21/9; }
+
+    /* Pull quote */
+    .pull-quote{
+      margin: 52px 0;
+      padding: 0 0 0 22px;
+      border-left: 2px solid var(--accent);
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    /* FAQ */
+    .faq-section{
+      margin-top: 72px;
+      padding: 64px 36px 0;
+      border-top: 1px solid var(--hair);
+    }
+    .faq-section h2{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 32px;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .faq-section h2::before{
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 18px;
+      opacity: 0.85;
+    }
+    .faq-item{
+      margin: 0 0 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--hair);
+    }
+    .faq-item:last-child{ border-bottom: 0; padding-bottom: 0; }
+    .faq-q{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 12px;
+      line-height: 1.5;
+    }
+    .faq-a{
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* Article CTA — 深色块 */
+    .article-cta{
+      margin: 72px 0 0;
+      padding: 56px 36px 60px;
+      background: #1b1b1b;
+      text-align: center;
+    }
+    .article-cta__eyebrow{
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 18px;
+    }
+    .article-cta__title{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #f0ebe0;
+      margin: 0 0 18px;
+      letter-spacing: -0.005em;
+    }
+    .article-cta__body{
+      font-size: 14px;
+      line-height: 1.85;
+      color: rgba(240,235,224,.7);
+      max-width: 440px;
+      margin: 0 auto 28px;
+    }
+    .article-cta__button{
+      display: inline-block;
+      padding: 13px 30px;
+      background: #f0ebe0;
+      color: #1b1b1b;
+      text-decoration: none;
+      font-size: 12.5px;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 999px;
+      transition: transform .2s ease;
+    }
+    .article-cta__button:hover{ transform: translateY(-1px); }
+
+    /* About us */
+    .author-block{
+      padding: 56px 36px 60px;
+      border-top: 1px solid var(--hair);
+      margin-top: 0;
+    }
+    .author-eyebrow{
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 0 0 24px;
+    }
+    .author-name{
+      font-family: "Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","Georgia",serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 16px;
+      letter-spacing: -0.005em;
+      line-height: 1.4;
+    }
+    .author-bio{
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 560px;
+    }
+
+    /* Back to top — 极简日式 */
+    .back-to-top-wrap{
+      text-align: center;
+      padding: 48px 36px 56px;
+      background: #fff;
+    }
+    .back-to-top-wrap a{
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--ink-mute);
+      transition: color 0.3s ease;
+      padding: 12px 18px;
+    }
+    .back-to-top-wrap a:hover{ color: var(--accent); }
+    .back-to-top-wrap .arrow{
+      width: 22px;
+      height: 22px;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .back-to-top-wrap a:hover .arrow{ transform: translateY(-4px); }
+    .back-to-top-wrap .label{
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* 移动端 */
+    @media (max-width: 700px){
+      .article-shell{ padding: 48px 26px 6px; }
+      .article-title{ font-size: 24px; }
+      .article-lede{ font-size: 15px; }
+      .article-body{ padding: 0 26px; }
+      .article-body h2{ font-size: 19px; margin: 52px 0 22px; }
+      .article-body p, .article-body li{ font-size: 14.5px; }
+      .photo-frame{ margin: 52px -26px; }
+      .article-divider{ margin: 44px 12% 44px; }
+      .faq-section{ padding: 52px 26px 0; margin-top: 56px; }
+      .article-cta{ padding: 48px 24px 52px; margin-top: 60px; }
+      .article-cta__title{ font-size: 19px; }
+      .author-block{ padding: 44px 26px 48px; }
+      .author-name{ font-size: 18px; }
+      .back-to-top-wrap{ padding: 40px 26px 48px; }
+    }
+
+    /* SNS 区 */
+    .sns-guide{
+      padding: 64px 18px 80px;
+      background: #fff;
+      text-align: center;
+      border-top: 1px solid var(--hair);
+    }
+    .sns-guide .sec-title-block{ margin-bottom: 36px; }
+    .bottom-grid{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .sq-small.sq-img{
+      width: 100% !important;
+      height: auto !important;
+      background: none;
+      aspect-ratio: 1 / 1;
+    }
+    .sq-small.sq-img img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    @media (max-width: 1000px){
+      .bottom-grid{
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 320px;
+        gap: 14px;
+      }
+    }
+    @media (max-width: 480px){
+      .bottom-grid{ max-width: 260px; }
+      .sns-guide{ padding: 56px 18px 100px; }
+    }
+
+    /* Footer */
+    .site-footer-bar{
+      margin-top: 0;
+      padding: 28px 18px 34px;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid rgba(0,0,0,.08);
+      text-align: center;
+      font-size: 13px;
+      color: rgba(0,0,0,.7);
+    }
+    .site-footer-bar .footer-links{
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+    }
+    .site-footer-bar .footer-links li{ margin: 0; }
+    .site-footer-bar .footer-links a{
+      color: rgba(0,0,0,.75);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    .site-footer-bar .footer-links a:hover{ text-decoration: underline; }
+    .site-footer-bar .copyright{
+      font-size: 12px;
+      color: rgba(0,0,0,.55);
+      letter-spacing: .04em;
+    }
+
+    /* 给手机端底部导航预留空间 */
+    @media (max-width: 1000px){
+      .paper{ padding-bottom: 110px; }
+    }
+
+    /* --- 电脑端 1001px 以上的偏移逻辑（service 原版保留） --- */
+    @media (min-width: 1001px){
+      .paper{
+        transform: translateX(-140px);
+      }
+    }
+    @media (min-width: 1001px){
+      .floating-nav-wrapper{
+        transform: translateX(
+          calc((var(--w-screen) / 2) + 18px - 140px)
+        ) !important;
+      }
+    }
+</style>
+</head>
+<body><img alt="" aria-hidden="true" class="bg-car" src="youce.png"/>
+<div class="stage">
+<main class="paper">
+<header class="topbar">
+  <div class="topbar-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <div class="brand" style="font-weight: 800; font-size: 20px;">ASOBI Co., Ltd.</div>
+    </a>
+
+    <nav aria-label="top" style="display: flex; align-items: center;">
+
+      <a href="../service.html" style="text-decoration: none; color: #ff5500; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        日本語
+      </a>
+
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit; margin-right: 15px;"><span>About Us</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+    </nav>
+  </div>
+</header>
+
+<section aria-label="Hero" class="hero-ph hero-smile">
+<svg aria-hidden="true" class="smile-wave" preserveAspectRatio="none" viewBox="0 0 1440 120">
+<path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+</svg>
+</section>
+
+<!-- ✅ ARTICLE — Partner Guide 正文 -->
+<article lang="en">
+  <header class="article-shell">
+    <div class="article-eyebrow">Partner Guide · 旅行業パートナー向け</div>
+    <h1 class="article-title">Japan Chauffeur Service for Travel Agents: The Complete 2026 Partner Guide</h1>
+    <p class="article-lede">If you sell Japan, your clients expect more than a taxi at the curb. They expect a uniformed driver waiting at arrivals with their name on a printed sign, a spotless vehicle with bottled water, and a route that gets them to The Aman or The Peninsula on time even if their flight slipped two hours. Sourcing that experience reliably — for client after client, prefecture after prefecture — is the quiet part of a luxury Japan program that makes or breaks repeat bookings.</p>
+    <div class="article-meta">
+      <span>For travel agents · DMCs · concierge desks</span>
+      <span class="dot"></span>
+      <span>10 min read</span>
+    </div>
+  </header>
+
+  <hr class="article-divider">
+
+  <div class="article-body">
+    <p>This guide is written for travel agents, DMCs, tour operators, and concierge desks who want a working understanding of how Japan chauffeur service actually operates, what to look for in a B2B partner, and how to price and present private transport to high-end clients in 2026.</p>
+
+    <h2>Why private chauffeur service is the quiet hero of a Japan program</h2>
+
+    <p>Japan has the world's most reliable trains. So why book a chauffeur at all?</p>
+
+    <p>The honest answer is that the trains are reliable <em>for confident, mobile travelers traveling light</em>. Most luxury clients are neither. They are arriving from a 12-hour flight with four suitcases, two carry-ons, a stroller, and a four-year-old. They are couples celebrating a 40th anniversary who do not want to negotiate the JR ticket gate at Shinagawa on day one. They are executives whose entire perception of "Japan" will be shaped by the 90 minutes between Haneda and the hotel lobby. A private chauffeur removes friction at exactly the moments when friction matters most.</p>
+
+    <p>For travel agents, this also means transport stops being a complaint generator. Missed trains, taxi queues at Kyoto Station, and rideshare apps that don't work without a Japanese phone number are common reasons clients call you from the road. None of that happens when a chauffeur is waiting.</p>
+  </div>
+
+  <!-- PHOTO 1 -->
+  <figure class="photo-frame photo-frame--wide">
+    <img src="images/v20_115 2.png" alt="ASOBI chauffeur — vehicle at a hotel porte-cochère" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+  </figure>
+
+  <div class="article-body">
+    <h2>What "chauffeur service" actually includes in Japan</h2>
+
+    <p>The word "limo" gets used loosely. In Japan, a serious chauffeur operator offers a tightly defined product:</p>
+
+    <p>A <strong>uniformed, vetted driver</strong> who is licensed for hire (a green-plate vehicle, not a private white-plate car illegally operating as a taxi). A <strong>late-model vehicle</strong> — typically a Toyota Alphard or Toyota Granace for couples and small families, a Toyota Alphard or Toyota HiAce for groups of up to six with luggage, and a HiAce Grand Cabin or mini-coach for larger parties.</p>
+
+    <p><strong>Meet-and-greet at arrivals</strong> with a printed name sign, including a flight-tracking guarantee so the driver is there even when the flight is early or late. <strong>Bilingual support</strong> — typically an English-speaking driver, or a Japanese-speaking driver with a dedicated English-speaking dispatcher reachable by phone or WhatsApp. <strong>Itinerary flexibility</strong> — by-the-hour charter, point-to-point transfer, or multi-day touring with the same driver and vehicle.</p>
+
+    <p>What it is <em>not</em>: a regular taxi booked through an app. The difference matters for pricing predictability (fixed charter rates instead of a running meter during waits), guaranteed vehicle quality, and the premium client experience.</p>
+
+    <h2>The B2B partnership models, briefly</h2>
+
+    <p>Most travel agents work with Japan chauffeur operators under one of three models. Pick the partner whose model matches how you want to sell.</p>
+
+    <p><strong>Net rate + agent markup.</strong> The operator quotes you a net (wholesale) rate and you mark it up to your client. This gives agents the most pricing control and is the standard for luxury operators selling FIT programs. Margins typically sit between 15% and 25%.</p>
+
+    <p><strong>Commission model.</strong> The operator publishes a public retail rate and pays you a commission (often 10–15%) on confirmed bookings. Easier for one-off bookings; less attractive at scale because the client sees the same price they would see direct.</p>
+
+    <p><strong>Retainer / dedicated allocation.</strong> For agencies doing high volume — say, more than 30 vehicle-days per month in Japan — some operators will pre-allocate vehicles and drivers, with priority confirmation and a small monthly retainer. This is how the strongest DMCs and luxury hotel concierges operate during cherry blossom and autumn peaks.</p>
+
+    <p>For most growing programs, the net-rate model is the right starting point. It is transparent, easy to invoice, and lets you bundle transport into a package without exposing the supplier.</p>
+  </div>
+
+  <!-- PHOTO 2 -->
+  <figure class="photo-frame photo-frame--wide">
+    <img src="images/grandhiace2.png" alt="ASOBI chauffeur — vehicle at kyoto" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+  </figure>
+
+  <div class="article-body">
+    <h2>How to vet a Japan chauffeur partner</h2>
+
+    <p>Anyone can put a website up and claim to run "luxury Japan transport." The questions below quickly separate operators with real fleets and real drivers from resellers passing your booking down a chain of subcontractors.</p>
+
+    <p>1.Ask to see the <strong>operator's license number</strong> (the <em>ippan jōyō ryokaku jidōsha unsō jigyō</em> permit, often abbreviated 一般乗用旅客自動車運送事業 on Japanese government documents). Legitimate operators publish it; resellers cannot.</p>
+    <p>2.Ask <strong>who actually owns the vehicles</strong> — operators with their own fleet have consistent presentation; brokers send whatever happens to be available, which is why your client gets a tired Alphard with a stale air freshener on day one and a sparkling new Granace on day three.</p>
+    <p>3.Ask for <strong>driver tenure and English assessment</strong> — how long is the average driver on staff, and how is English ability evaluated and graded internally? Operators that can't answer this are guessing.</p>
+    <p>4.Ask about <strong>flight tracking and delay policy</strong> — what happens if the client's flight is 4 hours late, and is there an extra charge?</p>
+    <p>5.Ask about <strong>insurance coverage</strong> — passenger liability minimums and proof of commercial coverage.</p>
+    <p>6.Ask how they handle <strong>luggage limits in the Alphard vs. Granace</strong> — a partner who has clearly thought through "2 adults + 2 large hard-shells + 2 carry-ons + stroller = which vehicle" is a partner who has handled real luxury clients.</p>
+
+    <div class="pull-quote">
+      Do a test booking on your own account before you ever sell it to a client. One quiet airport transfer tells you more than a hundred slides in a sales deck.
+    </div>
+
+    <h2>Fleet basics: matching the vehicle to the client</h2>
+
+    <p>Vehicle choice is half the product. The defaults to internalize:</p>
+
+    <p>The <strong>Toyota Alphard Executive Lounge</strong> is the workhorse of Japanese chauffeur service — sliding doors, captain's chairs in the second row, surprisingly generous luggage space behind the third row. Two adults plus two large suitcases is comfortable; two adults plus a child plus three suitcases is still fine.</p>
+
+    <p>The <strong>Toyota Granace</strong> is the step-up for ultimate luxury: offering massive luggage space paired with an executive, hotel-suite finish inside. Specify it for VIP business hosting, elder family members, or high-end golf trips where premium space is a priority.</p>
+
+    <p>For <strong>groups of seven or more</strong>, move to a HiAce Grand Cabin (9–10 passengers, more austere) or a small coach.</p>
+  </div>
+
+  <!-- PHOTO 3 -->
+  <figure class="photo-frame photo-frame--wide">
+    <img src="images/alphard2.png" alt="ASOBI chauffeur — vehicle at a hotel porte-cochère" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+  </figure>
+
+  <div class="article-body">
+    <h2>Pricing your Japan chauffeur product</h2>
+
+    <p>Indicative 2026 net rates (you'll quote higher to your client; these are wholesale ranges from established Tokyo operators):</p>
+
+    <ul>
+      <li><strong>Half-day charter</strong> (4 hours, within Tokyo 23 wards), Alphard: ¥45,000–¥60,000</li>
+      <li><strong>Full-day charter</strong> (8 hours, within Greater Tokyo), Alphard: ¥75,000–¥95,000</li>
+      <li><strong>Haneda ↔ central Tokyo transfer</strong>, Alphard: ¥22,000–¥30,000</li>
+      <li><strong>Narita ↔ central Tokyo transfer</strong>, Alphard: ¥38,000–¥55,000</li>
+      <li><strong>Tokyo → Kyoto one-way</strong> (highway tolls included), Alphard: ¥160,000–¥200,000</li>
+      <li><strong>English-speaking driver upgrade</strong>: typically a 10–15% premium where available</li>
+    </ul>
+
+    <p>Two pricing notes that will save you angry emails: <strong>overtime is real</strong> (typically billed in 30-minute increments once a charter runs past contracted hours), and <strong>highway tolls and parking are usually passed through at cost</strong> rather than included. Build both into your client quote so the final invoice doesn't surprise anyone.</p>
+
+    <h2>What to put on your own quote to the client</h2>
+
+    <p>A clean client-facing quote includes the vehicle model, maximum passenger and luggage capacity, included hours, driver language, meet-and-greet details, and what is <em>excluded</em> (parking inside ryokan grounds, entry fees the driver pays on behalf of the client, expressway tolls beyond the standard route). Make exclusions explicit. Luxury clients accept extras; they hate surprises.</p>
+
+    <p>Where you have it, include a <strong>photo of a representative vehicle interior</strong> and the line <em>"driver and vehicle confirmed 48 hours before arrival, with name and mobile contact."</em> This single sentence does more for conversion than any amount of brand copy.</p>
+
+    <h2>The conversations that close partnerships</h2>
+
+    <p>When you reach out to a Japan chauffeur operator as a potential partner, the first email that gets taken seriously usually includes three things: a one-line description of your agency (where you're based, what segment of clients you serve), an estimate of monthly vehicle-days you expect to book in Japan during a typical and a peak month, and a request for a <em>specific</em> sample quote — not "send me your rate sheet," but "what would a 7-day Tokyo–Hakone–Kyoto program with a Toyota Granace and English-speaking driver look like for 2 adults arriving HND on November 12?"</p>
+
+    <p>Vendors quote that email accurately within 24 hours. They send a sales template to "please share your destinations of interest" emails. You can tell the difference, and so can they.</p>
+  </div>
+
+  <!-- PHOTO 4 -->
+  <figure class="photo-frame photo-frame--wide">
+    <img src="images/sakura.jpg" alt="ASOBI chauffeur — vehicle at a hotel porte-cochère" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+  </figure>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Do Japan chauffeur operators offer English-speaking drivers as standard?</p>
+      <p class="faq-a">No. Truly bilingual drivers are a minority of the workforce — most operators have 10–25% of their fleet covered by English-confident drivers. Always request English-speaking explicitly at the time of booking, and expect a small surcharge or limited availability during cherry blossom and koyo (autumn foliage) peaks.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Can the same chauffeur stay with our client across multiple cities?</p>
+      <p class="faq-a">Yes. Multi-day "same driver, same vehicle" charters are common, including overnight stays in Hakone, Kyoto, or Kanazawa. The operator covers the driver's accommodation and per diem, billed through to you at a published rate (typically ¥15,000–¥25,000 per overnight).</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Is private chauffeur faster than the shinkansen for Tokyo–Kyoto?</p>
+      <p class="faq-a">No — the shinkansen is faster by roughly an hour door-to-door. Private chauffeur wins on door-to-door comfort, luggage handling, mid-route stops (Hakone, Nagoya), and the ability to start or end at addresses far from a major station. For pure transit, sell the train. For experience, sell the car.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How far in advance should we book?</p>
+      <p class="faq-a">For standard dates, 2–3 weeks is comfortable. For cherry blossom (late March through mid-April) and autumn foliage (mid-November through early December), book a minimum of 6–8 weeks out for the Granace and larger group vehicles, longer for popular Friday and Saturday slots.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What's the cancellation policy travel agents should expect?</p>
+      <p class="faq-a">Industry standard is free cancellation up to 72 hours before pickup, 50% within 72 hours, 100% within 24 hours, with longer windows during peak season. Build matching terms into your own client agreements so you are never absorbing supplier penalties personally.</p>
+    </div>
+  </section>
+
+  <!-- About us -->
+  <section class="author-block">
+    <div class="author-eyebrow">About us</div>
+    <p class="author-name">ASOBI Co., Ltd.</p>
+    <p class="author-bio">A Japan-based, licensed private chauffeur operator. We work directly with travel agents, DMCs, and luxury concierge desks — own team, own fleet, no subcontracting. All drivers hold the Japanese Class-2 operating license with mandatory physical and psychological screening.</p>
+  </section>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="article-cta__eyebrow">Become a partner</div>
+    <h2 class="article-cta__title">Run one trial booking on us.</h2>
+    <p class="article-cta__body">We'd rather have you experience the product than read another deck. Tell us about an upcoming Japan program and we'll come back with a confirmed quote within one business day.</p>
+    <a class="article-cta__button" href="mailto:cheng@asobi.ltd?subject=Travel%20Agent%20Partnership%20Inquiry">Get in touch</a>
+  </div>
+</article>
+
+<!-- Back to top — 极简箭头 -->
+<div class="back-to-top-wrap">
+  <a href="#top" aria-label="Back to top">
+    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4 L12 22 M5 11 L12 4 L19 11" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="label">Back to top</span>
+  </a>
+</div>
+
+<!-- SNS -->
+<section class="sns-guide"><div class="sec-title-block" style="margin:40px 0 20px;">
+<div class="sec-en" style="font-size:20px;">Contact Us</div>
+<div style="font-size:14px; color:#666;"></div>
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.ltd">
+      <img src="images/contact-mail.png" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat-qr.png" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+</div></section>
+
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href=" index.html">Home</a></li>
+        <li><a href=" service.html">Our Services</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
+        <li><a href="about_asobi.html">Company Profile</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    </div>
+</footer></main>
+
+    <!-- right floating nav -->
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="Contact us via LINE" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
+<img alt="Contact us via Email" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Follow us on Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+</div>
+
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {},
+  systemVariables: {},
+  userVariables: {},
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+  /* --- Dify 聊天机器人左侧固定位 --- */
+#dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 1000000 !important;
+}
+
+#dify-chatbot-bubble-window {
+    position: fixed !important;
+    width: 24rem !important;
+    height: 40rem !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 90px !important;
+    z-index: 1000001 !important;
+}
+
+/* --- 左下角装饰图微调 --- */
+.dify-cover-wrapper img {
+        width: 99px !important;
+        height: auto !important;
+        opacity: 0.8 !important;
+    }
+
+    .dify-cover-wrapper {
+        left: -5px !important;
+        bottom: 65px !important;
+    }
+
+/* 移动端适配 */
+@media (max-width: 1000px) {
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important;
+        height: 65vh !important;
+    }
+
+    #dify-chatbot-bubble-button {
+        left: 15px !important;
+        bottom: 66px !important;
+        z-index: 999999 !important;
+    }
+        .dify-cover-wrapper {
+        bottom: 65px;
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+    }
+}
+</style>
+
+</body>
+</html>
