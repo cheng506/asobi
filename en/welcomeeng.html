@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us | ASOBI Co., Ltd.</title>
+
+  <!-- ✅ 统一基础 -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+
+  <style>
+    :root{
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --muted:rgba(0,0,0,.62);
+      --line:rgba(0,0,0,.08);
+      --max:664px;
+      --accent:#d92121;          /* ロゴの赤丸に合わせるアクセント */
+      --ink-dim:rgba(0,0,0,.72);
+    }
+
+    body{ margin:0; background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+    /* 跟你现有 follow/detail 的 stage/paper 结构靠拢 */
+    /* ✅ 修正 stage：让主体和导航作为一个整体居中 */
+.stage {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; /* 恢复居中 */
+  gap: 12px;               /* 白色纸张与导航栏的固定间距 */
+  padding: 0 18px 60px;
+  position: relative;
+  left: 0;                 /* 移除之前的偏移 */
+}
+
+/* ✅ 修正 paper：移除 auto margin，让它在 flex 流中排队 */
+.paper {
+  flex-shrink: 0;           /* 防止宽度被挤压 */
+  width: min(var(--max), 100%);
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  overflow: hidden;
+  margin: 0;                /* 必须改为0，否则 nav 无法贴合 */
+}
+
+ 
+
+
+    /* 顶部（轻、干净） */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar .brand{ font-weight:700; letter-spacing:.5px; }
+    .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
+
+    /* ✅ Hero：保留“你现在的 hero + smile wave” */
+    .hero-ph{
+      height:46vh; min-height:320px;
+      background: #d9d9d9;
+      position: relative;
+      background-image:url("images/hero.jpg"); /* 你已有的hero图 */
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph .smile-wave{
+      position:absolute;
+      left:0; bottom:-1px;
+      width:100%;
+      height:90px;
+      pointer-events:none;
+    }
+    .hero-ph .smile-wave path{ fill:#fff; }
+
+     
+ 
+ 
+
+    /* 手机：更窄更松 */
+    @media (max-width: 1000px){
+      .stage{ display:block; padding: 0 12px 60px; }
+      .paper{ border-radius: 0; width:100%; max-width: 520px; }
+     
+    }
+
+    /* ✅ 手机底部三色导航预留空间（不挡内容） */
+    @media (max-width: 1000px){
+      .paper{ padding-bottom: 110px; }
+    }
+    @media (min-width: 1001px){
+  :root{
+    --paper-shift: 140px;
+  }
+
+}
+
+/* ✅ 右侧三色导航：作为第二列，贴着 paper */
+/* =========================
+   Desktop：nav 贴白色纸右侧
+   ========================= */
+.floating-nav-wrapper{
+  
+
+  margin-left: 12px;        /* ✅ 贴着 paper */
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 手机端：底部固定（你 follow 也是这个思路） */
+@media (max-width: 1000px){
+  .floating-nav-wrapper{
+    
+    left: 0;
+    
+    bottom: 0;
+    top: auto;
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+  }
+}
+/* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
+@media (min-width: 1001px) {
+  .floating-nav-wrapper {
+    position: sticky !important; 
+    top: 528px !important;       /* 距离视口顶部的距离 */
+    left: auto !important;
+    margin-left: 0 !important;   /* 靠 gap 控制间距 */
+    transform: none !important;  /* 必须清除 base/follow 里的位移 */
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation: 
+  carFloat 9s ease-in-out infinite;
+}
+/* =========================
+   Footer（底部版权栏）
+   ========================= */
+
+.site-footer-bar{
+  margin-top: 64px;
+  padding: 28px 18px 34px;
+  background: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,.7);
+}
+
+/* 链接列表 */
+.site-footer-bar .footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.site-footer-bar .footer-links li{
+  margin: 0;
+}
+
+.site-footer-bar .footer-links a{
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bar .footer-links a:hover{
+  text-decoration: underline;
+}
+
+/* 版权行 */
+.site-footer-bar .copyright{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  letter-spacing: .04em;
+}
+/* 文章の距離感デザイン */
+/* ✅ 1. 容器：确保背景和间距统一 */
+.sns-guide {
+  padding: 80px 18px 120px; /* 底部多留点空间给手机导航 */
+  background: #fff;
+  text-align: center;
+}
+
+.sns-guide .sec-title-block {
+  margin-bottom: 40px;
+}
+
+/* ✅ 2. 网格：核心自适应逻辑 */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 电脑端：4列 */
+  gap: 18px;                             /* 间距 */
+  max-width: 560px;                      /* 限制整体宽度，保持精致 */
+  margin: 0 auto;
+}
+
+/* ✅ 3. 项目：去掉固定宽高，改用自适应比例 */
+.sq-small.sq-img {
+  width: 100% !important;   /* 覆盖 follow.css 的 188px */
+  height: auto !important;  /* 覆盖 follow.css 的 188px */
+  background: none;
+  aspect-ratio: 1 / 1;      /* 保持正方形 */
+}
+
+.sq-small.sq-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* 确保图片填满格子 */
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* ✅ 4. 响应式：针对平板和手机切换布局 */
+@media (max-width: 1000px) {
+  .bottom-grid {
+    grid-template-columns: repeat(2, 1fr); /* 1000px以下变 2x2 */
+    max-width: 360px;                      /* 手机端收窄 */
+    gap: 14px;                             /* 间距稍微调小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-grid {
+    max-width: 280px;                      /* 小屏手机更紧凑 */
+  }
+  .sns-guide {
+    padding: 60px 18px 100px;              /* 缩减间距 */
+  }
+}
+
+
+    /* =========================
+       Welcome / Intro セクション
+       ========================= */
+    .intro{
+      padding: 56px 40px 24px;
+    }
+    .intro h1{
+      font-size: clamp(28px, 4.2vw, 38px);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin: 0 0 18px;
+      line-height: 1.15;
+    }
+    .accent-bar{
+      display:block;
+      width: 96px;
+      height: 3px;
+      background: var(--accent);
+      border: 0;
+      margin: 0 0 28px;
+    }
+    .accent-bar.center{ margin: 22px auto 0; }
+    .intro p.lead{
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--ink-dim);
+      margin: 0;
+      text-wrap: pretty;
+    }
+
+    /* =========================
+       セクション見出し（中央）
+       ========================= */
+    .section-title{
+      padding: 56px 24px 8px;
+      text-align: center;
+    }
+    .section-title h2{
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 800;
+      margin: 0 0 10px;
+      letter-spacing: -.005em;
+    }
+    .section-title .sub{
+      font-size: 14px;
+      color: var(--ink-dim);
+      margin: 0 auto;
+      max-width: 460px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       サービスカードグリッド
+       ========================= */
+    .service-grid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 22px;
+      padding: 36px 40px 56px;
+    }
+    .service-card{
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .service-card .thumb{
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(135deg,
+          #efe9df 0 12px,
+          #e7e0d3 12px 24px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .service-card .thumb .ph-label{
+      position: absolute;
+      inset: auto 10px 10px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.42);
+    }
+    .service-card .pill{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      background: rgba(20,20,20,.78);
+      color:#fff;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .02em;
+      padding: 10px 26px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .service-card h3{
+      font-size: 17px;
+      font-weight: 800;
+      margin: 4px 0 0;
+      line-height: 1.35;
+    }
+    .service-card p{
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--ink-dim);
+      margin: 0;
+      text-wrap: pretty;
+    }
+
+    @media (max-width: 560px){
+      .intro{ padding: 40px 24px 16px; }
+      .service-grid{
+        grid-template-columns: 1fr;
+        padding: 28px 24px 40px;
+        gap: 26px;
+      }
+      .service-card .thumb{ aspect-ratio: 4 / 3; }
+    }
+
+    /* =========================
+       How It Works — ステップ
+       ========================= */
+    .how-it-works{
+      padding: 56px 40px 64px;
+      background: #f9f8f6;
+    }
+    .how-it-works .hiw-inner{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 40px;
+      align-items: center;
+      max-width: 100%;
+    }
+    .how-it-works .hiw-steps{
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .hiw-step{
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      position: relative;
+    }
+    /* 竖线：步骤之间 */
+    .hiw-step:not(:last-child)::after{
+      content:'';
+      position: absolute;
+      left: 19px;
+      top: 42px;
+      width: 2px;
+      bottom: 0;
+      background: var(--line);
+    }
+    .hiw-step .num{
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+    .hiw-step.active .num{
+      background: var(--accent);
+      color: #fff;
+    }
+    .hiw-step:not(.active) .num{
+      background: #fff;
+      color: #999;
+      border: 2px solid #ddd;
+    }
+    .hiw-step .body{
+      padding-bottom: 36px;
+    }
+    .hiw-step .body h3{
+      font-size: 17px;
+      font-weight: 800;
+      margin: 8px 0 8px;
+      color: var(--text);
+    }
+    .hiw-step.active .body h3{
+      color: var(--accent);
+    }
+    .hiw-step .body p{
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--ink-dim);
+      margin: 0;
+      text-wrap: pretty;
+    }
+    .hiw-step .step-icon{
+      font-size: 20px;
+      margin-right: 4px;
+    }
+    .hiw-img{
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background:
+        repeating-linear-gradient(135deg,
+          #ded9d2 0 14px,
+          #cac4bc 14px 28px);
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.10);
+    }
+    .hiw-img .ph-label{
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.38);
+    }
+
+    @media (max-width: 660px){
+      .how-it-works{ padding: 40px 24px 48px; }
+      .how-it-works .hiw-inner{ grid-template-columns: 1fr; }
+      .hiw-img{ aspect-ratio: 16/9; }
+    }
+
+    /* =========================
+       Vehicle Lineup
+       ========================= */
+    .vehicle-section{
+      /* 各車型のブロック */
+    }
+    .vehicle-banner{
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 28px 24px;
+    }
+    .vehicle-banner h2{
+      font-size: clamp(20px, 3.2vw, 26px);
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .vehicle-banner .rec{
+      font-style: italic;
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      margin: 0;
+      font-family: Georgia, serif;
+    }
+    .vehicle-photos{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 24px 24px 0;
+      background: #fff;
+    }
+    .vehicle-photos .vph{
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(135deg,
+          #e8e4de 0 12px,
+          #d8d3cb 12px 24px);
+      display: flex;
+      align-items: flex-end;
+      padding: 8px;
+    }
+    .vehicle-photos .vph .ph-label{
+      font-family: ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+      font-size: 9px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,.36);
+      line-height: 1.3;
+    }
+    .vehicle-prices{
+      background: #fff;
+      padding: 28px 24px 40px;
+    }
+    .vehicle-prices .price-row{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .vehicle-prices .price-col h4{
+      font-size: 14px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      line-height: 1.4;
+    }
+    .vehicle-prices .price-col .amount{
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+    .vehicle-prices .footnote{
+      text-align: center;
+      font-size: 13px;
+      color: var(--ink-dim);
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    /* 車型ブロック間の区切り */
+    .vehicle-section + .vehicle-section{
+      margin-top: 0;
+    }
+
+    @media (max-width: 480px){
+      .vehicle-photos{ gap: 6px; padding: 16px 16px 0; }
+      .vehicle-prices{ padding: 20px 16px 32px; }
+      .vehicle-prices .price-col h4{ font-size: 13px; }
+      .vehicle-prices .price-col .amount{ font-size: 18px; }
+    }
+
+    /* =========================
+       Q&A アコーディオン（index.html と統一）
+       ========================= */
+    .qa-area{
+      background: #fff;
+      padding: 56px 40px 48px;
+    }
+    .qa-list{ margin-bottom: 12px; }
+    .qa-row{ border-bottom: 1px solid #ddd; }
+    .qa-trigger{
+      width: 100%;
+      padding: 22px 0;
+      text-align: left;
+      background: none;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      line-height: 1.45;
+      font-family: inherit;
+    }
+    .qa-trigger .qa-icon{
+      flex-shrink: 0;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--accent);
+      transition: transform .3s ease;
+      line-height: 1;
+    }
+    .qa-trigger.open .qa-icon{
+      transform: rotate(45deg);
+    }
+    .qa-answer{
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink-dim);
+    }
+    .qa-answer-pad{ padding-bottom: 22px; }
+
+    @media (max-width: 560px){
+      .qa-area{ padding: 40px 24px 36px; }
+      .qa-trigger{ font-size: 15px; }
+    }
+
+    /* back-to-top ラッパー */
+    .back-to-top-wrap{
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+    .back-to-top-wrap img{ width: 120px; height:auto; opacity:.85; }
+    .back-to-top-wrap a:hover img{ opacity: 1; }
+
+    /* Vehicle detail button */
+    .vehicle-detail-btn {
+      display: block;
+      margin: 18px auto 0;
+      width: fit-content;
+      padding: 10px 28px;
+      border: 2px solid #111;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-decoration: none;
+      color: #111;
+      transition: background .2s, color .2s;
+    }
+    .vehicle-detail-btn:hover {
+      background: #111;
+      color: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- 右侧装饰车（保留统一） -->
+  <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+
+  <div class="stage">
+    <main class="paper" role="main">
+
+      <header class="topbar">
+        <div class="brand">ASOBI Co., Ltd.</div>
+        <nav aria-label="top">
+          <a href="company.html">About Us</a>
+          <a href="news.html">News</a>
+        </nav>
+      </header>
+
+      <!-- ✅ HERO（保留） -->
+      <section class="hero-ph" aria-label="Hero">
+        <svg class="smile-wave" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1440 120">
+          <path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+        </svg>
+      </section>
+
+      <!-- ✅ Welcome / イントロ -->
+      <section class="intro" aria-labelledby="welcome-title">
+        <h1 id="welcome-title">Welcome to ASOBI</h1>
+        <hr class="accent-bar" aria-hidden="true">
+        <p class="lead">
+          ASOBI Co., Ltd. offers premium private chauffeur and transfer services throughout Japan.
+          Whether you're exploring with family and friends, travelling for business, or need a seamless
+          transfer to the airport or cruise port — we tailor every plan to suit your needs.
+          Our dedicated staff speak Japanese, English, and Chinese, supporting you from booking right through to your journey.
+          Sit back, relax, and enjoy a truly special experience in Japan.
+        </p>
+      </section>
+
+      <!-- ✅ サービス見出し -->
+      <section class="section-title" aria-labelledby="services-title">
+        <h2 id="services-title">Transfers for All Occasions</h2>
+        <p class="sub">Premium door-to-door transfers for every journey. We offer tailored plans to suit your schedule and destination.</p>
+        <hr class="accent-bar center" aria-hidden="true">
+      </section>
+
+      <!-- ✅ サービスカード（4種） -->
+      <section class="service-grid" aria-label="サービス一覧">
+
+        <!-- Airport -->
+<article class="service-card">
+  <div class="thumb">
+    <img src="images/service-02.png" alt="Airport Transfer" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pill">Airport</span>
+  </div>
+  <h3>Airport Transfers <p>— Arrive relaxed, every time.</p></h3>
+  <p>Comfortable door-to-door transfers between Kansai Airport, Osaka Airport, and your hotel or residence in Osaka. Stay connected and get back to work the moment you land.</p>
+</article>
+
+<!-- Port / Station -->
+<article class="service-card">
+  <div class="thumb">
+    <img src="images/port.jpg" alt="Port & Station Transfer" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pill">Port / Station</span>
+  </div>
+  <h3>Port & Station Transfers <p>— Where public transit can't reach.</p></h3>
+  <p>From Kobe Port to Osaka Nanko and beyond — we cover destinations that are difficult to reach by public transport. Door-to-door service, no matter how much luggage you have.</p>
+</article>
+
+<!-- Day Trip -->
+<article class="service-card">
+  <div class="thumb">
+    <img src="images/fushimi_inari.png" alt="Day Trip" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pill">Day Trip</span>
+  </div>
+  <h3>Day Trips from Osaka <p>— Japan's highlights in a single day.</p></h3>
+  <p>Kyoto, Wakayama, Nara and more — explore Japan's most beloved destinations on a private day trip. Our knowledgeable drivers help you make the most of every moment.</p>
+</article>
+
+<!-- City -->
+<article class="service-card">
+  <div class="thumb">
+    <img src="images/businesstrip.jpg" alt="City Charter" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <span class="pill">City</span>
+  </div>
+  <h3>City Charter <p>— Your schedule, your pace.</p></h3>
+  <p>Business meetings, shopping, dinner reservations — we build your day around your itinerary. A private city charter tailored entirely to you.</p>
+</article>
+
+      </section>
+
+      <!-- ✅ How It Works — ご利用の流れ -->
+      <section class="how-it-works" aria-labelledby="hiw-title">
+        <div class="section-title" style="padding:0 0 36px; background:transparent;">
+          <h2 id="hiw-title">Arrive at your destination in 3 steps</h2>
+          <hr class="accent-bar center" aria-hidden="true">
+        </div>
+        <div class="hiw-inner">
+
+          <!-- 左：ステップ一覧 -->
+          <div class="hiw-steps">
+
+            <div class="hiw-step active">
+              <div class="num">1</div>
+              <div class="body">
+                <h3><span class="step-icon">✉️</span> Get in Touch</h3>
+                <p>Simply send us a message with your preferred dates, destination, and number of passengers. We're available in English, Japanese, and Chinese.</p>
+              </div>
+            </div>
+
+            <div class="hiw-step">
+              <div class="num">2</div>
+              <div class="body">
+                <h3>Confirm & Book</h3>
+                <p>Our team reviews your request and presents the best plan with a clear quote. Once you're happy, we'll confirm your reservation.</p>
+              </div>
+            </div>
+
+            <div class="hiw-step">
+              <div class="num">3</div>
+              <div class="body" style="padding-bottom:0;">
+                <h3>Depart & Enjoy</h3>
+                <p>Your driver will be waiting at your specified pickup location. Sit back, relax, and enjoy a smooth, comfortable journey.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 右：イメージ写真 -->
+          <div class="hiw-img">
+            <img src="images/process-01.jpg" alt="How it works" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ✅ Vehicle Lineup — 車両ラインナップ -->
+      <section aria-label="車両ラインナップ">
+
+        <!-- 見出し -->
+        <div class="section-title" style="padding:56px 24px 28px; background:#fff;">
+          <h2>Our Fleet</h2>
+          <p class="sub">Choose the vehicle that suits your group size and itinerary. Child seats are available on request for all vehicles (advance booking required).</p>
+          <hr class="accent-bar center" aria-hidden="true">
+        </div>
+
+        <!-- 1: Alphard -->
+        <div class="vehicle-section">
+          <div class="vehicle-banner">
+            <h2>Toyota — Alphard</h2>
+            <p class="rec">Recommended for 2–4 passengers</p>
+          </div>
+          <div class="vehicle-photos">
+            <div class="vph"><img src="images/alpha2.jpg" alt="Alphard exterior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/alpha5.jpg" alt="Alphard door" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/alpha4.png" alt="Alphard interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+          <div class="vehicle-prices">
+            <div class="price-row">
+              <div class="price-col">
+                <h4>Kansai Airport ⇄ Osaka City Area</h4>
+                <p class="amount">18,000 JPY</p>
+              </div>
+              <div class="price-col">
+                <h4>Osaka City Area ⇄ Kyoto City Area</h4>
+                <p class="amount">48,000 JPY</p>
+              </div>
+            </div>
+            <p class="footnote">※ Meet &amp; Greet Service 3,000 JPY</p>
+            <a href="https://asobi.ltd/en/alphard_detail.html" class="vehicle-detail-btn">View Full Details →</a>
+          </div>
+        </div>
+
+        <!-- 2: Hiace -->
+        <div class="vehicle-section">
+          <div class="vehicle-banner">
+            <h2>Toyota — Hiace</h2>
+            <p class="rec">Recommended for 5–9 passengers</p>
+          </div>
+          <div class="vehicle-photos">
+            <div class="vph"><img src="images/hiace1.png" alt="Hiace exterior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/hiace2.png" alt="Hiace door" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/hiace3.png" alt="Hiace interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+          <div class="vehicle-prices">
+            <div class="price-row">
+              <div class="price-col">
+                <h4>Kansai Airport ⇄ Osaka City Area</h4>
+                <p class="amount">18,000 JPY</p>
+              </div>
+              <div class="price-col">
+                <h4>Osaka City Area ⇄ Kyoto City Area</h4>
+                <p class="amount">48,000 JPY</p>
+              </div>
+            </div>
+            <p class="footnote">※ Meet &amp; Greet Service 3,000 JPY</p>
+            <a href="https://asobi.ltd/en/hiace.html" class="vehicle-detail-btn">View Full Details →</a>
+          </div>
+        </div>
+
+        <!-- 3: Grand Hiace -->
+        <div class="vehicle-section">
+          <div class="vehicle-banner">
+            <h2>Toyota — Grand Hiace</h2>
+            <p class="rec">Recommended for 5–8 passengers</p>
+          </div>
+          <div class="vehicle-photos">
+            <div class="vph"><img src="images/grandhiace1.png" alt="Grand Hiace exterior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/grandhiace2.png" alt="Grand Hiace front" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="vph"><img src="images/grand.jpg" alt="Grand Hiace interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+          </div>
+          <div class="vehicle-prices">
+            <div class="price-row">
+              <div class="price-col">
+                
+                <h4>Kansai Airport ⇄ Osaka City Area</h4>
+                <p class="amount">18,000 JPY</p>
+              </div>
+              <div class="price-col">
+                <h4>Osaka City Area ⇄ Kyoto City Area</h4>
+                <p class="amount">48,000 JPY</p>
+              </div>
+            </div>
+            <p class="footnote">※ Meet &amp; Greet Service 3,000 JPY</p>
+            <a href="https://asobi.ltd/en/granace.html" class="vehicle-detail-btn">View Full Details →</a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ✅ Q&A — よくあるご質問 -->
+      <section class="qa-area" aria-labelledby="faq-title">
+        <div class="section-title" style="padding:0 0 36px; background:transparent; text-align:left;">
+          <h2 id="faq-title" style="font-size:clamp(20px,3vw,26px);">Frequently Asked Questions</h2>
+          <hr class="accent-bar" aria-hidden="true" style="margin:14px 0 0;">
+        </div>
+        <div class="qa-list">
+
+          <div class="qa-row">
+            <button class="qa-trigger">What is the difference between a hire car and a taxi?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              A hire car (chauffeur service) is a fully reservation-based private transfer. A dedicated driver operates according to your schedule and route, with a fixed fare confirmed before departure — no extra charges for traffic delays. You'll have the vehicle entirely to yourself, your family, or your group.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Can I book on the same day?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              We generally ask for bookings to be made at least one day in advance. For same-day requests, availability may allow us to accommodate you — please contact us by email or LINE as soon as possible.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Can I choose a specific vehicle? Are baby seats and wheelchair access available?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Yes, you can select from the Toyota Alphard, HiAce, or Grand HiAce. Child seats are available with advance notice. Wheelchair accessibility varies by vehicle and situation — please let us know your requirements at the time of booking.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">What areas do you cover?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              We primarily serve the Osaka area, including airport transfers from Kansai Airport and Itami Airport, as well as day trips to Kyoto, Nara, Wakayama, and surrounding regions. Please get in touch for destinations outside these areas.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Are there cancellation fees?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Cancellations made more than 2 days before the service date are free of charge. Cancellations the day before incur a 50% fee, and same-day cancellations are charged at 100%. Full details are provided in the booking confirmation.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Can I change my booking after it's confirmed?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Changes to dates, routes, or passenger numbers can be accommodated subject to availability. Please contact us by email or LINE as early as possible. Last-minute changes are welcome — just reach out and we'll do our best.
+            </div></div>
+          </div>
+
+          <!-- English FAQ -->
+          <div class="qa-row">
+            <button class="qa-trigger">Can the itinerary be fully customized?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Yes. Every private chauffeur service is planned around your specific travel dates, destinations, and preferred pace. Route adjustments can be made right up until the day of departure — just let us know in advance.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Do you provide English or Chinese-speaking chauffeurs?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Yes. English- and Chinese-speaking chauffeurs are available upon request. Please specify your language preference at the time of booking so we can confirm the arrangement in advance.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">How many hours are included per day?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Standard service covers up to 10 hours per day. If your itinerary requires additional hours or longer travel distances, a separate quote will be provided based on the specifics.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">What vehicles are used?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              We operate Toyota Alphard, HiAce, and Grand HiAce vehicles. The appropriate model is selected based on your group size, luggage volume, and route requirements. All vehicles hold valid commercial operation licenses in Japan.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">Is this a guided tour?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              No. ASOBI provides a private chauffeur service — not a licensed sightseeing tour. Our drivers offer logistical support and local knowledge, but do not act as tour guides. If you require a licensed guide, we can help arrange one separately.
+            </div></div>
+          </div>
+
+          <div class="qa-row">
+            <button class="qa-trigger">How is pricing calculated?<span class="qa-icon">+</span></button>
+            <div class="qa-answer"><div class="qa-answer-pad">
+              Pricing is determined by vehicle type, service duration, route distance, and the number of days required. An exact quote is provided after we review your itinerary — please contact us with your travel details to get started.
+            </div></div>
+          </div>
+
+        </div>
+      </section>
+
+        <div class="back-to-top-wrap">
+  <a href="about_asobi.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+
+      
+        <!-- ✅ 最下方 SNS（保留统一：bottom-grid class） -->
+<section class="sns-guide"><div class="sec-title-block" style="margin:40px 0 20px;">
+<div class="sec-en" style="font-size:20px;">Contact Us</div>
+<div style="font-size:14px; color:#666;">Feel free to reach out via any channel below</div>
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.ltd">
+      <img src="images/contact-mail.png" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat.JPG" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+</div></section>
+ 
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="alphard_detail.html">Our Fleet</a></li>
+        <li><a href="about_asobi.html">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    </div>
+</footer></main>
+    
+
+
+    <!-- ✅ 右侧三色导航（保留统一） -->
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+<img alt="LINEでお問い合わせ" src="images/cta-line.png"/>
+</a>
+<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
+<img alt="メールでお問い合わせ" src="images/cta-mail.png"/>
+</a>
+<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
+<img alt="Instagram" src="images/insta.png"/>
+</a>
+</aside>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.qa-trigger').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var ans = btn.nextElementSibling;
+        btn.classList.toggle('open');
+        if (ans.style.maxHeight) {
+          ans.style.maxHeight = null;
+        } else {
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
