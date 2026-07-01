@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>永和盛 株式会社｜可提供的服务</title>
+<meta name="description" content="ASOBI株式会社是一家以关西（京都・大阪・奈良）为中心，提供观光高级轿车、机场接送、商务VIP接待的高级轿车服务公司。我们会根据您的不同场景，从埃尔法、海狮等车型中为您推荐最合适的一辆。亦可提供英语・中文服务。">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/follow.css">
+<style>
+    :root{
+      /* ✅ 保留 sheen 的颜色/字体基调 */
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --muted:#666;
+      --line:rgba(0,0,0,.08);
+      --ph:#d9d9d9;
+      --max:720px;
+      --transition: 0.7s cubic-bezier(.2,1,.3,1);
+      --w-screen: 664px;
+--max: 664px;
+
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+    img{max-width:100%; display:block;}
+    a{color:inherit; text-decoration:none;}
+
+    /* 中间白框（sheen 保留） */
+    .stage{min-height:100vh; display:flex; justify-content:center; align-items:flex-start; gap:10px; padding:0 18px 60px;}
+    .paper{
+      width:min(var(--max),100%);
+      background:var(--paper);
+      min-height:100vh;
+      border-radius:10px 10px 0 0;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    /* 顶部 */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px;
+    }
+    .brand{font-weight:700; letter-spacing:.02em; font-size:16px;}
+    .nav{display:flex; gap:18px; font-size:13px; color:var(--muted);}
+
+    /* 顶部大图（sheen 保留） */
+    .hero-ph{height:46vh; min-height:320px; background:var(--ph);}
+    .hero-ph.hero-smile{
+      position:relative;
+      overflow:hidden;
+      background-image:url("images/hero.jpg");
+      background-position:center;
+      background-size:cover;
+    }
+    .hero-ph.hero-smile .smile-wave{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:100%;
+      height:90px;
+      display:block;
+      pointer-events:none;
+    }
+    .hero-ph.hero-smile .smile-wave path{ fill: var(--paper); }
+    @media (max-width:560px){
+      .hero-ph{ min-height:260px; }
+      .hero-ph.hero-smile .smile-wave{ height:72px; }
+      .paper{ border-radius:0; }
+      .topbar-inner{ padding:14px; }
+    }
+
+    /* Hero 文案（sheen 保留） */
+    .hero-message{ padding: 54px 20px 42px; text-align:center; }
+    .hero-message-inner{ max-width: 560px; margin: 0 auto; }
+    .hero-quote{ font-size: 22px; line-height: 1.9; letter-spacing: .03em; margin: 0 0 18px; font-weight: 520; }
+    .hero-lead{ font-size: 14px; line-height: 2.0; color: #222; margin: 0; }
+
+    /* 标题 */
+    .sec-title{ text-align:center; padding:40px 18px 30px; }
+    .sec-title .jp{ margin:0 0 6px; font-size:30px; font-weight:800; line-height:1.25; }
+    .sec-title .en{ margin:0; font-size:22px; font-weight:700; letter-spacing:.02em; }
+    @media (max-width:560px){
+      .sec-title{ padding:34px 14px 24px; }
+      .sec-title .jp{ font-size:26px; }
+      .sec-title .en{ font-size:20px; }
+    }
+
+    /* =========================================
+       ✅ 统一为 service 文件的布局/动画
+       - 文字居左、图片居右（PC固定）
+       - 删除 sheen 原本的遮罩/白色椭圆卡片
+       ========================================= */
+
+    .service-wrap{ padding: 10px 18px 90px; }
+    .service-container{ max-width: 640px; margin: 0 auto; }
+
+    .svc-block{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 34px;
+      margin: 0 0 88px;
+    }
+
+    /* ✅ 文字居左 / 图片居右：不做偶数反转 */
+    .svc-text{ width: 46%; }
+    .svc-image{ width: 54%; position:relative; }
+
+    .svc-image{
+      overflow:hidden;
+      border-radius: 16px;
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .95s ease, transform .95s ease;
+      background: rgba(0,0,0,.02);
+    }
+
+    /* 揭幕遮罩 */
+    .svc-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: var(--paper);
+      transform: translateY(0);
+      transition: transform 1.05s cubic-bezier(.2,1,.2,1);
+      z-index:2;
+    }
+
+    .svc-image img{
+      width:100%;
+      height:auto;
+      transform: scale(1.05);
+      transition: transform 1.35s cubic-bezier(.2,1,.2,1);
+      translate: 0 var(--parallax, 0px);
+      will-change: transform, translate;
+    }
+
+    /* 排版 */
+    .svc-num{
+      display:block;
+      font-size: 36px;
+      line-height:1;
+      font-weight: 900;
+      letter-spacing: .02em;
+      color: rgba(0,0,0,.18);
+      margin-bottom: 6px;
+    }
+    .svc-heading{
+      font-size: 18px;
+      font-weight: 900;
+      margin: 0 0 14px;
+      line-height: 1.45;
+    }
+    .svc-desc{
+      margin:0;
+      font-size: 13px;
+      line-height: 2.15;
+      letter-spacing: .02em;
+      color:#222;
+      white-space: pre-line;
+      text-align:left;
+    }
+
+    /* 文字节奏 */
+    .svc-text .svc-num,
+    .svc-text .svc-heading,
+    .svc-text .svc-desc{
+      opacity:0;
+      transform: translateY(18px);
+      filter: blur(3px);
+      transition: opacity .9s ease, transform .9s ease, filter .9s ease;
+    }
+
+    .svc-block.is-in .svc-text .svc-num{ transition-delay:.06s; opacity:1; transform:none; filter:none; }
+    .svc-block.is-in .svc-text .svc-heading{ transition-delay:.14s; opacity:1; transform:none; filter:none; }
+    .svc-block.is-in .svc-text .svc-desc{ transition-delay:.22s; opacity:1; transform:none; filter:none; }
+
+    .svc-block.is-in .svc-image{ opacity:1; transform:none; }
+    .svc-block.is-in .svc-image::after{ transform: translateY(-105%); }
+    .svc-block.is-in .svc-image img{ transform: scale(1.0); }
+
+    @media (hover:hover){
+      .svc-block:hover .svc-image img{ transform: scale(1.03); }
+    }
+
+    /* 分隔线：更干净 */
+    .svc-block + .svc-block{ border-top: 1px solid rgba(0,0,0,.06); padding-top: 42px; }
+
+    /* 手机端 */
+    @media (max-width: 768px){
+      .service-wrap{ padding: 0 14px 70px; }
+      .service-container{ max-width: 100%; }
+
+      /* 手机：图片在上、文字在下（统一 service 的阅读顺序） */
+      .svc-block{
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 18px;
+        margin-bottom: 64px;
+      }
+      .svc-text{ width:100%; }
+      .svc-image{ width: 92%; margin-left:auto; }
+      .svc-num{ font-size: 30px; }
+      .svc-heading{ font-size: 17px; }
+    }
+
+    /* 减少动态偏好 */
+    @media (prefers-reduced-motion: reduce){
+      .svc-image, .svc-image::after, .svc-image img,
+      .svc-text *{ transition:none !important; transform:none !important; filter:none !important; opacity:1 !important; }
+    }
+
+    /* 首屏标题渐入（service 文件风格） */
+    .reveal-head{ opacity:0; transform: translateY(22px); transition: opacity 1.05s ease, transform 1.05s ease; }
+    .reveal-head.is-in{ opacity:1; transform:none; }
+
+
+    /* ===============================
+       UMINO-HOTEL 风格：松弛感排版块
+       - 大留白 + 窄文字列 + 居中大图
+       - 右下角 Read more + 轻装饰
+       =============================== */
+
+    .umi-section{ padding: 64px 0 10px; }
+    .umi-inner{ padding: 0 18px; }
+
+    /* 图：居中 + 充足白边 */
+    .umi-photo{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 10px 0 0;
+    }
+    .umi-photo img{
+      width: 100%;
+      height: auto;
+      border-radius: 2px; /* 近似直角 */
+    }
+
+    /* 标题区：左对齐，但整体居中在窄列内 */
+    .umi-text{
+      max-width: 560px;
+      margin: 40px auto 0;
+      position: relative;
+      padding: 0 2px 78px;
+    }
+
+    .umi-head{
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      margin: 0 0 14px;
+    }
+
+    .umi-title{
+      font-family: ui-serif, "Didot", "Bodoni 72", "Times New Roman", Georgia, serif;
+      font-weight: 400;
+      font-size: 56px;
+      letter-spacing: .02em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .umi-slash{
+      width: 2px;
+      height: 70px;
+      background: rgba(0,0,0,.55);
+      transform: rotate(28deg);
+      transform-origin: center;
+      margin-bottom: 6px;
+    }
+
+    .umi-sub{
+      font-size: 13px;
+      letter-spacing: .22em;
+      color: rgba(0,0,0,.7);
+      margin: 0 0 6px;
+      white-space: nowrap;
+    }
+
+    .umi-body{
+      margin: 0;
+      font-size: 13px;
+      line-height: 2.2;
+      letter-spacing: .04em;
+      color: rgba(0,0,0,.78);
+      white-space: pre-line;
+    }
+
+    .umi-readmore{
+      position: absolute;
+      right: 0;
+      bottom: 14px;
+      font-size: 13px;
+      letter-spacing: .06em;
+      color: rgba(0,0,0,.8);
+      padding-bottom: 8px;
+    }
+    .umi-readmore::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom: 2px;
+      height: 2px;
+      background: rgba(0,0,0,.35);
+      border-radius: 99px;
+      transform: scaleX(.72);
+      transform-origin: left;
+    }
+
+    /* 右侧“预订”泡泡（可选） */
+    .umi-badge{
+      position: absolute;
+      right: -64px;
+      bottom: -6px;
+      width: 170px;
+      height: 150px;
+      background: #76cfd0;
+      color: #fff;
+      border-radius: 58% 42% 55% 45% / 55% 45% 55% 45%;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+      text-align: center;
+      padding: 14px;
+    }
+    .umi-badge .jp{ font-size: 12px; letter-spacing:.18em; margin: 0 0 6px; opacity:.95; }
+    .umi-badge .en{ font-size: 16px; letter-spacing:.05em; margin: 0 0 10px; font-weight: 700; }
+    .umi-badge .mini{
+      width: 94px;
+      height: 58px;
+      background: #fff;
+      color: #3aa7a9;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.1;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 768px){
+      .umi-section{ padding: 52px 0 6px; }
+      .umi-photo{ max-width: 620px; }
+      .umi-text{ max-width: 520px; padding-bottom: 92px; }
+      .umi-title{ font-size: 46px; }
+      .umi-slash{ height: 58px; }
+      .umi-badge{ right: -10px; bottom: -8px; transform: scale(.92); }
+    }
+
+    @media (max-width: 420px){
+      .umi-title{ font-size: 40px; }
+      .umi-sub{ letter-spacing: .14em; }
+      .umi-badge{ right: -6px; transform: scale(.86); }
+    }
+/* 呼吸感正文 */
+.breath-text{
+  color: rgba(0,0,0,.78);
+  font-size: 14px;
+  line-height: 2.2;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0,0,0,.06);
+  -webkit-font-smoothing: antialiased;
+}
+/* 呼吸感标题 */
+.breath-title{
+  color: #111;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+/* 给手机端底部导航预留空间，避免压住正文 */
+@media (max-width: 1000px){
+  .paper{ padding-bottom: 110px; }
+}
+/* --- 电脑端 1001px 以上的偏移逻辑 --- */
+@media (min-width: 1001px){
+  .paper{
+    transform: translateX(-140px);
+  }
+}
+@media (min-width: 1001px){
+  .floating-nav-wrapper{
+    transform: translateX(
+      calc((var(--w-screen) / 2) + 18px - 140px)
+    ) !important;
+  }
+}
+
+
+
+
+/* (moved to css/follow.css) */
+</style>
+</head>
+<body><img alt="" aria-hidden="true" class="bg-car" src="youce.png"/>
+<div class="stage">
+<main class="paper">
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <a href="index.html" style="text-decoration: none; color: inherit; display: block;">永和盛 株式会社</a>
+    </div>
+    <nav class="nav" style="display: flex; align-items: center;">
+      <a href="en/service.html" style="text-decoration: none; color: #3647EB; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        English
+      </a>
+
+      <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>公司概况</span></a>
+      <a href="#" style="text-decoration: none; color: inherit;"><span>最新消息</span></a>
+    </nav>
+  </div>
+</header>
+<section aria-label="Hero" class="hero-ph hero-smile">
+<svg aria-hidden="true" class="smile-wave" preserveaspectratio="none" viewbox="0 0 1440 120">
+<path d="M0,0 C 360,120 1080,120 1440,0 L1440,120 L0,120 Z"></path>
+</svg>
+</section>
+<section class="hero-message">
+<div class="hero-message-inner">
+<p class="hero-quote">
+            「想要消除出行的不安」<br/>
+            「想要提供更高一档的体验」
+          </p>
+<p class="hero-lead">
+            作为满足这些需求的伙伴，<br/>
+            请务必善用本公司的高级轿车服务。
+          </p>
+</div>
+</section>
+<!-- ✅ UMINO 风格：松弛感示例块（放在 hero 文案后面） -->
+<section class="sec-title reveal-head" id="service">
+<h2 class="jp">可提供的服务</h2>
+<p class="en">Our service</p>
+</section>
+<section class="service-wrap">
+<div class="service-container">
+<article class="svc-block reveal" id="svc1">
+<div class="svc-text">
+<span class="svc-num">01</span>
+<h3 class="svc-heading">观光高级轿车</h3>
+<p class="svc-desc">观光高级轿车，可乘坐客人专属的私人车辆，悠闲畅游京都・大阪・奈良等关西地区的观光景点。
+可以事先确定想去的地方，自由编排观光路线，实现配合客人节奏的行程。
+
+无需在意公共交通的时间，跨多个城市的观光也十分顺畅。</p>
+</div>
+<div class="svc-image">
+<img alt="观光高级轿车" src="images/svc-1.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc2">
+<div class="svc-text">
+<span class="svc-num">02</span>
+<h3 class="svc-heading">配司机的观光高级轿车</h3>
+<p class="svc-desc">
+
+由能像观光导游一样讲解的司机同乘，便是“配司机的观光高级轿车”。
+
+精通观光、经验丰富的乘务员将护送您的旅程，即使是初次到访的地方也令人安心。
+
+本公司有会说英语和中文的员工，
+在迎接来自海外的宾客或入境观光时，也可放心使用。</p>
+</div>
+<div class="svc-image">
+<img alt="配司机的观光高级轿车" src="images/svc-2.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc3">
+<div class="svc-text">
+<span class="svc-num">03</span>
+<h3 class="svc-heading">商务接送</h3>
+<p class="svc-desc">本公司的商务接送服务，由专业司机按指定的时间・地点待命，将您确实地送往重要的目的地。
+
+                作为繁忙的经营者与高管们的通勤・出行方式，也获得了众多企业的青睐。</p>
+</div>
+<div class="svc-image">
+<img alt="商务接送" src="images/service-03.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc4">
+<div class="svc-text">
+<span class="svc-num">04</span>
+<h3 class="svc-heading">活动・典礼</h3>
+<p class="svc-desc">在婚礼、纪念典礼、各类活动的日子里，出行也是特别演出的一部分。
+我们将助您为人生中重要的一天增添色彩。新郎新娘及亲属的接送、前往拍摄外景地的出行、VIP来宾的接送等，会根据不同场景以最合适的车辆应对。</p>
+</div>
+<div class="svc-image">
+<img alt="活动・典礼" src="images/service-04.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc5">
+<div class="svc-text">
+<span class="svc-num">05</span>
+<h3 class="svc-heading">5：机场接送</h3>
+<p class="svc-desc">在使用关西国际机场或大阪国际机场时，请务必善用本公司的机场接送服务。
+
+将机场与酒店、住所、观光地等目的地门到门直连，即使有大件行李，移动也变得轻松。清晨或深夜航班也可应对。</p>
+</div>
+<div class="svc-image">
+<img alt="机场接送" src="images/service-02.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc6">
+<div class="svc-text">
+<span class="svc-num">06</span>
+<h3 class="svc-heading">家庭旅行・三代同游</h3>
+<p class="svc-desc">在家庭旅行中，尤其是带着年幼孩子或年长家人的旅程，“出行的负担”会极大地左右旅行的满意度。对公共交通的换乘、时间管理和体力方面感到不安的人也不在少数。
+
+“想一边照看祖父母的身体状况一边观光”
+“想配合孩子的节奏”
+
+能灵活满足这类需求，正是配专属司机的高级轿车独有的优势。</p>
+</div>
+<div class="svc-image">
+<img alt="家庭旅行・三代同游" src="images/svc-6.png"/>
+</div>
+</article>
+<article class="svc-block reveal" id="svc7">
+<div class="svc-text">
+<span class="svc-num">07</span>
+<h3 class="svc-heading">修学旅行</h3>
+<p class="svc-desc">在陌生的地方换乘公交或电车，比想象中更耗费时间和精神。
+  可以避免“坐反了方向的电车！”这类麻烦，
+  又因为是门到门移动，事故、麻烦以及治安方面的风险大幅降低。
+  这对于送孩子出行的家长，以及负责管理的老师们来说，都是非常大的优点。</p>
+</div>
+<div class="svc-image">
+<img alt="公司旅行・研修旅行" src="images/svc-7.png"/>
+</div>
+</article>
+</div>
+<div class="back-to-top-wrap">
+  <a href="about_asobi.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+</section>
+
+
+<section class="sns-guide"><div class="sec-title-block" style="margin:40px 0 20px;">
+<div class="sec-en" style="font-size:20px;">Contact Us</div>
+<div style="font-size:14px; color:#666;">咨询请由此处</div>
+  <div class="bottom-grid">
+
+    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+      <img src="images/contact-line.png" alt="LINE">
+    </a>
+
+    <a class="sq-small sq-img" href="mailto:cheng@asobi.ltd">
+      <img src="images/contact-mail.png" alt="Mail">
+    </a>
+
+    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+      <img src="images/contact-instagram.svg" alt="Instagram">
+    </a>
+
+   <a class="sq-small sq-img" href="images/wechat.JPG" target="_blank">
+  <img src="images/contact-wechat.png" alt="WeChat">
+</a>
+</div></section>
+<footer class="site-footer-bar">
+    <ul class="footer-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="service.html">服务一览</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">车辆阵容</a></li>
+        <li><a href="about_asobi.html">公司概况</a></li>
+        <li><a href="#">隐私政策</a></li>
+    </ul>
+    <div class="copyright">
+        © 2026 永和盛 株式会社. All Rights Reserved.
+    </div>
+</footer></main>
+
+<aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="images/wechat.jpg" target="_blank" style="padding:0;">
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:60px;display:block;">
+  <defs>
+    <linearGradient id="wechatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1de9b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00b894;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="170" height="50" fill="url(#wechatGrad)" rx="8" filter="url(#shadow)"/>
+  <circle cx="30" cy="30" r="18" fill="white" opacity="0.2"/>
+  <text x="90" y="38" font-size="16" font-weight="bold" fill="white" text-anchor="middle" font-family="Microsoft YaHei, sans-serif">微信咨询</text>
+</svg>
+</a>
+
+<a class="nav-tag nav-img" href="images/rednote.jpg" target="_blank" style="padding:0;">
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:60px;display:block;">
+  <defs>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="170" height="50" fill="url(#redGrad)" rx="8" filter="url(#shadow2)"/>
+  <circle cx="30" cy="30" r="18" fill="white" opacity="0.2"/>
+  <text x="90" y="38" font-size="16" font-weight="bold" fill="white" text-anchor="middle" font-family="Microsoft YaHei, sans-serif">小红书咨询</text>
+</svg>
+</a>
+</aside>
+
+</div>
+<script>
+    // ===== Scroll reveal + subtle parallax（service文件同款） =====
+    window.addEventListener('DOMContentLoaded', () => {
+      const head = document.querySelector('.reveal-head');
+      const blocks = Array.from(document.querySelectorAll('.svc-block.reveal'));
+      const targets = [head, ...blocks].filter(Boolean);
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: "0px 0px -10% 0px" });
+
+      targets.forEach(el => io.observe(el));
+
+      // subtle parallax（只对图片：很轻）
+      const imgs = document.querySelectorAll('.svc-image img');
+      const onScroll = () => {
+        const vh = window.innerHeight;
+        imgs.forEach(img => {
+          const r = img.getBoundingClientRect();
+          const t = ((r.top + r.height/2) - vh/2) / (vh/2);
+          const px = Math.max(-10, Math.min(18, -t * 18));
+          img.style.setProperty('--parallax', px.toFixed(2) + 'px');
+        });
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', onScroll);
+    });
+  </script>
+  <div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
+#dify-chatbot-bubble-window {
+    position: fixed !important;
+    right: auto !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important;
+}
+
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* 针对移动端的适配 */
+@media (max-width: 1000px) {
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
+    }
+    #dify-chatbot-bubble-button {
+        left: 10px !important;
+        bottom: 66px !important;
+    }
+            .dify-cover-wrapper {
+        bottom: 65px;
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+    }
+}
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px;
+    bottom: -10px;
+
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999;
+
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
+</style>
+
+
+</body>
+</html>

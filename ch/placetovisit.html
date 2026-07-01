@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>推荐观光路线｜永和盛株式会社</title>
+<meta name="description" content="ASOBI株式会社是一家以关西（京都・大阪・奈良）为中心，提供观光高级轿车、机场接送、商务VIP接待的高级轿车服务公司。我们会根据您的不同场景，从埃尔法、海狮等车型中为您推荐最合适的一辆。亦可提供英语・中文服务。">
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/follow.css" />
+
+  <style>
+    :root{
+      --bg:#9CE0FC;
+      --paper:#fff;
+      --text:#111;
+      --accent: #E60012; /* 推荐的红色 */
+      --muted:rgba(0,0,0,.62);
+      --line:rgba(0,0,0,.08);
+      --max:664px;
+      /* 字体指定（来自原代码） */
+      --font-miyabi: "SicTake-Miyabi", serif;
+      --font-gothic: "Sawarabi Gothic", sans-serif;
+    }
+
+    body{ margin:0; background:var(--bg); color:var(--text); font-family: var(--font-gothic); overflow-x:hidden; }
+
+    .stage {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 18px 60px;
+      position: relative;
+    }
+
+    .paper {
+      flex-shrink: 0;
+      width: min(var(--max), 100%);
+      background: var(--paper);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 18px 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .topbar .brand{ font-weight:700; letter-spacing:.5px; }
+
+    /* --- 内容独有的样式 --- */
+
+    .course-header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .course-header .sub { font-size: 20px; margin-bottom: 10px; }
+    .course-header h1 { font-family: var(--font-miyabi); font-size: 48px; margin: 10px 0; }
+    .course-header .lead { font-family: var(--font-miyabi); font-size: 24px; }
+    .course-header .accent { color: var(--accent); font-weight: bold; }
+
+    /* 各观光地区块 */
+    .spot-section {
+      position: relative;
+      margin-bottom: 60px;
+      padding: 0 20px;
+    }
+
+    .spot-image-box {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      background: #d9d9d9; /* 没有图片时的占位 */
+      background-size: cover;
+      background-position: center;
+      border-radius: 4px;
+    }
+
+    /* 文字盘的叠加层 */
+    .spot-overlay {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      bottom: 20px;
+      left: 60px;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spot-overlay h2 { font-family: var(--font-miyabi); font-size: 24px; margin-bottom: 10px; border-bottom: 1px solid #333; display: inline-block; width: fit-content; }
+    .spot-overlay p { font-size: 15px; line-height: 1.6; margin: 5px 0; }
+
+    /* 竖排的地名 */
+    .vertical-label {
+      position: absolute;
+      left: -5px;
+      top: 10px;
+      writing-mode: vertical-rl;
+      font-family: var(--font-miyabi);
+      font-size: 54px;
+      line-height: 1;
+      z-index: 2;
+    }
+
+    /* 员工介绍 */
+    .staff-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+      padding-left: 60px;
+    }
+/* staff-thumb 的内容由空白改为支持图片 */
+.staff-thumb {
+  width: 100px;
+  height: 100px;
+  background: none; /* 删除灰色背景 */
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden; /* 把图片裁成圆形 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 增加一点立体感 */
+}
+
+.staff-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保持纵横比收进框中 */
+}
+
+    .staff-name { font-size: 16px; font-weight: bold; }
+/* 追加：行程表样式 */
+.itinerary-container {
+  margin: 20px;
+  padding: 30px 20px;
+  border: 4px dashed #D9D9D9; /* 对应 React 代码中的 StyledRectangle6 */
+  position: relative;
+  background: #fff;
+}
+
+.itinerary-title {
+  font-family: var(--font-miyabi);
+  margin-bottom: 30px;
+}
+.itinerary-title .small { font-size: 16px; }
+.itinerary-title .large { font-size: 48px; display: block; line-height: 1; }
+
+.itinerary-item {
+  font-family: var(--font-miyabi);
+  font-size: 20px; /* ← 这里改成 20px */
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 为了兼容你京都和奈良用的新类名，建议把这个也加上 */
+.itinerary-text {
+  font-family: var(--font-miyabi);
+  font-size: 20px; /* ← 统一设定为 20px */
+}
+
+/* 修改或确认以下样式，确保行程表内图片能够灵活排列 */
+.itinerary-photos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.photo-card.right { transform: rotate(5deg); }
+.photo-card.left { transform: rotate(-5deg); }
+
+.caption {
+  font-size: 14px; /* ← 这里锁定 14px */
+  color: #333;
+  display: block;
+  margin-top: 5px;
+  line-height: 1.4;
+}/* 这样写能保证所有照片下的文字（无论带不带类名）都是 14px */
+.itinerary-photos span,
+.photo-card span,
+.caption {
+  font-size: 14px;
+}
+/* 调整文字样式 */
+.itinerary-note {
+  font-family: var(--font-miyabi);
+  font-size: 18px;
+  text-align: right;
+  margin-top: 20px;
+  color: #333;
+}
+    /* 响应式调整 */
+    @media (max-width: 1000px){
+      .stage{ display:block; padding: 0; }
+      .paper{ width:100%; border-radius: 0; }
+      .vertical-label { font-size: 40px; left: 5px; }
+      .spot-overlay { left: 45px; }
+      .staff-info { padding-left: 20px; }
+      .course-header h1 { font-size: 32px; }
+    }
+
+/* ✅ 右侧三色导航：作为第二列，贴着 paper */
+/* =========================
+   Desktop：nav 贴白色纸右侧
+   ========================= */
+.floating-nav-wrapper{
+
+
+  margin-left: 12px;        /* ✅ 贴着 paper */
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 手机端：底部固定（你 follow 也是这个思路） */
+@media (max-width: 1000px){
+  .floating-nav-wrapper{
+
+    left: 0;
+
+    bottom: 0;
+    top: auto;
+    margin-left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(255,255,255,0.9);
+  }
+}
+/* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
+@media (min-width: 1001px) {
+  .floating-nav-wrapper {
+    position: sticky !important;
+    top: 528px !important;       /* 距离视口顶部的距离 */
+    left: auto !important;
+    margin-left: 0 !important;   /* 靠 gap 控制间距 */
+    transform: none !important;  /* 必须清除 base/follow 里的位移 */
+    z-index: 120;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation:
+  carFloat 9s ease-in-out infinite;
+}
+.bg-car {
+  position: fixed;
+  top: 72px;
+  right: -166px; /* 恢复到 follow.css 的标准位置 */
+  width: min(52vw, 980px);
+  z-index: 80;
+  pointer-events: none;
+  animation:
+  carFloat 9s ease-in-out infinite;
+}
+/* =========================
+   Footer（底部版权栏）
+   ========================= */
+
+.site-footer-bar{
+  margin-top: 64px;
+  padding: 28px 18px 34px;
+  background: rgba(255,255,255,0.85);
+  border-top: 1px solid rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  color: rgba(0,0,0,.7);
+}
+
+/* 链接列表 */
+.site-footer-bar .footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.site-footer-bar .footer-links li{
+  margin: 0;
+}
+
+.site-footer-bar .footer-links a{
+  color: rgba(0,0,0,.75);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: .04em;
+}
+
+.site-footer-bar .footer-links a:hover{
+  text-decoration: underline;
+}
+
+/* 版权行 */
+.site-footer-bar .copyright{
+  font-size: 12px;
+  color: rgba(0,0,0,.55);
+  letter-spacing: .04em;
+}
+/* 文章的距离感设计 */
+/* ✅ 1. 容器：确保背景和间距统一 */
+.sns-guide {
+  padding: 80px 18px 120px; /* 底部多留点空间给手机导航 */
+  background: #fff;
+  text-align: center;
+}
+
+.sns-guide .sec-title-block {
+  margin-bottom: 40px;
+}
+
+/* ✅ 2. 网格：核心自适应逻辑 */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 电脑端：4列 */
+  gap: 18px;                             /* 间距 */
+  max-width: 560px;                      /* 限制整体宽度，保持精致 */
+  margin: 0 auto;
+}
+
+/* ✅ 3. 项目：去掉固定宽高，改用自适应比例 */
+.sq-small.sq-img {
+  width: 100% !important;   /* 覆盖 follow.css 的 188px */
+  height: auto !important;  /* 覆盖 follow.css 的 188px */
+  background: none;
+  aspect-ratio: 1 / 1;      /* 保持正方形 */
+}
+
+.sq-small.sq-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* 确保图片填满格子 */
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* ✅ 4. 响应式：针对平板和手机切换布局 */
+@media (max-width: 1000px) {
+  .bottom-grid {
+    grid-template-columns: repeat(2, 1fr); /* 1000px以下变 2x2 */
+    max-width: 360px;                      /* 手机端收窄 */
+    gap: 14px;                             /* 间距稍微调小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-grid {
+    max-width: 280px;                      /* 小屏手机更紧凑 */
+  }
+  .sns-guide {
+    padding: 60px 18px 100px;              /* 缩减间距 */
+  }
+}
+    /* 图片随机倾斜效果，模拟手贴照片的感觉 */
+.tilt-left { transform: rotate(-6deg); }
+.tilt-right { transform: rotate(5deg); }
+.tilt-slight-right { transform: rotate(3deg); }
+
+/* 每一行的高度和对齐 */
+.itinerary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px; /* 行间距 */
+  min-height: 150px;
+}
+/* --- 京都部分特有的推荐评价布局 --- */
+.itinerary-recommendation {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 30px;
+  padding-bottom: 20px;
+}
+
+/* 那个灰色的圆形图片框 */
+.recommendation-circle {
+  width: 140px;
+  height: 140px;
+  background-color: #D9D9D9; /* 默认灰色背景 */
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recommendation-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recommendation-text-block {
+  font-family: var(--font-miyabi);
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: left; /* 评价文字左对齐 */
+  color: #000;
+}
+html {
+  scroll-behavior: smooth; /* 点击标签时平滑滚动到目标位置 */
+}
+
+/* 抵消顶部粘性导航栏可能遮挡标题的问题 */
+.itinerary-container {
+  scroll-margin-top: 80px; /* 根据您 topbar 的高度调整此数值 */
+}
+/* 标题下方的点击引导文字样式 */
+.course-header .click-hint {
+  font-size: 16px;              /* 设置为 16px */
+  color: var(--muted);          /* 使用您已有的半透明灰色变量 */
+  margin-top: 10px;             /* 与上方句子的间距 */
+  font-family: var(--font-gothic); /* 使用哥特体增加易读性 */
+  animation: bounce 2s infinite; /* 可选：增加一个微弱的跳动动画引导点击 */
+}
+
+/* 如果想让小手图标跳动，可以加上这个（可选） */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+/* ✅ 让 TOP 按钮变得精致小巧 */
+.back-to-top-wrap {
+  text-align: center;   /* 居中显示 */
+  margin: 40px 0;       /* 上下留出一点呼吸感 */
+}
+
+.back-to-top-wrap a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.back-to-top-wrap img {
+  width: 43x;          /* 1. 缩小尺寸（原来的图片可能太大） */
+  height: auto;
+  opacity: 0.8;         /* 2. 增加一点半透明感，显得高级不扎眼 */
+  transition: all 0.3s ease; /* 3. 增加平滑过渡动画 */
+  cursor: pointer;
+}
+
+.back-to-top-wrap img:hover {
+  opacity: 1;           /* 鼠标悬停时变亮 */
+  transform: scale(1.1) translateY(-5px); /* 4. 轻轻向上跳一下，非常灵动精致 */
+}
+/* 照片的基本样式（加上白框和阴影，做成拍立得风格） */
+.photo-frame {
+  background: #fff;
+  padding: 8px 8px 20px 8px; /* 下侧留宽一点做成说明文字风格 */
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.15);
+  border: 1px solid #ddd;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- 模式A：仅1张（倾斜） --- */
+.single-photo {
+  max-width: 280px;
+}
+
+/* --- 模式B：2张叠放（堆叠） --- */
+.photo-stack {
+  position: relative;
+  width: 320px;   /* 整体宽度 */
+  height: 240px;  /* 整体高度 */
+  margin-right: 40px;
+}
+
+.photo-stack .photo-frame {
+  position: absolute;
+  width: 200px; /* 每张的尺寸 */
+}
+
+/* 位于下方的照片 */
+.photo-stack .bottom-photo {
+  top: 0;
+  left: 0;
+  transform: rotate(-6deg);
+  z-index: 1;
+}
+
+/* 位于上方的照片 */
+.photo-stack .top-photo {
+  bottom: 0;
+  right: 0;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+/* 悬停时稍微移动的效果（可选） */
+.photo-stack:hover .top-photo { transform: rotate(0deg) scale(1.05); z-index: 10; }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 给各个大的板块加这个动画 */
+.spot-section, .itinerary-container {
+  animation: fadeInUp 1s ease-out both;
+}
+@keyframes swing {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.floating-nav-wrapper .nav-tag:hover {
+  animation: swing 0.5s ease-in-out;
+}
+/* 让照片悬停时更有互动感 */
+.photo-frame {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05) rotate(0deg) translateY(-10px) !important; /* 悬停时放大、变正、上浮 */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <main class="paper">
+<header class="topbar">
+  <a href="index.html" style="text-decoration: none; color: inherit;">
+    <div class="brand">永和盛 株式会社</div>
+  </a>
+  <nav aria-label="top" style="display: flex; align-items: center;">
+    
+
+    <a href="about_asobi.html" style="text-decoration: none; color: inherit;"><span>公司概况</span></a>
+    <a href="#" style="text-decoration: none; color: inherit;"><span>最新消息</span></a>
+  </nav>
+</header>
+
+      <section class="course-header">
+        <p class="sub">深受客人好评！</p>
+        <h1>大阪・京都・奈良</h1>
+        <p class="lead">员工精心策划的<span class="accent">推荐</span>观光路线</p>
+
+  <p class="click-hint">👇 点击各张图片查看详细路线！</p>
+      </section>
+
+<section class="spot-section">
+  <a href="#itinerary-osaka" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">大阪</div>
+  </a>
+  <a href="#itinerary-osaka"> <div class="spot-image-box" style="background-image: url('images/osaka_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>推荐亮点</h2>
+            <p>要说大阪的魅力，一言以蔽之就是“总之能量超强的城市”！这里还是天下的厨房，美食数不胜数！</p>
+            <p>道顿堀、新世界等，也有十分华丽的观光地。当然百货店、咖啡馆也很多。一定能成就一段留在记忆里的旅程！</p>
+      </div>
+    </div>
+  </a> <div class="staff-info">
+    <div class="staff-thumb">
+      <img src="images/nakayama.jpg" alt="中山先生">
+    </div>
+    <div class="staff-name">精通英语的中山先生</div>
+  </div>
+</section>
+
+    <section class="spot-section">
+  <a href="#itinerary-kyoto" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">京都</div>
+  </a>
+  <a href="#itinerary-kyoto">
+    <div class="spot-image-box" style="background-image: url('images/kyoto_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>推荐亮点</h2>
+            <p>京都虽是千年古都，如今却仍在不断进化！这里有着仿佛魔法般的空间，让人感到“啊，此刻的我正身处一个特别的地方”。</p>
+            <p>使用高级轿车服务，便能顺畅地把您带往绝景胜地！请务必来京都一游。</p>
+          </div>
+        </div>
+        <div class="staff-info">
+  <div class="staff-name" style="margin-left: auto;">精通韩语的金先生</div>
+  <div class="staff-thumb">
+    <img src="images/kimu.jpg" alt="金先生"> </div>
+</div>
+      </section>
+ <section class="spot-section">
+  <a href="#itinerary-nara" style="text-decoration: none; color: inherit;">
+    <div class="vertical-label">奈良</div>
+  </a>
+  <a href="#itinerary-nara">
+    <div class="spot-image-box" style="background-image: url('images/nara_bg.png'); cursor: pointer;">
+      <div class="spot-overlay">
+        <h2>推荐亮点</h2>
+            <p>看着奈良公园的鹿、东大寺的大佛，悠然地任时光流淌…… 推荐给追求这种体验的您</p>
+            <p>高级轿车服务连清晨也能接送！特别推荐奈良的“清晨”。另外，这里意外地需要多走路，穿惯了的鞋必不可少！</p>
+          </div>
+        </div>
+        </a><div class="staff-info">
+  <div class="staff-thumb">
+    <img src="images/ou.png" alt="方先生"> </div>
+  <div class="staff-name">中国出生、日本长大的王先生</div>
+</div>
+      </section>
+
+ <div class="itinerary-container" id="itinerary-osaka">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">大阪</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00 接车<br>（酒店・指定地点）
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:30 - 11:30 大阪城公园
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/osaka_castle.png" alt="大阪城">
+      <span class="caption">绚烂豪华！秀吉的黄金世界。</span>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/shinsekai.jpg" alt="新世界美食">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/tsutenkaku.png" alt="通天阁">
+        <span class="caption">热闹浪速的象征！</span>
+      </div>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      11:30 - 14:30 通天阁＆新世界
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      14:30 ～ 15:00 四天王寺
+    </div>
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/shitennoji.png" alt="四天王寺">
+      <span class="caption">日本佛法最初的官寺</span>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/aquarium.jpg" alt="海游馆">
+      <span class="caption">附设咖啡馆，悠闲小憩。</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:30 - 17:30 海游馆
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      18:00 - 19:00 道顿堀＆心斋桥
+    </div>
+    <div class="photo-stack" style="margin-right: 0; margin-left: 40px;">
+      <div class="photo-frame bottom-photo">
+        <img src="images/glico.jpg" alt="格力高">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/dotonbori.jpg" alt="道顿堀">
+        <span class="caption">大阪真是太棒啦！</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>19:00~ 送回酒店</p>
+      <p style="font-size: 14px;">（也推荐就地解散，尽情欣赏夜景）</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/kimu.jpg" alt="建议">
+      </div>
+      <div class="recommendation-text-block">
+        欢迎来到大阪！<br>
+        我会为您介绍“只有当地人才知道、不用排队的隐藏美食”。<br>
+        并以避开拥堵的最佳路线为您导览。
+      </div>
+    </div>
+  </div>
+</div>
+   <div class="itinerary-container" id="itinerary-kyoto">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">京都</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00～10:30 会合后<br>前往京都
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/kyoto_van.png" alt="途中">
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/fushimi_inari.png" alt="伏见稻荷大社">
+      <span class="caption">也推荐和服体验！<br>乘高级轿车移动轻松～</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      10:30-12:00 伏见稻荷大社
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      12:20-15:00 清水寺
+    </div>
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/kiyomizu1.jpg" alt="观光">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/kiyomizu.png" alt="清水寺">
+        <span class="caption">二年坂・产宁坂<br>有很多可爱的小店～</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/kinkakuji.png" alt="金阁寺">
+      <span class="caption">无论看多少次，这种存在感<br>果然都很震撼！</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:40-16:40 金阁寺
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      17:20-18:00 祇园＆花见小路
+    </div>
+    <div class="photo-stack">
+  <div class="photo-frame bottom-photo">
+    <img src="images/gion.jpg" alt="gion">
+  </div>
+<div class="photo-frame single-photo tilt-left">
+  <img src="images/gion.png" alt="祇园">
+  <span class="caption">购物和美食都很丰富！</span>
+</div>
+  </div>
+  </div>
+
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>18:00~ 前往大阪</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/nakayama.jpg" alt="中山先生">
+      </div>
+      <div class="recommendation-text-block">
+        清晨的京都也非常推荐！<br>
+        避开拥挤，可以悠闲地观光。<br>
+        请务必使用便捷的高级轿车服务！
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="itinerary-container" id="itinerary-nara">
+  <div class="itinerary-header">
+    <span class="day-in">one day in</span>
+    <span class="city-name">奈良</span>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      9:00 接车<br>（酒店・指定地点）
+    </div>
+    <div class="photo-frame single-photo tilt-right">
+      <img src="images/nara_pickup.png" alt="接车">
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-left">
+      <img src="images/toshodaiji.png" alt="唐招提寺">
+      <span class="caption">静谧的时光在此流淌……</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      10:00-11:00 唐招提寺
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="itinerary-text" style="padding-left: 10px;">
+      11:30-15:30<br>奈良公园＆东大寺
+    </div>
+    <div class="photo-stack">
+      <div class="photo-frame bottom-photo">
+        <img src="images/daibutsu.jpg" alt="大佛">
+      </div>
+      <div class="photo-frame top-photo">
+        <img src="images/nara_lunch.png" alt="美食">
+        <span class="caption">  好吃的店也有很多！</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-row">
+    <div class="photo-frame single-photo tilt-slight-right">
+      <img src="images/kasuga_shrine.png" alt="春日大社">
+      <span class="caption">喂鹿饼干的时候<br>要小心哦！</span>
+    </div>
+    <div class="itinerary-text" style="text-align: right; padding-right: 20px;">
+      15:40-16:30 春日大社
+    </div>
+  </div>
+<div class="itinerary-row">
+  <div class="photo-frame single-photo tilt-left">
+    <img src="images/wakakusa.jpg" alt="若草山">
+    <span class="caption">可一览奈良市内全景</span>
+  </div>
+  <div class="itinerary-text" style="text-align: left;">
+    17:00-17:40 若草山
+  </div>
+</div>
+  <div class="itinerary-footer">
+    <div class="itinerary-note">
+      <p>19:00~ 抵达大阪酒店</p>
+    </div>
+    <div class="itinerary-recommendation">
+      <div class="recommendation-circle">
+        <img src="images/ou.png" alt="方先生">
+      </div>
+      <div class="recommendation-text-block">
+        上午（奈良）下午（宇治）<br>
+        一天内尽享“大佛・鹿・抹茶”，<br>
+        这条关西『精华尽收』路线也大受欢迎！<b><br><br>请务必前来咨询。</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <div class="back-to-top-wrap">
+  <a href="placetovisit.html">
+    <img src="images/pagetop.png" alt="TOP">
+  </a>
+</div>
+<section class="sns-guide">
+      <div class="sec-title-block" style="margin:40px 0 20px;">
+        <div class="sec-en" style="font-size:20px;">Contact Us</div>
+        <div style="font-size:14px; color:#666;">咨询请由此处</div>
+      </div>
+      <div class="bottom-grid">
+        <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
+          <img src="images/contact-line.png" alt="LINE">
+        </a>
+        <a class="sq-small sq-img" href="mailto:cheng@asobi.ltd">
+          <img src="images/contact-mail.png" alt="Mail">
+        </a>
+        <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
+          <img src="images/contact-instagram.svg" alt="Instagram">
+        </a>
+        <a class="sq-small sq-img" href="images/wechat.JPG" target="_blank">
+          <img src="images/contact-wechat.png" alt="WeChat">
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer-bar">
+      <ul class="footer-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="service.html">服务一览</a></li>
+        <li><a href="alphard_detail.html#vehicle-photos">车辆阵容</a></li>
+        <li><a href="about_asobi.html">公司概况</a></li>
+        <li><a href="#">隐私政策</a></li>
+      </ul>
+      <div class="copyright">© 2026 永和盛 株式会社. All Rights Reserved.</div>
+    </footer>
+  </main> <aside class="floating-nav-wrapper">
+<a class="nav-tag nav-img" href="images/wechat.jpg" target="_blank" style="padding:0;">
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:60px;display:block;">
+  <defs>
+    <linearGradient id="wechatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1de9b6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00b894;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="170" height="50" fill="url(#wechatGrad)" rx="8" filter="url(#shadow)"/>
+  <circle cx="30" cy="30" r="18" fill="white" opacity="0.2"/>
+  <text x="90" y="38" font-size="16" font-weight="bold" fill="white" text-anchor="middle" font-family="Microsoft YaHei, sans-serif">微信咨询</text>
+</svg>
+</a>
+
+<a class="nav-tag nav-img" href="images/rednote.jpg" target="_blank" style="padding:0;">
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:60px;display:block;">
+  <defs>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="170" height="50" fill="url(#redGrad)" rx="8" filter="url(#shadow2)"/>
+  <circle cx="30" cy="30" r="18" fill="white" opacity="0.2"/>
+  <text x="90" y="38" font-size="16" font-weight="bold" fill="white" text-anchor="middle" font-family="Microsoft YaHei, sans-serif">小红书咨询</text>
+</svg>
+</a>
+</aside>
+
+</div> <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>AOS.init();</script>
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<div class="dify-cover-wrapper">
+    <img src="images/left.svg" alt="Chat Decor">
+</div>
+<script>
+ window.difyChatbotConfig = {
+  token: 'UdHmrJYfs7wR2k4Y',
+  inputs: {
+    // You can define the inputs from the Start node here
+    // key is the variable name
+    // e.g.
+    // name: "NAME"
+  },
+  systemVariables: {
+    // user_id: 'YOU CAN DEFINE USER ID HERE',
+    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+  },
+  userVariables: {
+    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+    // name: 'YOU CAN DEFINE USER NAME HERE',
+  },
+ }
+</script>
+<script
+ src="https://udify.app/embed.min.js"
+ id="UdHmrJYfs7wR2k4Y"
+ defer>
+</script>
+<style>
+  #dify-chatbot-bubble-button {
+    background-color: #1C64F2 !important;
+  }
+  #dify-chatbot-bubble-window {
+    width: 24rem !important;
+    height: 40rem !important;
+  }
+/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
+#dify-chatbot-bubble-window {
+    position: fixed !important;
+    right: auto !important;
+    left: 30px !important;   /* 匹配你之前的左侧定位 */
+    bottom: 90px !important; /* 距离底部距离 */
+    z-index: 999999 !important; /* 确保在所有元素之上 */
+
+    /* 解决“只显示在顶端”的问题 */
+    top: auto !important;
+}
+
+/* 同时确保气泡按钮也是固定定位 */
+#dify-chatbot-bubble-button {
+    position: fixed !important;
+    right: auto !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    z-index: 999999 !important;
+}
+
+/* 针对移动端的适配 */
+@media (max-width: 1000px) {
+    #dify-chatbot-bubble-window {
+        left: 10px !important;
+        bottom: 100px !important;
+        width: 90vw !important; /* 手机端宽度适中 */
+        height: 70vh !important; /* 防止撑出屏幕 */
+    }
+    #dify-chatbot-bubble-button {
+        left: 10px !important;
+        bottom: 66px !important;
+    }
+            .dify-cover-wrapper {
+        bottom: 65px;
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+    }
+}
+.dify-cover-wrapper {
+    position: fixed;
+    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
+    left: -10px;
+    bottom: -10px;
+
+    /* 确保层级足够高，盖在 Dify 气泡之上 */
+    z-index: 999999;
+
+    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
+    pointer-events: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dify-cover-wrapper img {
+    /* 进一步放大尺寸 */
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+
+    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
+    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
+}
+
+/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
+@media (max-width: 1000px) {
+    .dify-cover-wrapper {
+        left: -5px;
+        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
+    }
+    .dify-cover-wrapper img {
+        width: 120px;
+        height: 120px;
+    }
+}
+</style>
+
+  </body>
+</html>

@@ -1,0 +1,7 @@
+/* base.css: small reset + basic defaults */
+:root{ color-scheme: light; }
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{ margin:0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
