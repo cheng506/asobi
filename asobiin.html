@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASOBI 包车预约系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* ── 顶部导航栏 ── */
+    header {
+      background: #263238;
+      color: #fff;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    header .subtitle {
+      font-size: 13px;
+      color: #90a4ae;
+      margin-top: 2px;
+    }
+
+    /* ── 主体布局 ── */
+    main {
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── 通用卡片 ── */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #eceff1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-header .icon {
+      font-size: 20px;
+    }
+
+    .card-header h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #37474f;
+    }
+
+    .card-header .tag {
+      margin-left: auto;
+      font-size: 11px;
+      background: #e3f2fd;
+      color: #1565c0;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .card-body {
+      padding: 0;
+    }
+
+    /* ── 嵌入区域 ── */
+    .embed-wrapper {
+      position: relative;
+      width: 100%;
+      background: #eceff1;
+    }
+
+    .embed-wrapper iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    /* 日历高度 */
+    .calendar-embed iframe {
+      height: 620px;
+    }
+
+    /* 表单高度 */
+    .form-embed iframe {
+      height: 780px;
+    }
+
+    /* ── 占位提示（替换 iframe 前显示）── */
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 60px 24px;
+      color: #90a4ae;
+      text-align: center;
+    }
+
+    .placeholder .ph-icon {
+      font-size: 48px;
+      opacity: 0.4;
+    }
+
+    .placeholder p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .placeholder code {
+      background: #eceff1;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #546e7a;
+    }
+
+    /* ── 页脚 ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #b0bec5;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="logo">🚐 ASOBI 包车预约</div>
+      <div class="subtitle">Charter Booking Portal</div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── 日历区块 ── -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📅</span>
+        <h2>行程日历</h2>
+        <span class="tag">Google Calendar</span>
+      </div>
+      <div class="card-body">
+        <div class="embed-wrapper calendar-embed">
+
+          <!-- ✅ 把下方 PLACEHOLDER 替换为你的 Google Calendar 嵌入代码 -->
+          <!-- 获取方法：Google 日历 → 设置 → 某个日历 → 整合日历 → 嵌入代码 -->
+
+         <iframe src="https://calendar.google.com/calendar/embed?src=4d30b23a737dab56552b535e7cade9f9cca07fcdc14014745a713e8379baee30%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 表单区块 ── -->
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">📋</span>
+        <h2>预约申请</h2>
+        <span class="tag">Google Forms</span>
+      </div>
+      <div class="card-body">
+        <div class="embed-wrapper form-embed">
+
+          <!-- ✅ 把下方 PLACEHOLDER 替换为你的 Google Forms 嵌入代码 -->
+          <!-- 获取方法：Google 表单 → 发送 → 嵌入（</> 图标）→ 复制 iframe -->
+
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdYuOhSM5Pw_2UhyOO2cf9oi6ZdzRz_h9dbwiQxSTVg2FCIvQ/viewform?embedded=true" width="640" height="3872" frameborder="0" marginheight="0" marginwidth="0">正在加载…</iframe>
+
+ 
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    © ASOBI Charter Service &nbsp;·&nbsp; Powered by Google Workspace
+  </footer>
+
+</body>
+</html>
