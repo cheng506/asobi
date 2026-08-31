@@ -10,8 +10,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/follow.css" />
 
-  <style>
-    :root{
+  <style>    :root{
       --bg:#9CE0FC;
       --paper:#fff;
       --text:#111;
@@ -22,9 +21,7 @@
   --w-nav: 228px;
   --h-nav: 64px;
     }
-
     body{ margin:0; background:var(--bg); color:var(--text); overflow-x:hidden; }
-
     /* 跟你现有 follow/detail 的 stage/paper 结构靠拢 */
     /* ✅ 修正 stage：让主体和导航作为一个整体居中 */
 .stage {
@@ -38,7 +35,6 @@
   position: relative;
   left: 0;                 /* 移除之前的偏移 */
 }
-
 /* ✅ 修正 paper：移除 auto margin，让它在 flex 流中排队 */
 .paper {
   flex-shrink: 0;           /* 防止宽度被挤压 */
@@ -49,7 +45,6 @@
   overflow: hidden;
   margin: 0;                /* 必须改为0，否则 nav 无法贴合 */
 }
-
     .paper{
   width: min(var(--max), 100%);
   background: var(--paper);
@@ -60,8 +55,6 @@
   /* ❌ 不要 auto */
   margin: 0 auto；
 }
-
-
     /* 顶部（轻、干净） */
     .topbar{
       display:flex;
@@ -69,15 +62,16 @@
       justify-content:space-between;
       padding: 18px 26px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 10;
-    }
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
     .topbar .brand{ font-weight:700; letter-spacing:.5px; }
     .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
-
     /* ✅ Hero：保留“你现在的 hero + smile wave” */
     .hero-ph{
       height:46vh; min-height:320px;
@@ -95,7 +89,6 @@
       pointer-events:none;
     }
     .hero-ph .smile-wave path{ fill:#fff; }
-
     /* ✅ hero 下方介绍文字（开阔一点） */
     .hero-message{
       padding: 56px 22px 26px;
@@ -114,12 +107,10 @@
       line-height: 2.05;
       color: rgba(0,0,0,.78);
     }
-
     /* ✅ 开阔内容区：不用卡片盒子，改为“长文排版 + 细线” */
     .content{
       padding: 10px 22px 40px;
     }
-
     .page-title{
       text-align:center;
       margin: 18px 0 30px;
@@ -135,13 +126,11 @@
       font-size: 26px;
       letter-spacing: .08em;
     }
-
     .block{
       max-width: 560px;
       margin: 0 auto;
       padding: 0;
     }
-
     .intro{
       margin: 0 0 22px;
       color: rgba(0,0,0,.78);
@@ -149,19 +138,16 @@
       font-size: 14px;
       white-space: pre-line;
     }
-
     .divider{
       height:1px;
       background: var(--line);
       margin: 26px 0;
     }
-
     .h2{
       margin: 0 0 14px;
       font-size: 18px;
       letter-spacing: .08em;
     }
-
     /* ✅ “小表格”：轻量、开阔、像 aquastand 那种信息块:contentReference[oaicite:1]{index=1} */
     .info-table{
       width:100%;
@@ -187,7 +173,6 @@
       color: rgba(0,0,0,.86);
     }
     .info-table a{ text-decoration: underline; text-underline-offset: 3px; }
-
     /* 业务内容：用“宽松列表”，不要卡片 */
     .list{
       margin: 0;
@@ -197,7 +182,6 @@
       font-size: 14px;
     }
     .list li{ margin: 6px 0; }
-
     /* 实绩：用数字行（开阔） */
     .kpis{
       display:grid;
@@ -220,27 +204,20 @@
       letter-spacing:.04em;
       font-weight: 650;
     }
-
     /* 手机：更窄更松 */
-    @media (max-width: 1000px){
-      .stage{ display:block; padding: 0 12px 60px; }
+    @media (max-width: 1000px){      .stage{ display:block; padding: 0 12px 60px; }
       .paper{ border-radius: 0; width:100%; max-width: 520px; }
       .hero-message{ padding: 46px 18px 22px; }
       .content{ padding: 6px 18px 34px; }
       .kpis{ grid-template-columns: 1fr; }
-    }
-
+}
     /* ✅ 手机底部三色导航预留空间（不挡内容） */
-    @media (max-width: 1000px){
-      .paper{ padding-bottom: 110px; }
-    }
-    @media (min-width: 1001px){
-  :root{
+    @media (max-width: 1000px){      .paper{ padding-bottom: 110px; }
+}
+    @media (min-width: 1001px){  :root{
     --paper-shift: 140px;
   }
-
 }
-
 /* ✅ 右侧三色导航：作为第二列，贴着 paper */
 /* =========================
    Desktop：nav 贴白色纸右侧
@@ -255,11 +232,8 @@
   flex-direction: column;
   gap: 12px;
 }
-
-
 /* 手机端：底部固定（你 follow 也是这个思路） */
-@media (max-width: 1000px){
-  .floating-nav-wrapper{
+@media (max-width: 1000px){  .floating-nav-wrapper{
     
     left: 0;
     
@@ -273,8 +247,7 @@
   }
 }
 /* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
-@media (min-width: 1001px) {
-  .floating-nav-wrapper {
+@media (min-width: 1001px) {  .floating-nav-wrapper {
     position: sticky !important; 
     top: 528px !important;       /* 距离视口顶部的距离 */
     left: auto !important;
@@ -309,7 +282,6 @@
   font-size: 13px;
   color: rgba(0,0,0,.7);
 }
-
 /* 链接列表 */
 .site-footer-bar .footer-links{
   list-style: none;
@@ -320,113 +292,23 @@
   justify-content: center;
   gap: 18px;
 }
-
 .site-footer-bar .footer-links li{
   margin: 0;
 }
-
 .site-footer-bar .footer-links a{
   color: rgba(0,0,0,.75);
   text-decoration: none;
   font-size: 13px;
   letter-spacing: .04em;
 }
-
 .site-footer-bar .footer-links a:hover{
   text-decoration: underline;
 }
-
 /* 版权行 */
 .site-footer-bar .copyright{
   font-size: 12px;
   color: rgba(0,0,0,.55);
   letter-spacing: .04em;
-}
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
-#dify-chatbot-bubble-window {
-    position: fixed !important;
-    right: auto !important;
-    left: 30px !important;   /* 匹配你之前的左侧定位 */
-    bottom: 90px !important; /* 距离底部距离 */
-    z-index: 999999 !important; /* 确保在所有元素之上 */
-    
-    /* 解决“只显示在顶端”的问题 */
-    top: auto !important; 
-}
-
-/* 同时确保气泡按钮也是固定定位 */
-#dify-chatbot-bubble-button {
-    position: fixed !important;
-    right: auto !important;
-    left: 20px !important;
-    bottom: 20px !important;
-    z-index: 999999 !important;
-}
-
-/* 针对移动端的适配 */
-@media (max-width: 1000px) {
-    #dify-chatbot-bubble-window {
-        left: 10px !important;
-        bottom: 100px !important;
-        width: 90vw !important; /* 手机端宽度适中 */
-        height: 70vh !important; /* 防止撑出屏幕 */
-    }
-    #dify-chatbot-bubble-button {
-        left: 10px !important;
-        bottom: 66px !important;
-    }
-            .dify-cover-wrapper {
-        bottom: 65px; 
-    }
-    .dify-cover-wrapper img {
-        width: 120px; 
-    }
-}
-.dify-cover-wrapper {
-    position: fixed;
-    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
-    left: -10px; 
-    bottom: -10px;
-    
-    /* 确保层级足够高，盖在 Dify 气泡之上 */
-    z-index: 999999; 
-    
-    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
-    pointer-events: none; 
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dify-cover-wrapper img {
-    /* 进一步放大尺寸 */
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    
-    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
-    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
-}
-
-/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
-@media (max-width: 1000px) {
-    .dify-cover-wrapper {
-        left: -5px;
-        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
-    }
-    .dify-cover-wrapper img {
-        width: 120px;
-        height: 120px;
-    }
 }
 </style>
 </head>
@@ -587,7 +469,6 @@ ASOBIは、大阪圏を中心に、移動そのものを快適な体験へと変
   </div>
 </footer>
     </main>
-    
 
 
     <!-- ✅ 右侧三色导航（保留统一） -->
@@ -604,46 +485,7 @@ ASOBIは、大阪圏を中心に、移動そのものを快適な体験へと変
 </aside>
 
   </div>
-  <script>
- window.difyChatbotConfig = {
-  token: 'UdHmrJYfs7wR2k4Y',
-  inputs: {
-    // You can define the inputs from the Start node here
-    // key is the variable name
-    // e.g.
-    // name: "NAME"
-  },
-  systemVariables: {
-    // user_id: 'YOU CAN DEFINE USER ID HERE',
-    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
-  },
-  userVariables: {
-    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
-    // name: 'YOU CAN DEFINE USER NAME HERE',
-  },
- }
-</script>
-<script
- src="https://udify.app/embed.min.js"
- id="UdHmrJYfs7wR2k4Y"
- defer>
-</script>
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-</style>
- 
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="">
-</div>
 
  
-
-
 </body>
 </html>

@@ -188,7 +188,6 @@
 </section>
 
 
-
       <!-- bottom space (avoid mobile bottom floating nav overlay) -->
       <div style="height:120px"></div>
 <footer class="site-footer-bar">
@@ -286,169 +285,17 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoPlay();
 });
 </script>
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="Chat Decor">
-</div>
-  <script>
- window.difyChatbotConfig = {
-  token: 'UdHmrJYfs7wR2k4Y',
-  inputs: {
-    // You can define the inputs from the Start node here
-    // key is the variable name
-    // e.g.
-    // name: "NAME"
-  },
-  systemVariables: {
-    // user_id: 'YOU CAN DEFINE USER ID HERE',
-    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
-  },
-  userVariables: {
-    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
-    // name: 'YOU CAN DEFINE USER NAME HERE',
-  },
- }
-</script>
-<script
- src="https://udify.app/embed.min.js"
- id="UdHmrJYfs7wR2k4Y"
- defer>
-</script>
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-  
-</style>
+
  
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="">
-</div>
-
-<script>
- window.difyChatbotConfig = {
-  token: 'UdHmrJYfs7wR2k4Y',
-  inputs: {
-    // You can define the inputs from the Start node here
-    // key is the variable name
-    // e.g.
-    // name: "NAME"
-  },
-  systemVariables: {
-    // user_id: 'YOU CAN DEFINE USER ID HERE',
-    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
-  },
-  userVariables: {
-    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
-    // name: 'YOU CAN DEFINE USER NAME HERE',
-  },
- }
-</script>
-<script> 
- src="https://udify.app/embed.min.js"
- id="UdHmrJYfs7wR2k4Y"
- defer>
-</script>
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
-#dify-chatbot-bubble-window {
-    position: fixed !important;
-    right: auto !important;
-    left: 30px !important;   /* 匹配你之前的左侧定位 */
-    bottom: 90px !important; /* 距离底部距离 */
-    z-index: 999999 !important; /* 确保在所有元素之上 */
-    
-    /* 解决“只显示在顶端”的问题 */
-    top: auto !important; 
-}
-
-/* 同时确保气泡按钮也是固定定位 */
-#dify-chatbot-bubble-button {
-    position: fixed !important;
-    right: auto !important;
-    left: 20px !important;
-    bottom: 20px !important;
-    z-index: 999999 !important;
-}
-
-/* 针对移动端的适配 */
-@media (max-width: 1000px) {
-    #dify-chatbot-bubble-window {
-        left: 10px !important;
-        bottom: 100px !important;
-        width: 90vw !important; /* 手机端宽度适中 */
-        height: 70vh !important; /* 防止撑出屏幕 */
-    }
-    #dify-chatbot-bubble-button {
-        left: 10px !important;
-        bottom: 66px !important;
-    }
-            .dify-cover-wrapper {
-        bottom: 65px; 
-    }
-    .dify-cover-wrapper img {
-        width: 120px; 
-    }
-}
-.dify-cover-wrapper {
-    position: fixed;
-    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
-    left: -10px; 
-    bottom: -10px;
-    
-    /* 确保层级足够高，盖在 Dify 气泡之上 */
-    z-index: 999999; 
-    
-    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
-    pointer-events: none; 
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dify-cover-wrapper img {
-    /* 进一步放大尺寸 */
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    
-    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
-    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
-}
-
-/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
-@media (max-width: 1000px) {
-    .dify-cover-wrapper {
-        left: -5px;
-        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
-    }
-    .dify-cover-wrapper img {
-        width: 120px;
-        height: 120px;
-    }
-}
-/* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
-@media (max-width: 1024px) {
-    .bg-car {
+<style>/* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
+@media (max-width: 1024px) {    .bg-car {
         z-index: -1 !important; /* 将其置于底层，防止遮挡文字或按钮 */
         /* 如果您觉得画面还是有点乱，也可以考虑在这里调低透明度，例如：
         opacity: 0.3 !important; */
     }
 }
 /* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
-@media (max-width: 1024px) {
-    .bg-car {
+@media (max-width: 1024px) {    .bg-car {
         z-index: -1 !important; /* 将其置于底层，防止遮挡文字或按钮 */
         /* 如果您觉得画面还是有点乱，也可以考虑在这里调低透明度，例如：
         opacity: 0.3 !important; */
@@ -457,6 +304,5 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 
- 
 </body>
 </html>

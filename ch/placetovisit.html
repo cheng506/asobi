@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/follow.css" />
 
-  <style>
-    :root{
+  <style>    :root{
       --bg:#9CE0FC;
       --paper:#fff;
       --text:#111;
@@ -22,9 +21,7 @@
       --font-miyabi: "SicTake-Miyabi", serif;
       --font-gothic: "Sawarabi Gothic", sans-serif;
     }
-
     body{ margin:0; background:var(--bg); color:var(--text); font-family: var(--font-gothic); overflow-x:hidden; }
-
     .stage {
       max-width: 1440px;
       margin: 0 auto;
@@ -35,7 +32,6 @@
       padding: 0 18px 60px;
       position: relative;
     }
-
     .paper {
       flex-shrink: 0;
       width: min(var(--max), 100%);
@@ -44,21 +40,21 @@
       overflow: hidden;
       margin: 0;
     }
-
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding: 18px 26px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 10;
-    }
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
     .topbar .brand{ font-weight:700; letter-spacing:.5px; }
-
     /* --- 内容独有的样式 --- */
 
     .course-header {
@@ -69,14 +65,12 @@
     .course-header h1 { font-family: var(--font-miyabi); font-size: 48px; margin: 10px 0; }
     .course-header .lead { font-family: var(--font-miyabi); font-size: 24px; }
     .course-header .accent { color: var(--accent); font-weight: bold; }
-
     /* 各观光地区块 */
     .spot-section {
       position: relative;
       margin-bottom: 60px;
       padding: 0 20px;
     }
-
     .spot-image-box {
       position: relative;
       width: 100%;
@@ -86,7 +80,6 @@
       background-position: center;
       border-radius: 4px;
     }
-
     /* 文字盘的叠加层 */
     .spot-overlay {
       position: absolute;
@@ -100,10 +93,8 @@
       flex-direction: column;
       justify-content: center;
     }
-
     .spot-overlay h2 { font-family: var(--font-miyabi); font-size: 24px; margin-bottom: 10px; border-bottom: 1px solid #333; display: inline-block; width: fit-content; }
     .spot-overlay p { font-size: 15px; line-height: 1.6; margin: 5px 0; }
-
     /* 竖排的地名 */
     .vertical-label {
       position: absolute;
@@ -115,7 +106,6 @@
       line-height: 1;
       z-index: 2;
     }
-
     /* 员工介绍 */
     .staff-info {
       display: flex;
@@ -134,13 +124,11 @@
   overflow: hidden; /* 把图片裁成圆形 */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 增加一点立体感 */
 }
-
 .staff-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* 保持纵横比收进框中 */
 }
-
     .staff-name { font-size: 16px; font-weight: bold; }
 /* 追加：行程表样式 */
 .itinerary-container {
@@ -150,14 +138,12 @@
   position: relative;
   background: #fff;
 }
-
 .itinerary-title {
   font-family: var(--font-miyabi);
   margin-bottom: 30px;
 }
 .itinerary-title .small { font-size: 16px; }
 .itinerary-title .large { font-size: 48px; display: block; line-height: 1; }
-
 .itinerary-item {
   font-family: var(--font-miyabi);
   font-size: 20px; /* ← 这里改成 20px */
@@ -166,13 +152,11 @@
   flex-direction: column;
   gap: 10px;
 }
-
 /* 为了兼容你京都和奈良用的新类名，建议把这个也加上 */
 .itinerary-text {
   font-family: var(--font-miyabi);
   font-size: 20px; /* ← 统一设定为 20px */
 }
-
 /* 修改或确认以下样式，确保行程表内图片能够灵活排列 */
 .itinerary-photos {
   display: flex;
@@ -181,17 +165,16 @@
   margin-top: 20px;
   gap: 15px;
 }
-
 .photo-card.right { transform: rotate(5deg); }
 .photo-card.left { transform: rotate(-5deg); }
-
 .caption {
   font-size: 14px; /* ← 这里锁定 14px */
   color: #333;
   display: block;
   margin-top: 5px;
   line-height: 1.4;
-}/* 这样写能保证所有照片下的文字（无论带不带类名）都是 14px */
+}
+/* 这样写能保证所有照片下的文字（无论带不带类名）都是 14px */
 .itinerary-photos span,
 .photo-card span,
 .caption {
@@ -206,15 +189,13 @@
   color: #333;
 }
     /* 响应式调整 */
-    @media (max-width: 1000px){
-      .stage{ display:block; padding: 0; }
+    @media (max-width: 1000px){      .stage{ display:block; padding: 0; }
       .paper{ width:100%; border-radius: 0; }
       .vertical-label { font-size: 40px; left: 5px; }
       .spot-overlay { left: 45px; }
       .staff-info { padding-left: 20px; }
       .course-header h1 { font-size: 32px; }
-    }
-
+}
 /* ✅ 右侧三色导航：作为第二列，贴着 paper */
 /* =========================
    Desktop：nav 贴白色纸右侧
@@ -229,11 +210,8 @@
   flex-direction: column;
   gap: 12px;
 }
-
-
 /* 手机端：底部固定（你 follow 也是这个思路） */
-@media (max-width: 1000px){
-  .floating-nav-wrapper{
+@media (max-width: 1000px){  .floating-nav-wrapper{
 
     left: 0;
 
@@ -247,8 +225,7 @@
   }
 }
 /* ✅ 强制覆盖 follow.css 的定位，让它“粘”在 paper 右侧 */
-@media (min-width: 1001px) {
-  .floating-nav-wrapper {
+@media (min-width: 1001px) {  .floating-nav-wrapper {
     position: sticky !important;
     top: 528px !important;       /* 距离视口顶部的距离 */
     left: auto !important;
@@ -293,7 +270,6 @@
   font-size: 13px;
   color: rgba(0,0,0,.7);
 }
-
 /* 链接列表 */
 .site-footer-bar .footer-links{
   list-style: none;
@@ -304,22 +280,18 @@
   justify-content: center;
   gap: 18px;
 }
-
 .site-footer-bar .footer-links li{
   margin: 0;
 }
-
 .site-footer-bar .footer-links a{
   color: rgba(0,0,0,.75);
   text-decoration: none;
   font-size: 13px;
   letter-spacing: .04em;
 }
-
 .site-footer-bar .footer-links a:hover{
   text-decoration: underline;
 }
-
 /* 版权行 */
 .site-footer-bar .copyright{
   font-size: 12px;
@@ -333,11 +305,9 @@
   background: #fff;
   text-align: center;
 }
-
 .sns-guide .sec-title-block {
   margin-bottom: 40px;
 }
-
 /* ✅ 2. 网格：核心自适应逻辑 */
 .bottom-grid {
   display: grid;
@@ -346,7 +316,6 @@
   max-width: 560px;                      /* 限制整体宽度，保持精致 */
   margin: 0 auto;
 }
-
 /* ✅ 3. 项目：去掉固定宽高，改用自适应比例 */
 .sq-small.sq-img {
   width: 100% !important;   /* 覆盖 follow.css 的 188px */
@@ -354,7 +323,6 @@
   background: none;
   aspect-ratio: 1 / 1;      /* 保持正方形 */
 }
-
 .sq-small.sq-img img {
   width: 100%;
   height: 100%;
@@ -362,18 +330,14 @@
   border-radius: 12px;
   transition: transform .2s ease, box-shadow .2s ease;
 }
-
 /* ✅ 4. 响应式：针对平板和手机切换布局 */
-@media (max-width: 1000px) {
-  .bottom-grid {
+@media (max-width: 1000px) {  .bottom-grid {
     grid-template-columns: repeat(2, 1fr); /* 1000px以下变 2x2 */
     max-width: 360px;                      /* 手机端收窄 */
     gap: 14px;                             /* 间距稍微调小 */
   }
 }
-
-@media (max-width: 480px) {
-  .bottom-grid {
+@media (max-width: 480px) {  .bottom-grid {
     max-width: 280px;                      /* 小屏手机更紧凑 */
   }
   .sns-guide {
@@ -384,7 +348,6 @@
 .tilt-left { transform: rotate(-6deg); }
 .tilt-right { transform: rotate(5deg); }
 .tilt-slight-right { transform: rotate(3deg); }
-
 /* 每一行的高度和对齐 */
 .itinerary-row {
   display: flex;
@@ -401,7 +364,6 @@
   margin-top: 30px;
   padding-bottom: 20px;
 }
-
 /* 那个灰色的圆形图片框 */
 .recommendation-circle {
   width: 140px;
@@ -412,13 +374,11 @@
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
 .recommendation-circle img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .recommendation-text-block {
   font-family: var(--font-miyabi);
   font-size: 15px;
@@ -429,7 +389,6 @@
 html {
   scroll-behavior: smooth; /* 点击标签时平滑滚动到目标位置 */
 }
-
 /* 抵消顶部粘性导航栏可能遮挡标题的问题 */
 .itinerary-container {
   scroll-margin-top: 80px; /* 根据您 topbar 的高度调整此数值 */
@@ -442,7 +401,6 @@ html {
   font-family: var(--font-gothic); /* 使用哥特体增加易读性 */
   animation: bounce 2s infinite; /* 可选：增加一个微弱的跳动动画引导点击 */
 }
-
 /* 如果想让小手图标跳动，可以加上这个（可选） */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -453,12 +411,10 @@ html {
   text-align: center;   /* 居中显示 */
   margin: 40px 0;       /* 上下留出一点呼吸感 */
 }
-
 .back-to-top-wrap a {
   display: inline-block;
   text-decoration: none;
 }
-
 .back-to-top-wrap img {
   width: 43x;          /* 1. 缩小尺寸（原来的图片可能太大） */
   height: auto;
@@ -466,7 +422,6 @@ html {
   transition: all 0.3s ease; /* 3. 增加平滑过渡动画 */
   cursor: pointer;
 }
-
 .back-to-top-wrap img:hover {
   opacity: 1;           /* 鼠标悬停时变亮 */
   transform: scale(1.1) translateY(-5px); /* 4. 轻轻向上跳一下，非常灵动精致 */
@@ -480,18 +435,15 @@ html {
   display: inline-block;
   transition: transform 0.3s ease;
 }
-
 .photo-frame img {
   width: 100%;
   height: auto;
   display: block;
 }
-
 /* --- 模式A：仅1张（倾斜） --- */
 .single-photo {
   max-width: 280px;
 }
-
 /* --- 模式B：2张叠放（堆叠） --- */
 .photo-stack {
   position: relative;
@@ -499,12 +451,10 @@ html {
   height: 240px;  /* 整体高度 */
   margin-right: 40px;
 }
-
 .photo-stack .photo-frame {
   position: absolute;
   width: 200px; /* 每张的尺寸 */
 }
-
 /* 位于下方的照片 */
 .photo-stack .bottom-photo {
   top: 0;
@@ -512,7 +462,6 @@ html {
   transform: rotate(-6deg);
   z-index: 1;
 }
-
 /* 位于上方的照片 */
 .photo-stack .top-photo {
   bottom: 0;
@@ -520,7 +469,6 @@ html {
   transform: rotate(4deg);
   z-index: 2;
 }
-
 /* 悬停时稍微移动的效果（可选） */
 .photo-stack:hover .top-photo { transform: rotate(0deg) scale(1.05); z-index: 10; }
 @keyframes fadeInUp {
@@ -533,7 +481,6 @@ html {
     transform: translateY(0);
   }
 }
-
 /* 给各个大的板块加这个动画 */
 .spot-section, .itinerary-container {
   animation: fadeInUp 1s ease-out both;
@@ -543,7 +490,6 @@ html {
   50% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 }
-
 .floating-nav-wrapper .nav-tag:hover {
   animation: swing 0.5s ease-in-out;
 }
@@ -551,13 +497,12 @@ html {
 .photo-frame {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
 }
-
 .photo-frame:hover {
   transform: scale(1.05) rotate(0deg) translateY(-10px) !important; /* 悬停时放大、变正、上浮 */
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   z-index: 10;
 }
-  </style>
+</style>
 </head>
 
 <body>
@@ -886,7 +831,6 @@ html {
 </div>
 
 
-
         <div class="back-to-top-wrap">
   <a href="placetovisit.html">
     <img src="images/pagetop.png" alt="TOP">
@@ -962,123 +906,7 @@ html {
 </div> <img class="bg-car" src="youce.png" alt="" aria-hidden="true">
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>AOS.init();</script>
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="Chat Decor">
-</div>
-<div class="dify-cover-wrapper">
-    <img src="images/left.svg" alt="Chat Decor">
-</div>
-<script>
- window.difyChatbotConfig = {
-  token: 'UdHmrJYfs7wR2k4Y',
-  inputs: {
-    // You can define the inputs from the Start node here
-    // key is the variable name
-    // e.g.
-    // name: "NAME"
-  },
-  systemVariables: {
-    // user_id: 'YOU CAN DEFINE USER ID HERE',
-    // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
-  },
-  userVariables: {
-    // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
-    // name: 'YOU CAN DEFINE USER NAME HERE',
-  },
- }
-</script>
-<script
- src="https://udify.app/embed.min.js"
- id="UdHmrJYfs7wR2k4Y"
- defer>
-</script>
-<style>
-  #dify-chatbot-bubble-button {
-    background-color: #1C64F2 !important;
-  }
-  #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-  }
-/* 强制聊天窗口在视口中固定，不随页面滚动而消失 */
-#dify-chatbot-bubble-window {
-    position: fixed !important;
-    right: auto !important;
-    left: 30px !important;   /* 匹配你之前的左侧定位 */
-    bottom: 90px !important; /* 距离底部距离 */
-    z-index: 999999 !important; /* 确保在所有元素之上 */
 
-    /* 解决“只显示在顶端”的问题 */
-    top: auto !important;
-}
-
-/* 同时确保气泡按钮也是固定定位 */
-#dify-chatbot-bubble-button {
-    position: fixed !important;
-    right: auto !important;
-    left: 20px !important;
-    bottom: 20px !important;
-    z-index: 999999 !important;
-}
-
-/* 针对移动端的适配 */
-@media (max-width: 1000px) {
-    #dify-chatbot-bubble-window {
-        left: 10px !important;
-        bottom: 100px !important;
-        width: 90vw !important; /* 手机端宽度适中 */
-        height: 70vh !important; /* 防止撑出屏幕 */
-    }
-    #dify-chatbot-bubble-button {
-        left: 10px !important;
-        bottom: 66px !important;
-    }
-            .dify-cover-wrapper {
-        bottom: 65px;
-    }
-    .dify-cover-wrapper img {
-        width: 120px;
-    }
-}
-.dify-cover-wrapper {
-    position: fixed;
-    /* 调整 left 和 bottom，让大图紧贴角落，减少对正文的遮挡 */
-    left: -10px;
-    bottom: -10px;
-
-    /* 确保层级足够高，盖在 Dify 气泡之上 */
-    z-index: 999999;
-
-    /* 允许点击穿透，这样用户依然可以点击到下方的 Dify 气泡进行对话 */
-    pointer-events: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dify-cover-wrapper img {
-    /* 进一步放大尺寸 */
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-
-    /* 保持原汁原味，不加额外修饰，仅增加轻微阴影 */
-    filter: drop-shadow(2px 4px 15px rgba(0,0,0,0.2));
-}
-
-/* 针对手机端进行比例缩放，避免完全遮挡屏幕 */
-@media (max-width: 1000px) {
-    .dify-cover-wrapper {
-        left: -5px;
-        bottom: 66px; /* 避开您网页底部的移动端导航栏 */
-    }
-    .dify-cover-wrapper img {
-        width: 120px;
-        height: 120px;
-    }
-}
-</style>
 
   </body>
 </html>

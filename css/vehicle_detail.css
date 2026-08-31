@@ -43,6 +43,13 @@ body{ background: var(--bg-blue); }
   justify-content:space-between;
   padding: 18px 26px;
   border-bottom: 1px solid rgba(0,0,0,.06);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .topbar .brand{ font-weight:700; letter-spacing:.5px; }
 .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
@@ -305,7 +312,8 @@ body{ background: var(--bg-blue); }
     padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) !important;
 
     background: rgba(255,255,255,0.92) !important;
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     z-index: 9999 !important;
 
     /* ✅ 重点：清掉你 PC 端那些 translateX 贴右的逻辑 */
