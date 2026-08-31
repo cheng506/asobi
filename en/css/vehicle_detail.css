@@ -16,7 +16,6 @@
 /* sana： nav right */
 
 body{ background: var(--bg-blue); }
-
 /* layout wrapper (match your 0-asobi style: center paper with side blue) */
 .stage{
   max-width: 1440px;
@@ -26,7 +25,6 @@ body{ background: var(--bg-blue); }
   gap: 18px;
   padding: 0 18px;
 }
-
 .paper{
   width: min(var(--paper-w), 100%);
   background:#fff;
@@ -35,7 +33,6 @@ body{ background: var(--bg-blue); }
   margin: 6px auto 10px;
   overflow: hidden;
 }
-
 /* top header (simple, like your screenshot) */
 .topbar{
   display:flex;
@@ -53,7 +50,6 @@ body{ background: var(--bg-blue); }
 }
 .topbar .brand{ font-weight:700; letter-spacing:.5px; }
 .topbar nav{ display:flex; gap: 18px; font-size: 13px; color:#333; }
-
 /* section 01 */
 .hero{
   padding: 70px var(--paper-pad-x) 40px;
@@ -76,7 +72,6 @@ body{ background: var(--bg-blue); }
   margin: 34px auto 0;
   width: min(520px, 90%);
 }
-
 .badges{
   margin: 26px auto 6px;
   display:flex;
@@ -115,11 +110,9 @@ body{ background: var(--bg-blue); }
   font-weight: 600;
   letter-spacing: .08em;
 }
-@media (hover:hover){
-  .badge{
+@media (hover:hover){  .badge{
     transition: box-shadow .3s ease, transform .3s ease;
   }
-
   .badge:hover{
     box-shadow:
       0 0 20px rgba(230,197,122,0.55),
@@ -127,13 +120,10 @@ body{ background: var(--bg-blue); }
     transform: translateY(-2px);
   }
 }
-
-
 /* section 02 slider placeholder */
 .section{
   padding: 34px var(--paper-pad-x) 54px;
 }
-
 .slider-ph{
   background:#D9D9D9;
   border-radius: 10px;
@@ -152,7 +142,6 @@ body{ background: var(--bg-blue); }
 }
 .slider-ph .arrow.left{ left: 22px; }
 .slider-ph .arrow.right{ right: 22px; }
-
 /* 車種紹介タイトルのデザイン修正 */
 .others-title {
     font-size: 28px;            /* 文字を大きく */
@@ -164,7 +153,6 @@ body{ background: var(--bg-blue); }
     position: relative;
     font-family: var(--font-accent); /* 丸みのあるフォント（Zen Maru Gothic）を適用 */
 }
-
 /* 下に短い線を入れるとおしゃれになります */
 .others-title::after {
     content: "";
@@ -175,14 +163,10 @@ body{ background: var(--bg-blue); }
     margin: 10px auto 0;
     border-radius: 2px;
 }
-
-
 .other-card .make{ font-size: 18px; line-height: 1.4; }
 .other-card .model{ font-size: 12px; margin-top: 10px; opacity:.85; }
-
 /* responsive */
-@media (max-width: 1000px){
-  .stage{ display:block; padding: 0 12px; }
+@media (max-width: 1000px){  .stage{ display:block; padding: 0 12px; }
   .paper{ border-radius: 0; width:100%; max-width: 520px; }
   .hero{ padding: 54px 20px 34px; }
   .section{ padding: 26px 20px 46px; }
@@ -190,8 +174,7 @@ body{ background: var(--bg-blue); }
   .badge{ width: 86px; height: 86px; }
 }
 /* 给手机端底部导航预留空间，避免压住正文 */
-@media (max-width: 1000px){
-  .paper{ padding-bottom: 110px; }
+@media (max-width: 1000px){  .paper{ padding-bottom: 110px; }
 }
 /* =========================
    右侧三色浮动导航（完全跟随 follow）
@@ -207,14 +190,12 @@ body{ background: var(--bg-blue); }
   flex-direction: column;
   gap: 12px;
 }
-
 /*
   ✅ 重要：在某些布局组合（例如 body:flex + 复杂容器）里，Chrome 会让 sticky 偶发失效。
   电脑端我们直接改用 fixed，保证“永远跟随视口”，同时通过 left:50% + translateX
   把它锁在中间白色屏幕（--w-screen）的右侧。
 */
-@media (min-width: 1001px){
-  .floating-nav-wrapper{
+@media (min-width: 1001px){  .floating-nav-wrapper{
     position: fixed !important;
     top: calc(20vh + 400px) !important; /* ✅ 默认比原来更自然一点：你要更低就加大 120px */
     left: 50% !important;
@@ -223,8 +204,6 @@ body{ background: var(--bg-blue); }
     transform: translateX(calc((var(--w-screen) / 2) + 18px)) !important;
   }
 }
-
-
     
 .nav-tag {
         width: var(--w-nav);
@@ -259,8 +238,6 @@ body{ background: var(--bg-blue); }
   background: none;
   clip-path: none;   /* 关闭原本燕尾裁切 */
 }
-
-
 .nav-img img{
   display: block;
   width: 100%;
@@ -268,19 +245,13 @@ body{ background: var(--bg-blue); }
   filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
   
 }
-
-
-
-@media (min-width: 1001px){
-  :root{
+@media (min-width: 1001px){  :root{
     --paper-shift: 140px; /* ✅ 四分之一屏宽 */
   }
-
   /* 白色本文整体向左 */
   .paper{
     transform: translateX(calc(var(--paper-shift) * -1));
   }
-
   /* 右侧悬浮导航：仍然“贴着白色右边” */
   .floating-nav-wrapper{
     transform: translateX(
@@ -288,13 +259,10 @@ body{ background: var(--bg-blue); }
     ) !important;
   }
 }
-
 /* =========================
    Mobile bottom CTA — match homepage
    ========================= */
-@media (max-width: 1000px){
-
-  /* 1) 三按钮：贴底、横排、三等分 */
+@media (max-width: 1000px){  /* 1) 三按钮：贴底、横排、三等分 */
   .floating-nav-wrapper{
     position: fixed !important;
     left: 0 !important;
@@ -319,7 +287,6 @@ body{ background: var(--bg-blue); }
     /* ✅ 重点：清掉你 PC 端那些 translateX 贴右的逻辑 */
     transform: none !important;
   }
-
   /* 2) 每个按钮固定高度（跟首页那种“大条按钮”一致） */
   .floating-nav-wrapper .nav-tag{
     width: 100% !important;
@@ -330,8 +297,6 @@ body{ background: var(--bg-blue); }
     overflow: hidden;
     background: transparent !important;
   }
-
-
   /* 4) 给正文留出空间（你现在 110px 不够，所以圆形按钮被压住了） */
   .paper{
     padding-bottom: calc(140px + env(safe-area-inset-bottom)) !important;
@@ -345,7 +310,6 @@ body{ background: var(--bg-blue); }
   max-width: 560px;          /* 跟你 .block 一致 */
   margin: 6px auto 10px;
 }
-
 .pc-viewport{
   width: 100%;
   height: 280px;             /* 你截图那种大灰块高度 */
@@ -354,27 +318,23 @@ body{ background: var(--bg-blue); }
   background: #D9D9D9;       /* 没图时也像占位 */
   box-shadow: 0 10px 26px rgba(0,0,0,.06);
 }
-
 .pc-track{
   display:flex;
   height:100%;
   transition: transform .35s ease;
   will-change: transform;
 }
-
 .pc-slide{
   flex: 0 0 100%;
   height: 100%;
   display:flex;
 }
-
 .pc-slide img{
   width:100%;
   height:100%;
   object-fit: cover;
   display:block;
 }
-
 /* 左右白色圆按钮（你截图那种） */
 .pc-btn{
   position:absolute;
@@ -389,11 +349,9 @@ body{ background: var(--bg-blue); }
   cursor:pointer;
   z-index: 2;
 }
-
 /* 按钮位置 */
 .pc-prev{ left: 16px; }
 .pc-next{ right: 16px; }
-
 /* 小箭头（用CSS画，干净） */
 .pc-btn::before{
   content:"";
@@ -409,17 +367,13 @@ body{ background: var(--bg-blue); }
 .pc-next::before{
   transform: translate(-50%, -50%) rotate(-45deg);
 }
-
 /* hover 的轻微弹一下（PC） */
-@media (hover:hover){
-  .pc-btn:hover{
+@media (hover:hover){  .pc-btn:hover{
     transform: translateY(-50%) scale(1.04);
   }
 }
-
 /* 手机：按钮稍微小一点 */
-@media (max-width: 560px){
-  .pc-viewport{ height: 240px; border-radius: 14px; }
+@media (max-width: 560px){  .pc-viewport{ height: 240px; border-radius: 14px; }
   .pc-btn{ width: 62px; height: 62px; }
   .pc-prev{ left: 12px; }
   .pc-next{ right: 12px; }
@@ -432,14 +386,12 @@ body{ background: var(--bg-blue); }
   margin: 22px auto 8px;
   padding: 0 20px;
 }
-
 .spec-title{
   margin: 0 0 16px;
   font-size: 22px;
   letter-spacing: .06em;
   font-weight: 700;
 }
-
 /* 主表格：三行两列（像截图那种粗细的格子） */
 .spec-grid{
   border: 2px solid rgba(0,0,0,.10);
@@ -447,39 +399,32 @@ body{ background: var(--bg-blue); }
   overflow: hidden;
   background: #fff;
 }
-
 .spec-row{
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
 .spec-row + .spec-row{
   border-top: 2px solid rgba(0,0,0,.10);
 }
-
 .spec-th,
 .spec-td{
   padding: 18px 18px;
   line-height: 1.9;
   font-size: 14px;
 }
-
 .spec-th{
   color: rgba(0,0,0,.70);
   font-weight: 650;
   border-right: 2px solid rgba(0,0,0,.10);
 }
-
 .spec-th small{
   font-weight: 600;
   opacity: .85;
 }
-
 .spec-td{
   color: rgba(0,0,0,.85);
   font-weight: 650;
 }
-
 /* 尺寸小表格：两行两列 */
 .spec-mini{
   margin-top: 18px;
@@ -488,16 +433,13 @@ body{ background: var(--bg-blue); }
   overflow: hidden;
   background: #fff;
 }
-
 .spec-mini-row{
   display:grid;
   grid-template-columns: 1fr 1fr;
 }
-
 .spec-mini-row + .spec-mini-row{
   border-top: 2px solid rgba(0,0,0,.10);
 }
-
 .spec-mini-cell{
   padding: 14px 18px;
   font-size: 14px;
@@ -505,16 +447,13 @@ body{ background: var(--bg-blue); }
   color: rgba(0,0,0,.82);
   font-weight: 650;
 }
-
 .spec-mini-cell + .spec-mini-cell{
   border-left: 2px solid rgba(0,0,0,.10);
 }
-
 .spec-mini-cell span{
   color: rgba(0,0,0,.58);
   font-weight: 650;
 }
-
 /* 座位图区域（图片块） */
 .seat-figure{
   margin: 18px 0 0;
@@ -524,14 +463,12 @@ body{ background: var(--bg-blue); }
   overflow: hidden;
   text-align: center;
 }
-
 .seat-figure img{
   width: 100%;
   height: auto;
   display: block;
   padding: 18px;
 }
-
 .seat-figure figcaption{
   padding: 12px 0 16px;
   font-size: 14px;
@@ -539,10 +476,8 @@ body{ background: var(--bg-blue); }
   font-weight: 700;
   letter-spacing: .06em;
 }
-
 /* 手机：留白更舒服一点 */
-@media (max-width: 560px){
-  .spec-wrap{ padding: 0 18px; }
+@media (max-width: 560px){  .spec-wrap{ padding: 0 18px; }
   .spec-th,.spec-td{ padding: 16px 14px; }
 }
 /* =========================
@@ -559,7 +494,6 @@ body{ background: var(--bg-blue); }
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;             /* ✅ 间距小一点就不会“压住对方”的视觉 */
 }
-
 /* 卡片：强制 4:3（横向） */
 .other-card{
   aspect-ratio: 4 / 3;   /* ✅ 宽4高3 */
@@ -574,7 +508,6 @@ body{ background: var(--bg-blue); }
 
   text-decoration: none;
 }
-
 /* 图片：建议用 cover，不会出现“图很小留很多白”的感觉 */
 .other-card img{
   position:absolute;
@@ -584,7 +517,6 @@ body{ background: var(--bg-blue); }
   object-fit: cover;     /* ✅ 视觉更饱满 */
   display:block;
 }
-
 /* 文本：控制在卡片内正常宽度，不挤 */
 .other-card .make{
   position:absolute;
@@ -602,7 +534,6 @@ body{ background: var(--bg-blue); }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 /* 让文字更清楚（底部轻渐变） */
 .other-card::after{
   content:"";
@@ -622,7 +553,6 @@ body{ background: var(--bg-blue); }
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
-
 .other-card{
   position: relative;
   display: block;
@@ -638,7 +568,6 @@ body{ background: var(--bg-blue); }
   transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
   will-change: transform;
 }
-
 .other-card img{
   position: absolute;
   inset: 0;
@@ -647,7 +576,6 @@ body{ background: var(--bg-blue); }
   object-fit: cover;     /* ✅ 视觉饱满，hover 更明显 */
   z-index: 1;
 }
-
 .other-card .make{
   position: absolute;
   left: 12px;
@@ -664,7 +592,6 @@ body{ background: var(--bg-blue); }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 /* 文字可读性 */
 .other-card::after{
   content:"";
@@ -674,10 +601,8 @@ body{ background: var(--bg-blue); }
   background: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0) 55%);
   pointer-events:none;
 }
-
 /* ✅ hover 动画（PC） */
-@media (hover:hover){
-  .other-card:hover{
+@media (hover:hover){  .other-card:hover{
     transform: translateY(-2px) scale(1.03);
     filter: brightness(1.02);
     box-shadow:
@@ -686,10 +611,8 @@ body{ background: var(--bg-blue); }
       0 14px 28px rgba(0,0,0,.10);
   }
 }
-
 /* 手机点击反馈 */
-@media (max-width: 1000px){
-  .other-card:active{
+@media (max-width: 1000px){  .other-card:active{
     transform: scale(0.98);
     box-shadow: 0 0 0 2px rgba(201,162,77,.75) inset;
   }
@@ -707,45 +630,10 @@ body{ background: var(--bg-blue); }
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
-
-/* --- 左下角装饰图微调 --- */
-.dify-cover-wrapper {
-    position: fixed;
-    left: -10px;      /* 稍微往左靠，减少对正文的遮挡 */
-    bottom: -5px;     /* 紧贴底部 */
-    z-index: 999999;  /* 确保在所有元素最上层 */
-    pointer-events: none; /* 允许点击穿透，不影响聊天功能 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dify-cover-wrapper img {
-    /* 将尺寸从 220px 下调至 180px */
-    width: 180px;     
-    height: auto;     /* 保持比例 */
-    object-fit: contain;
-    
-    /* 优化投影，让边缘更柔和 */
-    filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.12));
-}
-
-/* 移动端适配微调 */
-@media (max-width: 1000px) {
-    .dify-cover-wrapper {
-        left: -8px;
-        bottom: 65px; /* 避开手机端底部导航栏 */
-    }
-    .dify-cover-wrapper img {
-        width: 120px; /* 手机端也相应缩小一点 */
-    }
-}
-
 /* =========================
    Mobile Header Harmony (针对手机端的和谐适配)
    ========================= */
-@media (max-width: 768px) {
-    /* 1. 强制缩小整体 Header 的占位空间 */
+@media (max-width: 768px) {    /* 1. 强制缩小整体 Header 的占位空间 */
     .topbar {
         padding: 0 !important;
         background: rgba(255,255,255,0.85) !important; /* 手机端毛玻璃，与桌面端一致 */
@@ -764,21 +652,18 @@ body{ background: var(--bg-blue); }
         justify-content: space-between !important;
         align-items: center !important;
     }
-
     /* 2. 品牌名瘦身：缩小字号并强制一行 */
     .topbar .brand {
         font-size: 15px !important; /* 原 20px 太大 */
         font-weight: 800 !important;
         white-space: nowrap !important;
     }
-
     /* 3. 导航栏紧凑布局 */
     .topbar nav {
         display: flex !important;
         align-items: center !important;
         gap: 8px !important; /* 缩小元素间的横向间距 */
     }
-
     /* 4. 语言切换按钮“胶囊化”：解决截图里高度突出的问题 */
     .lang-switch-jp, .lang-switch {
         margin-right: 2px !important;
@@ -790,19 +675,15 @@ body{ background: var(--bg-blue); }
         align-items: center !important;
         justify-content: center !important;
     }
-
     /* 5. 菜单文字微调 */
     .topbar nav a span {
         font-size: 11px !important;
         font-weight: 600 !important;
         color: #555 !important;
     }
-
- 
 }
 /* 针对中等屏幕/平板尺寸 (1024px 以下) 降低背景车的层级 */
-@media (max-width: 1024px) {
-    .bg-car {
+@media (max-width: 1024px) {    .bg-car {
         z-index: -1 !important; /* 将其置于底层，防止遮挡文字或按钮 */
         /* 如果您觉得画面还是有点乱，也可以考虑在这里调低透明度，例如：
         opacity: 0.3 !important; */
