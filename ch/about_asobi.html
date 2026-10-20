@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公司概况｜ASOBI 株式会社</title>
+<meta name="description" content="ASOBI株式会社是一家以关西（京都・大阪・奈良）为中心，提供观光高级轿车、机场接送、商务VIP接待的高级轿车服务公司。我们会根据您的不同场景，从埃尔法、海狮等车型中为您推荐最合适的一辆。亦可提供英语・中文服务。">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Serif+SC:wght@400;500;600&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="../css/asobi.css" rel="stylesheet">          <!-- 全站共用（和日文版同一个文件） -->
+<style>
+/* =========================================
+   会社概要页专用的样式（全站共用的部分在 css/asobi.css）
+   ========================================= */
+
+/* ---------- Hero：车队照片 ---------- */
+.page-hero{
+  height: clamp(320px, 52vh, 560px);
+  background: #e5e7eb url("../images/hero.jpg") center 55% / cover no-repeat;
+}
+
+/* ---------- 1. 会社概要 + 致辞 ---------- */
+.message{ text-align: center; }
+.message .quote{
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 2;
+  letter-spacing: .1em;
+  color: var(--c-navy);
+}
+.message .lead{
+  margin-top: 32px;
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--c-navy);
+}
+.message .rule{
+  width: 48px;
+  height: 1px;
+  margin: 56px auto;
+  background: var(--c-line);
+}
+.message .intro{
+  font-size: 15px;
+  line-height: 2.1;
+  color: var(--c-muted);
+}
+.message .intro p + p{ margin-top: 4px; }
+
+/* ---------- 3. 事業紹介：两列，每项可点进服务页 ---------- */
+.biz-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 64px;
+}
+.biz-item{
+  display: block;
+  padding-top: 28px;
+  border-top: 1px solid var(--c-rule);
+  text-decoration: none;
+  color: inherit;
+  transition: opacity .2s ease;
+}
+@media (hover: hover){ .biz-item:hover{ opacity: .6; } }
+.biz-num{
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  color: var(--c-line);
+}
+.biz-item h3{
+  margin: 12px 0 10px;
+  font-family: var(--font-title);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+.biz-item p{
+  font-size: 13.5px;
+  line-height: 1.95;
+  color: var(--c-muted);
+}
+
+/* ---------- 4. 実績：四项数据 ---------- */
+.kpis{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 64px;
+}
+.kpi{
+  padding: 28px 0;
+  border-bottom: 1px solid var(--c-rule);
+}
+.kpi:nth-child(-n+2){ border-top: 1px solid var(--c-rule); }
+.kpi-label{
+  font-family: var(--font-title);
+  font-size: 12px;
+  letter-spacing: .22em;
+  color: var(--c-line);
+}
+.kpi-val .nw{ display: inline-block; }   /* 车名不在中间断开 */
+.kpi-val{
+  margin-top: 8px;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .06em;
+  color: var(--c-navy);
+  text-wrap: balance;
+}
+
+/* =========================================
+   手机（767px 以下）
+   ========================================= */
+@media (max-width: 767px){
+  .page-hero{ height: auto; aspect-ratio: 4 / 3; }
+
+  .message{ text-align: left; }
+  .message .sec-title-block{ text-align: center; }
+  .message .quote{ font-size: clamp(17px, 4.8vw, 20px); text-align: center; letter-spacing: .06em; }
+  .message .lead{ margin-top: 24px; font-size: 14.5px; text-align: center; }
+  .message .rule{ margin: 40px auto; }
+  .message .intro{ font-size: 14.5px; }
+  .message .intro br{ display: none; }
+
+  .biz-grid{ grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .biz-item{ padding-top: 22px; }
+  .biz-item h3{ font-size: 18px; margin: 8px 0 6px; }
+
+  .kpis{ grid-template-columns: minmax(0, 1fr); }
+  .kpi{ padding: 22px 0; }
+  .kpi:nth-child(2){ border-top: 0; }
+  .kpi-val{ font-size: 18px; }
+}
+</style><style>
+/* 中文版专用：简体中文字体（日文字体做后备） */
+:root{
+  --font-title: "Noto Serif SC", "Noto Serif JP", "Songti SC", "STSong", serif;
+  --font-body: "Noto Sans SC", "Noto Sans JP", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+p, dd, figcaption{ text-wrap: pretty; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><a href="index.html">ASOBI 株式会社</a></div>
+    <nav class="nav">
+      <a href="../about_asobi.html" class="lang-switch" lang="ja">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        日本語
+      </a>
+      <a href="about_asobi.html"><span>公司概况</span></a>
+      <a href="#"><span>最新消息</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-hero" role="img" aria-label="ASOBI的车辆"></div>
+
+  <section class="sec message">
+    <div class="sec-title-block">
+      <div class="sec-en">Company</div>
+      <h1 class="sec-jp">公司概况</h1>
+    </div>
+    <p class="quote">「想要消除出行的不安」<br>「想要提供更高一档的体验」</p>
+    <p class="lead">作为满足这些需求的伙伴，<br>请务必选用本公司的高级轿车服务。</p>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="intro">
+      <p>衷心感谢您访问本公司网站。</p>
+      <p>ASOBI以大阪地区为中心，<br>提供让出行本身成为舒适体验的高级轿车服务。</p>
+      <p>我们会根据您的目的、人数和需求，<br>用心为您推荐最合适的车辆与行程安排。</p>
+    </div>
+  </section>
+
+  <section class="sec framed">
+    <div class="sec-title-block">
+      <div class="sec-en">Profile</div>
+      <h2 class="sec-jp">公司信息</h2>
+    </div>
+    <div class="frame-body">
+      <dl class="info-table">
+        <div class="info-row"><dt>公司名称</dt><dd>ASOBI 株式会社</dd></div>
+        <div class="info-row"><dt>地址</dt><dd lang="ja">大阪府堺市北区新金岡町５丁 ３−３０６−１０１</dd></div>
+        <div class="info-row"><dt>代表人</dt><dd>程　思量</dd></div>
+        <div class="info-row"><dt>业务内容</dt><dd>一般乘用旅客汽车运输业<br>（近运自二第 870 号）</dd></div>
+        <div class="info-row"><dt>电话</dt><dd><a href="tel:+81722609798">+81-72-260-9798</a></dd></div>
+        <div class="info-row"><dt>邮箱</dt><dd><a href="mailto:cheng@asobi.ltd">cheng@asobi.ltd</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec is-soft">
+    <div class="sec-title-block">
+      <div class="sec-en">Business</div>
+      <h2 class="sec-jp">业务介绍</h2>
+    </div>
+    <div class="biz-grid">
+      <a class="biz-item" href="service.html#svc1"><div class="biz-num">01</div><h3>观光高级轿车</h3><p>以大阪市为起终点，乘专用车辆畅游主要观光景点。</p></a>
+      <a class="biz-item" href="service.html#svc5"><div class="biz-num">02</div><h3>机场接送</h3><p>在 KIX / ITM 与大阪市内的酒店・目的地之间门到门接送。</p></a>
+      <a class="biz-item" href="service.html#svc3"><div class="biz-num">03</div><h3>商务接送</h3><p>为宴请・考察・出差等需严守时间的出行提供支持。</p></a>
+      <a class="biz-item" href="service.html#svc4"><div class="biz-num">04</div><h3>活动・典礼</h3><p>拍摄・典礼・VIP来宾等，为特别的一天提供出行服务。</p></a>
+    </div>
+    <a href="service.html" class="more-link"><span>READ MORE</span><svg width="34" height="10" viewBox="0 0 34 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 8h31l-7-7"/></svg></a>
+  </section>
+
+  <section class="sec">
+    <div class="sec-title-block">
+      <div class="sec-en">Achievements</div>
+      <h2 class="sec-jp">业绩</h2>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-label">ANNUAL CASES</div><div class="kpi-val">每年1000单以上</div></div>
+      <div class="kpi"><div class="kpi-label">LANGUAGES</div><div class="kpi-val">日语／英语／中文／韩语</div></div>
+      <div class="kpi"><div class="kpi-label">AREA</div><div class="kpi-val">以大阪市为起终点</div></div>
+      <div class="kpi"><div class="kpi-label">VEHICLES</div><div class="kpi-val"><span class="nw">埃尔法／</span><span class="nw">威尔法／</span><span class="nw">海狮／</span><span class="nw">格瑞纳</span></div></div>
+    </div>
+    <div class="back-to-top-wrap">
+      <a href="#"><img src="../images/pagetop.png" alt="返回顶部"></a>
+    </div>
+  </section>
+
+  <!-- Contact（和首页相同） -->
+  <section class="sec contact">
+    <div class="sec-title-block">
+      <div class="sec-en">Contact Us</div>
+      <h2 class="sec-jp">联系我们</h2>
+    </div>
+    <p class="contact-note">咨询时如能附上日期时间／人数／目的地／行李等信息，<br>沟通会更加顺畅。</p>
+    <div class="contact-icons">
+      <a href="https://line.me/R/ti/p/~13637985466" target="_blank" rel="noopener"><img src="../images/line.png" alt="LINE"></a>
+      <a href="mailto:cheng@asobi.ltd"><img src="../images/email.png" alt="邮件"></a>
+      <a href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener"><img src="../images/ins.png" alt="Instagram"></a>
+      <a href="../images/wechat.JPG" target="_blank"><img src="../images/wechat.png" alt="微信"></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer-bar">
+  <ul class="footer-links">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="service.html">服务一览</a></li>
+    <li><a href="alphard_detail.html#vehicle-photos">车辆阵容</a></li>
+    <li><a href="about_asobi.html">公司概况</a></li>
+    <li><a href="#">隐私政策</a></li>
+  </ul>
+  <div class="copyright">© 2026 ASOBI 株式会社. All Rights Reserved.</div>
+</footer>
+
+<!-- 手机端：底部固定的联系方式（跟随滚动） -->
+<nav class="m-contact-bar" aria-label="联系我们">
+  <a href="https://line.me/R/ti/p/~13637985466" target="_blank" rel="noopener"><img src="../images/line.png" alt=""><span>LINE</span></a>
+  <a href="mailto:cheng@asobi.ltd"><img src="../images/email.png" alt=""><span>邮件</span></a>
+  <a href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener"><img src="../images/ins.png" alt=""><span>Instagram</span></a>
+  <a href="../images/wechat.JPG" target="_blank"><img src="../images/wechat.png" alt=""><span>微信</span></a>
+</nav>
+
+</body>
+</html>

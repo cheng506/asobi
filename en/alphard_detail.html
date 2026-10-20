@@ -1,289 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alphard（TOYOTA）｜ASOBI Co., Ltd.</title>
-  <meta name="description" content="ASOBI Co., Ltd. provides premium private chauffeur services in the Kansai area, including Kyoto, Osaka, and Nara. We specialize in sightseeing tours, airport transfers, and VIP business transport with English-speaking drivers and a luxury fleet of Alphard and Hiace vehicles.">
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/follow.css" />
-  <link rel="stylesheet" href="css/vehicle_detail.css" />
-  <!-- width + right-nav sizing are unified in follow.css / vehicle_detail.css (match asobi) -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toyota Alphard | ASOBI Co., Ltd.</title>
+<meta name="description" content="ASOBI Co., Ltd. provides premium private chauffeur services in the Kansai area, including Kyoto, Osaka, and Nara. We specialize in sightseeing tours, airport transfers, and VIP business transport with English-speaking drivers and a luxury fleet of Alphard and Hiace vehicles.">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="../css/asobi.css" rel="stylesheet">          <!-- 全站共用（和日文版同一个文件） -->
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+<link href="../css/vehicle_page.css" rel="stylesheet">   <!-- 车辆页共用 -->
+<style>
+/* 英文版：当前这台车的标签 */
+.lineup .is-current .lineup-name::after{ content: "Now viewing"; }
+.veh-hero h1{ white-space: normal; }
+</style>
+<style>
+/* 英文版专用：英文换行更自然 */
+p, dd, li, figcaption{ text-wrap: pretty; }
+</style>
 </head>
 <body>
 
-  <!-- optional right-side decorative car (same class name as your framework) -->
-  <!-- If you don't want this on this page, delete this img line. -->
-<img class="bg-car" src="youce.png" alt="" aria-hidden="true">
-
-  <div class="stage">
-
-    <main class="paper" role="main">
 <header class="topbar">
-  <div class="topbar-inner" style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;">
-    
-    <a href=" index.html" style="text-decoration: none; color: inherit;">
-      <div class="brand" style="font-weight: 800; font-size: 20px;">ASOBI Co., Ltd.</div>
-    </a>
-
-    <nav aria-label="top" style="display: flex; align-items: center;">
-      
-      <a href="../alphard_detail.html" style="text-decoration: none; color: #ff5500; font-weight: 800; margin-right: 15px; display: inline-flex; align-items: center; border: 1px solid #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+  <div class="topbar-inner">
+    <div class="brand"><a href="index.html">ASOBI Co., Ltd.</a></div>
+    <nav class="nav">
+      <a href="../alphard_detail.html" class="lang-switch" lang="ja">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="2" y1="12" x2="22" y2="12"></line>
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
         </svg>
         日本語
       </a>
-
-      <a href="about_asobi.html" style="text-decoration: none; color: inherit; margin-right: 15px;"><span>About Us</span></a>
-      <a href="#" style="text-decoration: none; color: inherit;"><span>News</span></a>
+      <a href="about_asobi.html"><span>About Us</span></a>
+      <a href="#"><span>News</span></a>
     </nav>
   </div>
 </header>
-      <!-- 01 hero (your screenshot + figma export) -->
-      <section class="hero" id="top">
-        <h1 class="h">Toyota<br>Alphard</h1>
-        <p class="desc">Highly popular with international guests.
-Suitable for various occasions.
-We ensure a comfortable journey.</p>
 
-        <img class="car-illu" src="images/alpha1.png" alt="Toyota Alphard" />
+<main>
 
-        <div class="badges" aria-label="scenes">
-          <div class="badge">Family Trips</div>
-          <div class="badge">Business</div>
-          <div class="badge">Airport Transfer</div>
-          <div class="badge">Executive Use</div>
-        </div>
-      </section>
-
-      <!-- ✅ 4张照片轮播（左右白色圆按钮） -->
-<section class="content">
-  <div class="block">
-
-    <div class="photo-carousel" aria-label="写真スライダー">
-      <button class="pc-btn pc-prev" type="button" aria-label="前へ"></button>
-
-      <div class="pc-viewport" id="pcViewport">
-        <div class="pc-track" id="pcTrack">
-          <!-- ✅ 换成你的4张照片路径 -->
-          <div class="pc-slide"><img src="images/alpha2.jpg" alt="Photo 01"></div>
-          <div class="pc-slide"><img src="images/alpha5.jpg" alt="Photo 02"></div>\
-          <div class="pc-slide"><img src="images/alpha4.png" alt="Photo 02"></div>
-          <div class="pc-slide"><img src="images/alpha3.png" alt="Photo 02"></div>
-
-        </div>
+  <section class="sec is-wide">
+    <div class="veh-hero">
+      <div class="veh-intro">
+        <p class="veh-label" lang="ja">トヨタ・アルファード</p>
+        <h1>Toyota Alphard</h1>
+        <p class="veh-catch">Highly popular with international guests.<br>Suitable for all kinds of occasions.<br>We ensure a comfortable journey.</p>
+        <p class="veh-desc">A refined interior and a quiet, smooth ride make it a favourite for welcoming important guests. Family trips and long journeys stay comfortable in its spacious cabin.</p>
+        <ul class="veh-tags" aria-label="Recommended for"><li>Family Trips</li><li>Business</li><li>Airport Transfer</li><li>Executive Use</li></ul>
       </div>
-
-      <button class="pc-btn pc-next" type="button" aria-label="次へ"></button>
+      <div class="veh-visual">
+        <img src="../images/alpha1.png" alt="Toyota Alphard">
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
-<!-- ✅ 规格表格 + 座位图（放在轮播下面） -->
-<section class="spec-wrap" aria-label="車両スペック">
-  <h2 class="spec-title">Alphard（TOYOTA）</h2>
-
-  <!-- 上：主要信息（三行，左右两列） -->
-<div class="spec-grid">
-    <div class="spec-row">
-        <div class="spec-th">Max Capacity<br><small>(Including Driver)</small></div>
-        <div class="spec-td">7 people</div>
+  <section class="sec is-wide is-soft veh-photos">
+    <div class="sec-title-block">
+      <div class="sec-en" lang="ja">車両写真</div>
+      <h2 class="sec-jp">Photos</h2>
     </div>
-
-    <div class="spec-row">
-        <div class="spec-th">Recommended</div>
-        <div class="spec-td">2-4 people</div>
+    <div class="swiper" id="vehPhotos">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="../images/alpha2.jpg" alt="Alphard photo 1" loading="lazy"></div>
+        <div class="swiper-slide"><img src="../images/alpha5.jpg" alt="Alphard photo 2" loading="lazy"></div>
+        <div class="swiper-slide"><img src="../images/alpha4.png" alt="Alphard photo 3" loading="lazy"></div>
+        <div class="swiper-slide"><img src="../images/alpha3.png" alt="Alphard photo 4" loading="lazy"></div>
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
+  </section>
 
-    <div class="spec-row">
-        <div class="spec-th">Luggage Capacity</div>
-        <div class="spec-td">
-            Golf Bags: 2<br>
-            Suitcases: 4
-        </div>
-    </div> </div>
-
-  <div class="spec-mini">
-    <div class="spec-mini-row">
-      <div class="spec-mini-cell"><span>Length (mm)</span>: 4,995</div>
-      <div class="spec-mini-cell"><span>Width (mm)</span>: 1,850</div>
+  <section class="sec framed">
+    <div class="sec-title-block">
+      <div class="sec-en" lang="ja">車両スペック</div>
+      <h2 class="sec-jp">Specifications</h2>
     </div>
-    <div class="spec-mini-row">
-      <div class="spec-mini-cell"><span>Height (mm)</span>: 1,935</div>
-      <div class="spec-mini-cell"><span>AC Power</span>: Yes</div>
+    <div class="frame-body">
+      <dl class="info-table">
+        <div class="info-row"><dt>Max Capacity<small>(including driver)</small></dt><dd>7 people</dd></div>
+        <div class="info-row"><dt>Recommended</dt><dd>2–4 people</dd></div>
+        <div class="info-row"><dt>Luggage Capacity</dt><dd>Golf bags: 2<br>Suitcases: 4</dd></div>
+        <div class="info-row"><dt>Length</dt><dd>4,995 mm</dd></div>
+        <div class="info-row"><dt>Width</dt><dd>1,850 mm</dd></div>
+        <div class="info-row"><dt>Height</dt><dd>1,935 mm</dd></div>
+        <div class="info-row"><dt>AC Power</dt><dd>Available</dd></div>
+      </dl>
+      <figure class="seat-figure">
+        <img src="../images/alphard_seat.png" alt="Alphard seating chart" loading="lazy">
+        <figcaption>Seating Chart</figcaption>
+      </figure>
     </div>
-  </div>
+  </section>
 
-  <!-- 下：图片区域（座位图） -->
-  <figure class="seat-figure">
-    <!-- ✅ 换成你的座位图图片 -->
-    <img src="images/alphard_seat.png" alt="Seating Chart">
-<figcaption>Seating Chart</figcaption>
-  </figure>
-</section>
-
-
-      <div class="others-title" id="vehicle-photos">
-  <span style="font-size: 14px; display: block; color: #999; font-weight: 400; margin-bottom: 5px;">Lineup</span>
-  Vehicle Models
-</div>
-
-<div class="photo-carousel" aria-label="Photo Slider"></div>
-<div class="other-grid">
-  <a class="other-card" href="Vellfire.html" aria-label="Toyota Vellfire">
-    <img src="images/imagesb.png" alt="Vellfire">
-    <div class="make">Vellfire</div>
-  </a>
-
-  <a class="other-card" href="alphard_detail.html" aria-label="Toyota Alphard">
-    <img src="images/imagesa.png" alt="Alphard">
-    <div class="make">Alphard</div>
-  </a>
-
-  <a class="other-card" href="hiace.html" aria-label="Toyota Hiace">
-    <img src="images/imagesh.png" alt="Hiace">
-    <div class="make">Hiace</div>
-  </a>
-
-  <a class="other-card" href="granace.html" aria-label="Toyota GranAce">
-    <img src="images/imagesg.png" alt="GranAce">
-    <div class="make">GranAce</div>
-  </a>
-</div>
-<div class="back-to-top-wrap">
-  <a href="alphard_detail.html">
-    <img src="images/pagetop.png" alt="TOP">
-  </a>
-</div>
-
-</section>
-      <section class="sns-guide">
-  <div class="sec-title-block" style="margin:40px 0 20px;">
-    <div class="sec-en" style="font-size:20px;">Contact Us</div>
-    <div style="font-size:14px; color:#666;">Please feel free to contact us here</div>
-  </div>
-  <div class="bottom-grid">
-
-    <a class="sq-small sq-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
-      <img src="images/contact-line.png" alt="LINE">
-    </a>
-
-    <a class="sq-small sq-img" href="mailto:cheng@asobi.ltd">
-      <img src="images/contact-mail.png" alt="Mail">
-    </a>
-
-    <a class="sq-small sq-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr" target="_blank">
-      <img src="images/contact-instagram.svg" alt="Instagram">
-    </a>
-
-   <a class="sq-small sq-img" href="images/wechat.JPG" target="_blank">
-  <img src="images/contact-wechat.png" alt="WeChat">
-</a>
- 
-  </div>
-</section>
-
-
-<div style="height:120px"></div>
-<footer class="site-footer-bar">
-    <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="service.html">Our Services</a></li>
-        <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
-        <li><a href="about_asobi.html">Company Profile</a></li>
-        <li><a href="#">Privacy Policy</a></li>
+  <section class="sec is-wide" id="vehicle-photos">
+    <div class="sec-title-block">
+      <div class="sec-en" lang="ja">車種紹介</div>
+      <h2 class="sec-jp">Lineup</h2>
+    </div>
+    <ul class="lineup">
+      <li><a href="Vellfire.html"><img src="../images/imagesb.png" alt="Toyota Vellfire" loading="lazy"><div class="lineup-en" lang="ja">トヨタ・ヴェルファイア</div><div class="lineup-name">Vellfire</div></a></li>
+      <li><span class="is-current" aria-current="page"><img src="../images/imagesa.png" alt="Toyota Alphard" loading="lazy"><div class="lineup-en" lang="ja">トヨタ・アルファード</div><div class="lineup-name">Alphard</div></span></li>
+      <li><a href="hiace.html"><img src="../images/imagesh.png" alt="Toyota Hiace" loading="lazy"><div class="lineup-en" lang="ja">トヨタ・ハイエース</div><div class="lineup-name">Hiace</div></a></li>
+      <li><a href="granace.html"><img src="../images/imagesg.png" alt="Toyota Granace" loading="lazy"><div class="lineup-en" lang="ja">トヨタ・グランエース</div><div class="lineup-name">Granace</div></a></li>
     </ul>
-    <div class="copyright">
-        © 2026 ASOBI Co., Ltd. All Rights Reserved.
+    <div class="back-to-top-wrap">
+      <a href="#"><img src="../images/pagetop.png" alt="Back to top"></a>
     </div>
+  </section>
+
+  <!-- Contact（和首页相同） -->
+  <section class="sec contact">
+    <div class="sec-title-block">
+      <div class="sec-en" lang="ja">お問い合わせ</div>
+      <h2 class="sec-jp">Contact Us</h2>
+    </div>
+    <p class="contact-note">To ensure a smooth booking, please include your preferred date and time,<br>number of passengers, destination and luggage.</p>
+    <div class="contact-icons">
+      <a href="https://line.me/R/ti/p/~13637985466" target="_blank" rel="noopener"><img src="../images/line.png" alt="LINE"></a>
+      <a href="mailto:cheng@asobi.ltd"><img src="../images/email.png" alt="Email"></a>
+      <a href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener"><img src="../images/ins.png" alt="Instagram"></a>
+      <a href="../images/wechat.JPG" target="_blank"><img src="../images/wechat.png" alt="WeChat"></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer-bar">
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="service.html">Our Services</a></li>
+    <li><a href="alphard_detail.html#vehicle-photos">Vehicle Lineup</a></li>
+    <li><a href="about_asobi.html">Company Profile</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+  </ul>
+  <div class="copyright">© 2026 ASOBI Co., Ltd. All Rights Reserved.</div>
 </footer>
-    </main>
 
-    <!-- right floating nav (uses your follow.css). Put your image buttons here. -->
-<aside class="floating-nav-wrapper">
-<a class="nav-tag nav-img" href="https://line.me/R/ti/p/~13637985466" target="_blank">
-<img alt="Contact us via LINE" src="images/cta-line.png"/>
-</a>
-<a class="nav-tag nav-img" href="mailto:cheng@asobi.ltd">
-<img alt="Contact us via Email" src="images/cta-mail.png"/>
-</a>
-<a class="nav-tag nav-img" href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&utm_source=qr">
-<img alt="Follow us on Instagram" src="images/insta.png"/>
-</a>
-</aside>
+<!-- 手机端：底部固定的联系方式（跟随滚动） -->
+<nav class="m-contact-bar" aria-label="Contact">
+  <a href="https://line.me/R/ti/p/~13637985466" target="_blank" rel="noopener"><img src="../images/line.png" alt=""><span>LINE</span></a>
+  <a href="mailto:cheng@asobi.ltd"><img src="../images/email.png" alt=""><span>Email</span></a>
+  <a href="https://www.instagram.com/asobikabushikikaisya?igsh=MW9iajZmYW5ra2l5bA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener"><img src="../images/ins.png" alt=""><span>Instagram</span></a>
+  <a href="../images/wechat.JPG" target="_blank"><img src="../images/wechat.png" alt=""><span>WeChat</span></a>
+</nav>
 
- 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('pcTrack');
-    const slides = Array.from(track.children);
-    const nextButton = document.querySelector('.pc-next');
-    const prevButton = document.querySelector('.pc-prev');
-    
-    let currentIndex = 0;
-    let autoPlayTimer = null;
-
-    // 更新位置的函数
-    const updateSlide = (index) => {
-        const slideWidth = slides[0].getBoundingClientRect().width;
-        track.style.transform = `translateX(-${slideWidth * index}px)`;
-    };
-
-    // 切换到下一张的逻辑
-    const moveToNext = () => {
-        currentIndex++;
-        if (currentIndex >= slides.length) {
-            currentIndex = 0; // 循环回到第一张
-        }
-        updateSlide(currentIndex);
-    };
-
-    // 切换到上一张的逻辑
-    const moveToPrev = () => {
-        currentIndex--;
-        if (currentIndex < 0) {
-            currentIndex = slides.length - 1; // 循环回到最后一张
-        }
-        updateSlide(currentIndex);
-    };
-
-    // --- 自动播放逻辑 ---
-    const startAutoPlay = () => {
-        stopAutoPlay(); // 先清除旧的，防止重叠
-        autoPlayTimer = setInterval(moveToNext, 3000); // 每3秒自动切下一张
-    };
-
-    const stopAutoPlay = () => {
-        if (autoPlayTimer) clearInterval(autoPlayTimer);
-    };
-
-    // 点击按钮切换
-    nextButton.addEventListener('click', () => {
-        moveToNext();
-        startAutoPlay(); // 用户操作后重新计时
-    });
-
-    prevButton.addEventListener('click', () => {
-        moveToPrev();
-        startAutoPlay(); // 用户操作后重新计时
-    });
-
-    // 鼠标悬停时停止自动播放，离开时恢复
-    const viewport = document.getElementById('pcViewport');
-    viewport.addEventListener('mouseenter', stopAutoPlay);
-    viewport.addEventListener('mouseleave', startAutoPlay);
-
-    // 窗口大小改变时重置
-    window.addEventListener('resize', () => updateSlide(currentIndex));
-
-    // 初始化启动
-    startAutoPlay();
-});
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // 车辆照片轮播：手机一张（露出下一张的边），平板和电脑两张并排
+  const photoCount = document.querySelectorAll('#vehPhotos .swiper-slide').length;
+  new Swiper('#vehPhotos', {
+    slidesPerView: 1.12,
+    spaceBetween: 14,
+    loop: photoCount > 2,
+    autoplay: photoCount > 2 && !matchMedia('(prefers-reduced-motion: reduce)').matches ? { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true } : false,
+    pagination: { el: '#vehPhotos .swiper-pagination', clickable: true },
+    breakpoints: { 768: { slidesPerView: 2, spaceBetween: 24 } }
+  });
 </script>
-
-
 </body>
 </html>
